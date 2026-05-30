@@ -7,7 +7,7 @@ const MAP_EMBED_SRC =
 const CONTACT_EMAIL = 'info@medicolinehealthcare.com';
 
 const inputClass =
-  'w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#cc0000]/30 focus:border-[#cc0000] transition-shadow';
+  'w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow';
 
 export default function ContactMapSection() {
   const { ref, visible } = useScrollReveal();
@@ -78,7 +78,7 @@ export default function ContactMapSection() {
             Get In Touch
           </h2>
           <div className="flex justify-center mb-4">
-            <div className="w-14 h-1 bg-[#cc0000] rounded-full" />
+            <div className="w-14 h-1 bg-[#C0392B] rounded-full" />
           </div>
           <p className="text-gray-500 text-base max-w-xl mx-auto">
             Send us a message or visit our headquarters in Warangal.
@@ -94,7 +94,7 @@ export default function ContactMapSection() {
           <div className="bg-[#fbf9f8] rounded-xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col justify-center min-h-[380px]">
             {submitted ? (
               <div className="text-center py-6">
-                <div className="w-14 h-14 bg-[#fff5f5] text-[#cc0000] rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-14 h-14 bg-[#fff5f5] text-[#C0392B] rounded-full flex items-center justify-center mx-auto mb-4">
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
@@ -106,7 +106,7 @@ export default function ContactMapSection() {
                 <button
                   type="button"
                   onClick={() => setSubmitted(false)}
-                  className="bg-[#cc0000] text-white text-sm font-semibold px-6 py-2.5 rounded-full hover:bg-[#aa0000] transition-colors"
+                  className="bg-[#C0392B] text-white text-sm font-semibold px-6 py-2.5 rounded-full hover:bg-[#A93226] transition-colors"
                 >
                   Send Another Message
                 </button>
@@ -203,7 +203,7 @@ export default function ContactMapSection() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-[#cc0000] text-white font-semibold py-4 rounded-xl hover:bg-[#aa0000] transition-colors duration-200 shadow-sm disabled:opacity-50"
+                  className="w-full bg-[#C0392B] text-white font-semibold py-4 rounded-xl hover:bg-[#A93226] transition-colors duration-200 shadow-sm disabled:opacity-50"
                 >
                   {loading ? 'Sending Message...' : '✉ Send Message'}
                 </button>
@@ -221,7 +221,7 @@ export default function ContactMapSection() {
               allowFullScreen
             />
             <div className="absolute bottom-4 left-4 right-4 sm:left-auto sm:right-4 sm:max-w-sm bg-white rounded-xl shadow-lg border border-gray-100 px-4 py-3 flex gap-3 items-start">
-              <span className="w-9 h-9 rounded-lg bg-[#fff5f5] flex items-center justify-center shrink-0 text-[#cc0000]">
+              <span className="w-9 h-9 rounded-lg bg-[#fff5f5] flex items-center justify-center shrink-0 text-[#C0392B]">
                 <MapPin size={18} />
               </span>
               <div className="space-y-2">
@@ -230,16 +230,16 @@ export default function ContactMapSection() {
                 </p>
                 <a
                   href="tel:+917654247569"
-                  className="inline-flex items-center gap-2 text-sm text-[#111111] font-semibold hover:text-[#cc0000] transition-colors"
+                  className="inline-flex items-center gap-2 text-sm text-[#111111] font-semibold hover:text-[#C0392B] transition-colors"
                 >
-                  <Phone size={16} strokeWidth={2} className="text-[#cc0000]" />
+                  <Phone size={16} strokeWidth={2} className="text-[#C0392B]" />
                   <span>+91 76542 47569</span>
                 </a>
                 <a
                   href={`mailto:${CONTACT_EMAIL}`}
                   className="inline-flex items-center gap-2 text-sm text-[#111111] font-semibold hover:text-[#C0392B] transition-colors"
                 >
-                  <Mail size={16} strokeWidth={2} className="text-[#cc0000]" />
+                  <Mail size={16} strokeWidth={2} className="text-[#C0392B]" />
                   <span>{CONTACT_EMAIL}</span>
                 </a>
                 <div className="pt-2 border-t border-gray-100 mt-2">

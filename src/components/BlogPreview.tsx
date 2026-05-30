@@ -51,7 +51,7 @@ export default function BlogPreview() {
               <div className="p-6 flex flex-col flex-1">
                 {/* Category Tag */}
                 <div className="mb-3">
-                  <span className="text-[#C0392B] text-xs font-bold uppercase tracking-widest bg-red-50 px-2.5 py-1 rounded-full">
+                  <span className="text-[#C0392B] text-xs font-bold uppercase tracking-widest bg-[#C0392B]/10 px-2.5 py-1 rounded-full">
                     {post.category}
                   </span>
                 </div>
@@ -70,7 +70,7 @@ export default function BlogPreview() {
                 <div className="mt-auto pt-4 border-t border-gray-50 flex items-center justify-between">
                   <Link
                     to={`/blog#${post.id}`}
-                    className="text-[#C0392B] hover:text-[#a62b1f] text-sm font-bold inline-flex items-center gap-1 group transition-colors duration-200"
+                    className="text-[#C0392B] hover:text-[#A93226] text-sm font-bold inline-flex items-center gap-1 group transition-colors duration-200"
                   >
                     Read More 
                     <span className="transform translate-x-0 group-hover:translate-x-1 transition-transform">&rarr;</span>

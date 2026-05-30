@@ -54,7 +54,7 @@ export default function ServiceDetailModal({ service, onClose }: ServiceDetailMo
           >
             {service.title}
           </h3>
-          <div className="w-10 h-1 bg-[#cc0000] rounded-full mt-3 mb-5" />
+          <div className="w-10 h-1 bg-[#C0392B] rounded-full mt-3 mb-5" />
           <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
             {service.details}
           </p>

@@ -289,7 +289,7 @@ export default function OurPartners() {
               setIsModalOpen(true);
               setIsSuccess(false);
             }}
-            className="bg-[#cc0000] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#aa0000] transition-colors duration-200"
+            className="bg-[#C0392B] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#A93226] transition-colors duration-200"
           >
             Join as a Partner
           </button>
@@ -309,7 +309,7 @@ export default function OurPartners() {
 
               {isSuccess ? (
                 <div className="text-center py-8">
-                  <div className="w-16 h-16 bg-[#fff5f5] text-[#cc0000] rounded-full flex items-center justify-center mx-auto mb-6">
+                  <div className="w-16 h-16 bg-[#fff5f5] text-[#C0392B] rounded-full flex items-center justify-center mx-auto mb-6">
                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
@@ -321,7 +321,7 @@ export default function OurPartners() {
                   <button
                     type="button"
                     onClick={() => setIsModalOpen(false)}
-                    className="bg-[#cc0000] text-white px-8 py-2.5 rounded-full font-semibold hover:bg-[#aa0000] transition-colors"
+                    className="bg-[#C0392B] text-white px-8 py-2.5 rounded-full font-semibold hover:bg-[#A93226] transition-colors"
                   >
                     Close
                   </button>
@@ -341,7 +341,7 @@ export default function OurPartners() {
                         value={partnerForm.fullName}
                         onChange={(e) => setPartnerForm({ ...partnerForm, fullName: e.target.value })}
                         placeholder="Enter your full name"
-                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#cc0000]/30 focus:border-[#cc0000] transition-shadow"
+                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow"
                       />
                     </div>
 
@@ -356,7 +356,7 @@ export default function OurPartners() {
                         value={partnerForm.organisationName}
                         onChange={(e) => setPartnerForm({ ...partnerForm, organisationName: e.target.value })}
                         placeholder="Enter your company or organization name"
-                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#cc0000]/30 focus:border-[#cc0000] transition-shadow"
+                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow"
                       />
                     </div>
 
@@ -372,7 +372,7 @@ export default function OurPartners() {
                           value={partnerForm.phone}
                           onChange={(e) => setPartnerForm({ ...partnerForm, phone: e.target.value })}
                           placeholder="Your phone number"
-                          className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#cc0000]/30 focus:border-[#cc0000] transition-shadow"
+                          className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow"
                         />
                       </div>
 
@@ -387,7 +387,7 @@ export default function OurPartners() {
                           value={partnerForm.email}
                           onChange={(e) => setPartnerForm({ ...partnerForm, email: e.target.value })}
                           placeholder="you@email.com"
-                          className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#cc0000]/30 focus:border-[#cc0000] transition-shadow"
+                          className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow"
                         />
                       </div>
                     </div>
@@ -401,7 +401,7 @@ export default function OurPartners() {
                         required
                         value={partnerForm.partnershipType}
                         onChange={(e) => setPartnerForm({ ...partnerForm, partnershipType: e.target.value })}
-                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] focus:outline-none focus:ring-2 focus:ring-[#cc0000]/30 focus:border-[#cc0000] transition-shadow"
+                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow"
                       >
                         <option value="Diagnostic Center">Diagnostic Center</option>
                         <option value="Hospital">Hospital</option>
@@ -422,14 +422,14 @@ export default function OurPartners() {
                         value={partnerForm.message}
                         onChange={(e) => setPartnerForm({ ...partnerForm, message: e.target.value })}
                         placeholder="Tell us about the proposed collaboration..."
-                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#cc0000]/30 focus:border-[#cc0000] transition-shadow resize-none"
+                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow resize-none"
                       />
                     </div>
 
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full bg-[#cc0000] text-white font-semibold py-3.5 rounded-xl hover:bg-[#aa0000] transition-colors duration-200 shadow-md disabled:opacity-50 mt-2"
+                      className="w-full bg-[#C0392B] text-white font-semibold py-3.5 rounded-xl hover:bg-[#A93226] transition-colors duration-200 shadow-md disabled:opacity-50 mt-2"
                     >
                       {isSubmitting ? 'Submitting Request...' : 'Submit Partner Request'}
                     </button>

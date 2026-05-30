@@ -57,12 +57,12 @@ export default function NursingPackages() {
 
   return (
     <section id="packages" className="packages-section">
-      <div className="bg-gradient-to-br from-[#C0392B] to-[#922B21] text-white py-24 sm:py-32">
+      <div className="bg-[#C0392B] text-white py-24 sm:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl mb-6 tracking-tight">
             Health Packages For Every Family
           </h1>
-          <p className="font-body text-lg sm:text-xl text-red-100 max-w-2xl mx-auto">
+          <p className="font-body text-lg sm:text-xl text-white/90 max-w-2xl mx-auto">
             Affordable home healthcare packages with free sample collection
           </p>
         </div>
@@ -92,7 +92,7 @@ export default function NursingPackages() {
                 key={i}
                 onClick={() => setSelectedCard(i)}
                 className={`bg-white rounded-xl border-2 p-8 relative flex flex-col cursor-pointer transition-all duration-200 ${selectedCard === i
-                  ? 'border-[#C0392B] shadow-xl shadow-red-100 md:scale-105'
+                  ? 'border-[#C0392B] shadow-[0_18px_38px_rgba(192,57,43,0.14)] md:scale-105'
                   : 'border-gray-100 shadow-sm'
                   }`}
               >
@@ -128,8 +128,8 @@ export default function NursingPackages() {
                 <Link
                   to="/contact"
                   className={`block text-center font-heading font-bold text-sm py-3 rounded-full transition-colors duration-200 ${selectedCard === i
-                    ? 'bg-[#C0392B] text-white hover:bg-[#922B21]'
-                    : 'border-2 border-[#C0392B] text-[#C0392B] hover:bg-[#fff5f5]'
+                    ? 'bg-[#C0392B] text-white hover:bg-[#A93226]'
+                    : 'border-2 border-[#C0392B] text-[#C0392B] hover:bg-[#C0392B] hover:text-white'
                     }`}
                 >
                   Book Package

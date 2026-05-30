@@ -21,7 +21,7 @@ const SERVICE_OPTIONS = [
 ] as const;
 
 const inputClass =
-  'w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#cc0000]/30 focus:border-[#cc0000] transition-shadow';
+  'w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow';
 const CONTACT_EMAIL = 'info@medicolinehealthcare.com';
 
 export default function AppointmentBooking() {
@@ -100,7 +100,7 @@ export default function AppointmentBooking() {
             Book Your Appointment
           </h2>
           <div className="flex justify-center mb-4">
-            <div className="w-14 h-1 bg-[#cc0000] rounded-full" />
+            <div className="w-14 h-1 bg-[#C0392B] rounded-full" />
           </div>
           <p className="text-gray-500 text-base max-w-xl mx-auto">
             Schedule trusted home healthcare in minutes — we&apos;ll confirm your visit shortly.
@@ -115,7 +115,7 @@ export default function AppointmentBooking() {
         >
           {submitted ? (
             <div className="text-center py-8">
-              <div className="w-16 h-16 bg-[#fff5f5] text-[#cc0000] rounded-full flex items-center justify-center mx-auto mb-6">
+              <div className="w-16 h-16 bg-[#fff5f5] text-[#C0392B] rounded-full flex items-center justify-center mx-auto mb-6">
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
@@ -130,7 +130,7 @@ export default function AppointmentBooking() {
                 For urgent queries contact{' '}
                 <a
                   href={`mailto:${CONTACT_EMAIL}`}
-                  className="inline-flex items-center gap-1 text-[#cc0000] hover:text-[#C0392B] transition-colors"
+                  className="inline-flex items-center gap-1 text-[#C0392B] hover:text-[#A93226] transition-colors"
                 >
                   <Mail size={14} strokeWidth={2} />
                   <span>{CONTACT_EMAIL}</span>
@@ -139,7 +139,7 @@ export default function AppointmentBooking() {
               <button
                 type="button"
                 onClick={() => setSubmitted(false)}
-                className="bg-[#cc0000] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#aa0000] transition-colors"
+                className="bg-[#C0392B] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#A93226] transition-colors"
               >
                 Book Another Visit
               </button>
@@ -221,20 +221,20 @@ export default function AppointmentBooking() {
                         onClick={() => setSelectedService(id)}
                         className={`flex flex-col items-center gap-2 rounded-xl border p-4 text-center transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 ${
                           selected
-                            ? 'border-[#cc0000] bg-[#fff5f5] shadow-sm ring-2 ring-[#cc0000]/20'
-                            : 'border-gray-200 bg-white hover:border-[#cc0000]/40'
+                            ? 'border-[#C0392B] bg-[#fff5f5] shadow-sm ring-2 ring-[#C0392B]/20'
+                            : 'border-gray-200 bg-white hover:border-[#C0392B]/40'
                         }`}
                       >
                         <span
                           className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${
-                            selected ? 'bg-[#cc0000] text-white' : 'bg-[#fff5f5] text-[#cc0000]'
+                            selected ? 'bg-[#C0392B] text-white' : 'bg-[#fff5f5] text-[#C0392B]'
                           }`}
                         >
                           <Icon size={20} strokeWidth={2} />
                         </span>
                         <span
                           className={`text-xs sm:text-sm font-semibold leading-snug ${
-                            selected ? 'text-[#cc0000]' : 'text-[#111111]'
+                            selected ? 'text-[#C0392B]' : 'text-[#111111]'
                           }`}
                         >
                           {label}
@@ -294,7 +294,7 @@ export default function AppointmentBooking() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full flex items-center justify-center gap-2 bg-[#cc0000] text-white font-semibold py-4 rounded-xl hover:bg-[#aa0000] transition-colors duration-200 shadow-lg shadow-red-200/60 disabled:opacity-50"
+                className="w-full flex items-center justify-center gap-2 bg-[#C0392B] text-white font-semibold py-4 rounded-xl hover:bg-[#A93226] transition-colors duration-200 shadow-[0_14px_30px_rgba(192,57,43,0.22)] disabled:opacity-50"
               >
                 {loading ? 'Submitting...' : 'Book Appointment'}
                 <ArrowRight size={18} />
@@ -304,7 +304,7 @@ export default function AppointmentBooking() {
                 Or email us directly at{' '}
                 <a
                   href={`mailto:${CONTACT_EMAIL}`}
-                  className="inline-flex items-center gap-1 text-[#cc0000] hover:text-[#C0392B] transition-colors"
+                  className="inline-flex items-center gap-1 text-[#C0392B] hover:text-[#A93226] transition-colors"
                 >
                   <Mail size={14} strokeWidth={2} />
                   <span>{CONTACT_EMAIL}</span>
@@ -313,7 +313,7 @@ export default function AppointmentBooking() {
 
               <p className="text-center text-xs text-gray-500 leading-relaxed">
                 By booking, you agree to our terms of service. For emergencies, call{' '}
-                <a href="tel:+917654247569" className="text-[#cc0000] font-semibold hover:underline">
+                <a href="tel:+917654247569" className="text-[#C0392B] font-semibold hover:underline">
                   +91 7654247569
                 </a>
               </p>

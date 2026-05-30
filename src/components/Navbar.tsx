@@ -221,7 +221,7 @@ export default function Navbar() {
             <div className="hidden lg:flex nav-right items-center gap-3">
               <Link
                 to="/contact"
-                className="bg-[#C0392B] text-white text-sm font-heading font-bold px-6 py-2.5 rounded-full hover:bg-[#922B21] transition-colors duration-200"
+                className="bg-[#C0392B] text-white text-sm font-heading font-bold px-6 py-2.5 rounded-full hover:bg-[#A93226] transition-colors duration-200"
                 onClick={() => handleLinkClick('/contact')}
               >
                 Book Appointment
@@ -289,21 +289,21 @@ export default function Navbar() {
               href="https://www.instagram.com/we.medicoline/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#cc0000] hover:text-[#aa0000] transition-colors duration-200"
+              className="text-[#C0392B] hover:text-[#A93226] transition-colors duration-200"
               aria-label="Instagram"
             >
               <Instagram size={22} />
             </a>
             <a
               href="#"
-              className="text-gray-400 hover:text-[#cc0000] transition-colors duration-200"
+              className="text-gray-400 hover:text-[#C0392B] transition-colors duration-200"
               aria-label="Facebook"
             >
               <Facebook size={22} />
             </a>
             <a
               href="#"
-              className="text-gray-400 hover:text-[#cc0000] transition-colors duration-200"
+              className="text-gray-400 hover:text-[#C0392B] transition-colors duration-200"
               aria-label="YouTube"
             >
               <Youtube size={22} />

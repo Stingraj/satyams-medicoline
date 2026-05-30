@@ -225,7 +225,7 @@ export default function CareersPage() {
           font-weight: 700;
           letter-spacing: 0.15em;
           text-transform: uppercase;
-          color: #cc0000;
+          color: #C0392B;
           margin-bottom: 12px;
           display: block;
         }
@@ -247,7 +247,7 @@ export default function CareersPage() {
         .careers-section-divider {
           width: 50px;
           height: 3px;
-          background-color: #cc0000;
+          background-color: #C0392B;
           margin: 0 auto 20px auto;
           border-radius: 2px;
         }
@@ -302,7 +302,7 @@ export default function CareersPage() {
         }
 
         .careers-btn-red {
-          background-color: #cc0000;
+          background-color: #C0392B;
           color: #ffffff;
           font-size: 15px;
           font-weight: 700;
@@ -312,11 +312,11 @@ export default function CareersPage() {
           cursor: pointer;
           transition: background-color 0.25s ease, transform 0.2s ease;
           display: inline-block;
-          box-shadow: 0 4px 18px rgba(204, 0, 0, 0.15);
+          box-shadow: 0 4px 18px rgba(192, 57, 43, 0.15);
         }
 
         .careers-btn-red:hover {
-          background-color: #aa0000;
+          background-color: #A93226;
           transform: translateY(-2px);
         }
 
@@ -375,7 +375,7 @@ export default function CareersPage() {
 
         .why-join-card:hover {
           transform: translateY(-4px);
-          box-shadow: 0 12px 32px rgba(204, 0, 0, 0.06);
+          box-shadow: 0 12px 32px rgba(192, 57, 43, 0.06);
           border-color: #fce8e6;
         }
 
@@ -391,7 +391,7 @@ export default function CareersPage() {
         }
 
         .why-join-icon {
-          color: #cc0000;
+          color: #C0392B;
           font-weight: 700;
           font-size: 20px;
         }
@@ -469,7 +469,7 @@ export default function CareersPage() {
 
         .opening-badge {
           background-color: #fff5f5;
-          color: #cc0000;
+          color: #C0392B;
           font-size: 11px;
           font-weight: 700;
           padding: 4px 12px;
@@ -498,11 +498,11 @@ export default function CareersPage() {
 
         .careers-btn-red-outline {
           background-color: transparent;
-          color: #cc0000;
+          color: #C0392B;
           font-size: 13px;
           font-weight: 700;
           padding: 12px 28px;
-          border: 2px solid #cc0000;
+          border: 2px solid #C0392B;
           border-radius: 50px;
           cursor: pointer;
           transition: all 0.25s ease;
@@ -517,7 +517,7 @@ export default function CareersPage() {
         }
 
         .careers-btn-red-outline:hover {
-          background-color: #cc0000;
+          background-color: #C0392B;
           color: #ffffff;
         }
 
@@ -575,7 +575,7 @@ export default function CareersPage() {
         .testimonial-author {
           font-size: 13px;
           font-weight: 700;
-          color: #cc0000;
+          color: #C0392B;
           text-transform: uppercase;
           letter-spacing: 0.1em;
           margin: 0;
@@ -588,7 +588,7 @@ export default function CareersPage() {
           content: '';
           width: 12px;
           height: 2px;
-          background-color: #cc0000;
+          background-color: #C0392B;
           display: inline-block;
         }
 
@@ -655,7 +655,7 @@ export default function CareersPage() {
         }
 
         .form-input:focus {
-          border-color: #cc0000;
+          border-color: #C0392B;
         }
 
         .form-select {
@@ -704,7 +704,7 @@ export default function CareersPage() {
           border-radius: 12px;
           padding: 24px;
           text-align: center;
-          color: #cc0000;
+          color: #C0392B;
         }
 
         .form-success-heading {

@@ -89,7 +89,7 @@ export default function EcgAtHome() {
             <h2 className="font-extrabold text-[#111111] text-3xl sm:text-4xl tracking-tight leading-tight mb-4">
               Professional ECG Test at Your Doorstep
             </h2>
-            <div className="w-12 h-1 bg-[#cc0000] rounded-full mb-6" />
+            <div className="w-12 h-1 bg-[#C0392B] rounded-full mb-6" />
             <p className="text-gray-600 text-base sm:text-lg leading-relaxed mb-8">
               Accurate cardiac monitoring in the comfort of your home, managed by certified healthcare professionals
             </p>
@@ -98,7 +98,7 @@ export default function EcgAtHome() {
               {features.map((feature) => (
                 <li key={feature} className="flex items-start gap-3">
                   <span className="mt-0.5 flex-shrink-0 w-6 h-6 rounded-full bg-[#fff5f5] flex items-center justify-center">
-                    <Check size={14} className="text-[#cc0000]" strokeWidth={3} />
+                    <Check size={14} className="text-[#C0392B]" strokeWidth={3} />
                   </span>
                   <span className="text-[#111111] text-base font-semibold leading-snug">{feature}</span>
                 </li>
@@ -111,7 +111,7 @@ export default function EcgAtHome() {
                 setIsModalOpen(true);
                 setIsSuccess(false);
               }}
-              className="inline-flex items-center justify-center self-start bg-[#cc0000] text-white font-semibold px-8 py-4 rounded-full hover:bg-[#aa0000] transition-colors duration-200 text-base shadow-lg shadow-red-200"
+              className="inline-flex items-center justify-center self-start bg-[#C0392B] text-white font-semibold px-8 py-4 rounded-full hover:bg-[#A93226] transition-colors duration-200 text-base shadow-[0_14px_30px_rgba(192,57,43,0.22)]"
             >
               Book an ECG at Home
             </button>
@@ -133,7 +133,7 @@ export default function EcgAtHome() {
 
             {isSuccess ? (
               <div className="text-center py-8">
-                <div className="w-16 h-16 bg-[#fff5f5] text-[#cc0000] rounded-full flex items-center justify-center mx-auto mb-6">
+                <div className="w-16 h-16 bg-[#fff5f5] text-[#C0392B] rounded-full flex items-center justify-center mx-auto mb-6">
                   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
@@ -145,7 +145,7 @@ export default function EcgAtHome() {
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="bg-[#cc0000] text-white px-8 py-2.5 rounded-full font-semibold hover:bg-[#aa0000] transition-colors"
+                  className="bg-[#C0392B] text-white px-8 py-2.5 rounded-full font-semibold hover:bg-[#A93226] transition-colors"
                 >
                   Close
                 </button>
@@ -165,7 +165,7 @@ export default function EcgAtHome() {
                       value={ecgForm.name}
                       onChange={(e) => setEcgForm({ ...ecgForm, name: e.target.value })}
                       placeholder="Your full name"
-                      className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#cc0000]/30 focus:border-[#cc0000] transition-shadow"
+                      className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow"
                     />
                   </div>
 
@@ -181,7 +181,7 @@ export default function EcgAtHome() {
                         value={ecgForm.phone}
                         onChange={(e) => setEcgForm({ ...ecgForm, phone: e.target.value })}
                         placeholder="Your phone number"
-                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#cc0000]/30 focus:border-[#cc0000] transition-shadow"
+                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow"
                       />
                     </div>
 
@@ -196,7 +196,7 @@ export default function EcgAtHome() {
                         value={ecgForm.email}
                         onChange={(e) => setEcgForm({ ...ecgForm, email: e.target.value })}
                         placeholder="you@email.com"
-                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#cc0000]/30 focus:border-[#cc0000] transition-shadow"
+                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow"
                       />
                     </div>
                   </div>
@@ -212,7 +212,7 @@ export default function EcgAtHome() {
                       value={ecgForm.address}
                       onChange={(e) => setEcgForm({ ...ecgForm, address: e.target.value })}
                       placeholder="Home address for ECG visit"
-                      className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#cc0000]/30 focus:border-[#cc0000] transition-shadow"
+                      className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow"
                     />
                   </div>
 
@@ -226,7 +226,7 @@ export default function EcgAtHome() {
                       required
                       value={ecgForm.date}
                       onChange={(e) => setEcgForm({ ...ecgForm, date: e.target.value })}
-                      className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] focus:outline-none focus:ring-2 focus:ring-[#cc0000]/30 focus:border-[#cc0000] transition-shadow"
+                      className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow"
                     />
                   </div>
 
@@ -241,14 +241,14 @@ export default function EcgAtHome() {
                       value={ecgForm.message}
                       onChange={(e) => setEcgForm({ ...ecgForm, message: e.target.value })}
                       placeholder="Tell us about the patient's symptoms or requirements..."
-                      className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#cc0000]/30 focus:border-[#cc0000] transition-shadow resize-none"
+                      className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow resize-none"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-[#cc0000] text-white font-semibold py-3.5 rounded-xl hover:bg-[#aa0000] transition-colors duration-200 shadow-md disabled:opacity-50 mt-2"
+                    className="w-full bg-[#C0392B] text-white font-semibold py-3.5 rounded-xl hover:bg-[#A93226] transition-colors duration-200 shadow-md disabled:opacity-50 mt-2"
                   >
                     {isSubmitting ? 'Booking...' : 'Confirm ECG Booking'}
                   </button>

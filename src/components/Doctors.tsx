@@ -13,7 +13,7 @@ export default function Doctors() {
             Our Medical Team
           </h2>
           <div className="flex justify-center mb-5">
-            <div className="w-14 h-1 bg-[#cc0000] rounded-full"></div>
+            <div className="w-14 h-1 bg-[#C0392B] rounded-full"></div>
           </div>
           <p className="text-gray-500 text-base max-w-xl mx-auto">
             Qualified specialists ready to deliver premium home healthcare.
@@ -40,7 +40,7 @@ export default function Doctors() {
                 ) : (
                   <div className="flex h-full w-full items-center justify-center bg-[#f8f9fa] px-6 text-center">
                     <div>
-                      <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#cc0000]">Medicoline</p>
+                      <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#C0392B]">Medicoline</p>
                       <p className="mt-2 text-base font-semibold leading-relaxed text-[#111111]">{doc.name}</p>
                     </div>
                   </div>
@@ -57,7 +57,7 @@ export default function Doctors() {
                     </p>
                     <Link
                       to="/about#founder"
-                      className="block w-full bg-[#e30000] text-white text-xs sm:text-sm font-semibold px-2 py-2 sm:px-4 sm:py-2.5 rounded-full hover:bg-[#cc0000] transition-colors duration-200"
+                      className="block w-full bg-[#C0392B] text-white text-xs sm:text-sm font-semibold px-2 py-2 sm:px-4 sm:py-2.5 rounded-full hover:bg-[#A93226] transition-colors duration-200"
                     >
                       View Profile
                     </Link>

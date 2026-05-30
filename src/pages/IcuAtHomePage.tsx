@@ -67,7 +67,7 @@ export default function IcuAtHomePage() {
           <div className="grid items-center gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-10">
             <div className="relative z-10">
               <div className="mb-5 inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.26em] text-[#244d95] sm:text-xs">
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#e30000] text-white shadow-[0_10px_24px_rgba(227,0,0,0.22)]">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#C0392B] text-white shadow-[0_10px_24px_rgba(192,57,43,0.22)]">
                   <HeartPulse size={18} strokeWidth={2.4} />
                 </span>
                 Complete Critical Care At Home
@@ -75,7 +75,7 @@ export default function IcuAtHomePage() {
 
               <h1 className="text-[3.2rem] font-black leading-[0.95] tracking-[-0.05em] text-[#07122b] sm:text-[4.8rem] lg:text-[6rem] xl:text-[6.7rem]">
                 ICU@
-                <span className="text-[#e30000]">Home</span>
+                <span className="text-[#C0392B]">Home</span>
               </h1>
 
               <p className="mt-6 max-w-[39rem] text-[18px] leading-[1.7] text-[#3f4a5b] sm:text-[20px] lg:text-[21px]">
@@ -86,7 +86,7 @@ export default function IcuAtHomePage() {
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                 <Link
                   to="/contact"
-                  className="inline-flex items-center justify-center gap-3 rounded-full bg-[#e30000] px-8 py-4 text-base font-semibold text-white shadow-[0_14px_30px_rgba(227,0,0,0.18)] transition-all duration-200 hover:bg-[#c80000]"
+                  className="inline-flex items-center justify-center gap-3 rounded-full bg-[#C0392B] px-8 py-4 text-base font-semibold text-white shadow-[0_14px_30px_rgba(192,57,43,0.18)] transition-all duration-200 hover:bg-[#A93226]"
                 >
                   <CalendarDays size={19} strokeWidth={2.1} />
                   Book ICU Consultation
@@ -94,7 +94,7 @@ export default function IcuAtHomePage() {
 
                 <a
                   href="tel:+917654247569"
-                  className="inline-flex items-center justify-center gap-3 rounded-full border border-[#ef8f8f] bg-white px-8 py-4 text-base font-semibold text-[#e30000] transition-colors duration-200 hover:bg-[#fff7f7]"
+                  className="inline-flex items-center justify-center gap-3 rounded-full border border-[#C0392B] bg-white px-8 py-4 text-base font-semibold text-[#C0392B] transition-colors duration-200 hover:bg-[#C0392B] hover:text-white"
                 >
                   <Phone size={19} strokeWidth={2.1} />
                   Call Now
@@ -126,10 +126,10 @@ export default function IcuAtHomePage() {
               <div className="absolute -right-12 bottom-10 h-40 w-40 rounded-full bg-[#dce8ff] blur-3xl" aria-hidden="true" />
               <div className="relative flex h-[320px] w-full items-center justify-center rounded-[26px] border border-[#e2e8f3] bg-[linear-gradient(135deg,#eef4ff_0%,#ffffff_48%,#fff2f2_100%)] p-8 text-center shadow-[0_20px_60px_rgba(7,18,43,0.12)] sm:h-[440px] lg:h-[610px] lg:rounded-[32px]">
                 <div className="max-w-sm">
-                  <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-white text-[#a31218] shadow-sm">
+                  <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-white text-[#C0392B] shadow-sm">
                     <HeartPulse size={34} strokeWidth={2} />
                   </div>
-                  <p className="text-sm font-bold uppercase tracking-[0.22em] text-[#a31218]">ICU@Home</p>
+                  <p className="text-sm font-bold uppercase tracking-[0.22em] text-[#C0392B]">ICU@Home</p>
                   <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-[#07122b] sm:text-4xl">
                     Image coming soon
                   </h2>
@@ -154,7 +154,7 @@ export default function IcuAtHomePage() {
                   {service.title}
                 </h2>
                 <p className="mt-4 max-w-[16rem] text-[15px] leading-8 text-[#4b5563]">{service.description}</p>
-                <span className="absolute bottom-7 right-7 text-[31px] font-light leading-none text-[#e30000] transition-transform duration-300 group-hover:translate-x-1">
+                <span className="absolute bottom-7 right-7 text-[31px] font-light leading-none text-[#C0392B] transition-transform duration-300 group-hover:translate-x-1">
                   ›
                 </span>
               </article>

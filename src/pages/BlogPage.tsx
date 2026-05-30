@@ -33,7 +33,7 @@ export default function BlogPage() {
       {/* Blog Hero Section */}
       <div className="bg-gradient-to-br from-[#0f172a] to-[#1e293b] text-white py-20 text-center">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <span className="text-[#C0392B] text-xs font-bold uppercase tracking-widest bg-red-500/10 px-3.5 py-1.5 rounded-full border border-red-500/20 mb-4 inline-block">
+          <span className="text-[#C0392B] text-xs font-bold uppercase tracking-widest bg-[#C0392B]/10 px-3.5 py-1.5 rounded-full border border-[#C0392B]/20 mb-4 inline-block">
             Medicoline Journal
           </span>
           <h1 className="font-extrabold text-4xl sm:text-5xl lg:text-6xl mb-6 tracking-tight">
@@ -55,7 +55,7 @@ export default function BlogPage() {
               onClick={() => setSelectedCategory(category)}
               className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-200 ${
                 selectedCategory === category
-                  ? 'bg-[#C0392B] text-white shadow-md shadow-red-100'
+                  ? 'bg-[#C0392B] text-white shadow-[0_10px_24px_rgba(192,57,43,0.16)]'
                   : 'bg-white text-gray-600 border border-gray-200 hover:border-[#C0392B]/50 hover:text-[#C0392B]'
               }`}
             >
@@ -113,7 +113,7 @@ export default function BlogPage() {
                   <div className="mt-auto pt-6 border-t border-gray-50 flex items-center justify-between">
                     <Link
                       to="/contact"
-                      className="text-[#C0392B] hover:text-[#a62b1f] text-sm font-bold inline-flex items-center gap-1.5 group transition-colors duration-200"
+                      className="text-[#C0392B] hover:text-[#A93226] text-sm font-bold inline-flex items-center gap-1.5 group transition-colors duration-200"
                     >
                       Schedule Support 
                       <ArrowRight size={15} className="transform translate-x-0 group-hover:translate-x-1 transition-transform" />

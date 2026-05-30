@@ -7,7 +7,7 @@
 @layer base {
   :root {
     --color-primary: #C0392B;
-    --color-primary-dark: #922B21;
+    --color-primary-dark: #A93226;
     --color-primary-light: #E8514A;
     --color-gray: #6B7280;
     --color-gray-dark: #374151;
@@ -19,7 +19,7 @@
     --font-heading: 'Montserrat', sans-serif;
     --font-body: 'Inter', sans-serif;
     --red: #C0392B;
-    --red-dark: #922B21;
+    --red-dark: #A93226;
     --navy: #0f172a;
     --blue: #1e4fa3;
     --gray-text: #374151;
@@ -256,8 +256,8 @@ a:hover {
 
 .service-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(204, 0, 0, 0.1);
-  border-left-color: #cc0000;
+  box-shadow: 0 12px 32px rgba(192, 57, 43, 0.1);
+  border-left-color: #C0392B;
 }
 
 .doctor-card {
@@ -267,8 +267,8 @@ a:hover {
 
 .doctor-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(204, 0, 0, 0.1);
-  border-top-color: #cc0000;
+  box-shadow: 0 12px 32px rgba(192, 57, 43, 0.1);
+  border-top-color: #C0392B;
 }
 
 .doctor-card p,
@@ -397,13 +397,13 @@ img {
 
 .medical-cross {
   background:
-    linear-gradient(#cc0000, #cc0000) center / 18% 100% no-repeat,
-    linear-gradient(#cc0000, #cc0000) center / 100% 18% no-repeat;
+    linear-gradient(#C0392B, #C0392B) center / 18% 100% no-repeat,
+    linear-gradient(#C0392B, #C0392B) center / 100% 18% no-repeat;
   border-radius: 4px;
 }
 
 .journey-node-active {
-  box-shadow: 0 0 0 4px rgba(204, 0, 0, 0.12), 0 0 24px rgba(204, 0, 0, 0.35);
+  box-shadow: 0 0 0 4px rgba(192, 57, 43, 0.12), 0 0 24px rgba(192, 57, 43, 0.35);
 }
 
 .journey-node {
