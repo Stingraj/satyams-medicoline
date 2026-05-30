@@ -130,7 +130,7 @@ export default function AppointmentBooking() {
                 For urgent queries contact{' '}
                 <a
                   href={`mailto:${CONTACT_EMAIL}`}
-                  className="inline-flex items-center gap-1 text-[#C0392B] hover:text-[#A93226] transition-colors"
+                  className="inline-flex items-center gap-1 text-[#C0392B] hover:text-[#C0392B] transition-colors"
                 >
                   <Mail size={14} strokeWidth={2} />
                   <span>{CONTACT_EMAIL}</span>
@@ -139,7 +139,7 @@ export default function AppointmentBooking() {
               <button
                 type="button"
                 onClick={() => setSubmitted(false)}
-                className="bg-[#C0392B] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#A93226] transition-colors"
+                className="bg-[#C0392B] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#C0392B] transition-colors"
               >
                 Book Another Visit
               </button>
@@ -294,7 +294,7 @@ export default function AppointmentBooking() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full flex items-center justify-center gap-2 bg-[#C0392B] text-white font-semibold py-4 rounded-xl hover:bg-[#A93226] transition-colors duration-200 shadow-[0_14px_30px_rgba(192,57,43,0.22)] disabled:opacity-50"
+                className="w-full flex items-center justify-center gap-2 bg-[#C0392B] text-white font-semibold py-4 rounded-xl hover:bg-[#C0392B] transition-colors duration-200 shadow-[0_14px_30px_rgba(192,57,43,0.22)] disabled:opacity-50"
               >
                 {loading ? 'Submitting...' : 'Book Appointment'}
                 <ArrowRight size={18} />
@@ -304,7 +304,7 @@ export default function AppointmentBooking() {
                 Or email us directly at{' '}
                 <a
                   href={`mailto:${CONTACT_EMAIL}`}
-                  className="inline-flex items-center gap-1 text-[#C0392B] hover:text-[#A93226] transition-colors"
+                  className="inline-flex items-center gap-1 text-[#C0392B] hover:text-[#C0392B] transition-colors"
                 >
                   <Mail size={14} strokeWidth={2} />
                   <span>{CONTACT_EMAIL}</span>

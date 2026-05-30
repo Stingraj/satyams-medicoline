@@ -289,7 +289,7 @@ export default function OurPartners() {
               setIsModalOpen(true);
               setIsSuccess(false);
             }}
-            className="bg-[#C0392B] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#A93226] transition-colors duration-200"
+            className="bg-[#C0392B] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#C0392B] transition-colors duration-200"
           >
             Join as a Partner
           </button>
@@ -321,7 +321,7 @@ export default function OurPartners() {
                   <button
                     type="button"
                     onClick={() => setIsModalOpen(false)}
-                    className="bg-[#C0392B] text-white px-8 py-2.5 rounded-full font-semibold hover:bg-[#A93226] transition-colors"
+                    className="bg-[#C0392B] text-white px-8 py-2.5 rounded-full font-semibold hover:bg-[#C0392B] transition-colors"
                   >
                     Close
                   </button>
@@ -429,7 +429,7 @@ export default function OurPartners() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full bg-[#C0392B] text-white font-semibold py-3.5 rounded-xl hover:bg-[#A93226] transition-colors duration-200 shadow-md disabled:opacity-50 mt-2"
+                      className="w-full bg-[#C0392B] text-white font-semibold py-3.5 rounded-xl hover:bg-[#C0392B] transition-colors duration-200 shadow-md disabled:opacity-50 mt-2"
                     >
                       {isSubmitting ? 'Submitting Request...' : 'Submit Partner Request'}
                     </button>

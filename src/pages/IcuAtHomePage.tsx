@@ -86,7 +86,7 @@ export default function IcuAtHomePage() {
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                 <Link
                   to="/contact"
-                  className="inline-flex items-center justify-center gap-3 rounded-full bg-[#C0392B] px-8 py-4 text-base font-semibold text-white shadow-[0_14px_30px_rgba(192,57,43,0.18)] transition-all duration-200 hover:bg-[#A93226]"
+                  className="inline-flex items-center justify-center gap-3 rounded-full bg-[#C0392B] px-8 py-4 text-base font-semibold text-white shadow-[0_14px_30px_rgba(192,57,43,0.18)] transition-all duration-200 hover:bg-[#C0392B]"
                 >
                   <CalendarDays size={19} strokeWidth={2.1} />
                   Book ICU Consultation

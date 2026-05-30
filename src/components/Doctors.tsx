@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 export default function Doctors() {
   const { ref, visible } = useScrollReveal();
+  const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
 
   return (
     <section id="doctors" className="bg-white py-[60px]">
@@ -31,11 +32,14 @@ export default function Doctors() {
               className="doctor-card bg-white border border-gray-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
             >
               <div className="w-full aspect-square overflow-hidden bg-gray-100">
-                {doc.image ? (
+                {doc.image && !imageErrors[doc.id] ? (
                   <img
                     src={doc.image}
                     alt={`${doc.name} profile`}
                     className="w-full h-full object-cover"
+                    onError={() => {
+                      setImageErrors((prev) => ({ ...prev, [doc.id]: true }));
+                    }}
                   />
                 ) : (
                   <div className="flex h-full w-full items-center justify-center bg-[#F3F4F6]">
@@ -43,13 +47,13 @@ export default function Doctors() {
                       style={{
                         fontFamily: 'Montserrat, sans-serif',
                         fontWeight: 700,
-                        fontSize: '24px',
+                        fontSize: '20px',
                         color: '#374151',
                       }}
                     >
                       {doc.name
                         .split(' ')
-                        .filter((n: string) => n !== 'Dr.' && n !== 'Dr')
+                        .filter((n: string) => n !== 'Dr.' && n !== 'Dr' && n !== 'Dr.')
                         .slice(0, 2)
                         .map((n: string) => n[0])
                         .join('')
@@ -69,7 +73,7 @@ export default function Doctors() {
                     </p>
                     <Link
                       to="/about#founder"
-                      className="block w-full bg-[#C0392B] text-white text-xs sm:text-sm font-semibold px-2 py-2 sm:px-4 sm:py-2.5 rounded-full hover:bg-[#A93226] transition-colors duration-200"
+                      className="block w-full bg-[#C0392B] text-white text-xs sm:text-sm font-semibold px-2 py-2 sm:px-4 sm:py-2.5 rounded-full hover:bg-[#C0392B] transition-colors duration-200"
                     >
                       View Profile
                     </Link>

@@ -1,6 +1,6 @@
 export const colors = {
     primary: '#C0392B',        // brand red from logo
-    primaryDark: '#A93226',    // darker red for hover
+    primaryDark: '#C0392B',    // darker red for hover
     primaryLight: '#E8514A',   // lighter red for accents
     gray: '#6B7280',           // gray from HCS logo
     grayDark: '#374151',       // dark gray for headings

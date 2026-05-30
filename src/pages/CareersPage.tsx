@@ -316,7 +316,7 @@ export default function CareersPage() {
         }
 
         .careers-btn-red:hover {
-          background-color: #A93226;
+          background-color: #C0392B;
           transform: translateY(-2px);
         }
 

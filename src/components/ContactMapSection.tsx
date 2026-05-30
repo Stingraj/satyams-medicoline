@@ -106,7 +106,7 @@ export default function ContactMapSection() {
                 <button
                   type="button"
                   onClick={() => setSubmitted(false)}
-                  className="bg-[#C0392B] text-white text-sm font-semibold px-6 py-2.5 rounded-full hover:bg-[#A93226] transition-colors"
+                  className="bg-[#C0392B] text-white text-sm font-semibold px-6 py-2.5 rounded-full hover:bg-[#C0392B] transition-colors"
                 >
                   Send Another Message
                 </button>
@@ -203,7 +203,7 @@ export default function ContactMapSection() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-[#C0392B] text-white font-semibold py-4 rounded-xl hover:bg-[#A93226] transition-colors duration-200 shadow-sm disabled:opacity-50"
+                  className="w-full bg-[#C0392B] text-white font-semibold py-4 rounded-xl hover:bg-[#C0392B] transition-colors duration-200 shadow-sm disabled:opacity-50"
                 >
                   {loading ? 'Sending Message...' : '✉ Send Message'}
                 </button>
