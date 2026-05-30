@@ -1,0 +1,72 @@
+<USER_REQUEST>
+
+First run this before any changes:
+
+git add .
+git commit -m "backup before final fixes"
+
+
+Now make all these changes exactly. Do not skip any step.
+
+STEP 1 — Revert all button colors back to original red
+Open every component and page file. Find any button that was changed to a different shade of red, maroon, or any other color during the design system update. Revert ALL buttons back to the original brand red #C0392B background with white text. The Book Appointment button in the navbar and hero section must be exactly the same red color #C0392B. No dark maroon, no faded red, no gradient. Pure flat #C0392B on all buttons everywhere. Check these files specifically:
+
+	•	src/components/Navbar.tsx
+	•	src/components/Hero.tsx
+	•	src/components/NursingPackages.tsx
+	•	src/components/AppointmentBooking.tsx
+	•	src/components/Footer.tsx
+	•	src/pages/ContactPage.tsx
+	•	src/pages/DoctorsPage.tsx
+
+STEP 2 — Fix hero section spacing
+Open src/components/Hero.tsx. There is too much empty white space between the navbar and the hero heading text “Professional Healthcare at Your Doorstep”. Fix this by:
+
+	•	Reducing the top padding of the hero section from whatever it currently is to pt-16 on mobile and pt-20 on desktop
+	•	The badge that says “MEDICOLINE HOME CARE SERVICES” should sit close to the heading, not far above it
+	•	The gap between the badge and the heading should be gap-4 or mb-4 only
+	•	The overall hero section height should feel balanced, not too tall with empty space at top
+	•	Do not change any text content or button text, only fix the spacing
+
+STEP 3 — Remove Blog section completely from homepage
+Open src/pages/HomePage.tsx. Find where the Blog preview section is imported and rendered. Remove it completely. Delete the import line for the blog component at the top of the file. The homepage should not show any blog section at all.
+
+STEP 4 — Remove Blog page link from Navbar
+Open src/components/Navbar.tsx. Find the navGroups array. Remove the Blog entry completely:
+
+{ l
+<truncated 5946 bytes>
+w link in red
+	•	Clicking the card opens full article content on same page or a new route
+
+Do not use any AI generated or stock images for blog thumbnails. Use a simple colored background with the category name as a visual placeholder. Category Elderly Care gets light orange background, ICU Care gets light blue background, Wellness gets light green background. All placeholder backgrounds should be subtle pastel colors, not bright.
+
+STEP 9 — Remove all AI generated doctor placeholder images
+Open src/components/Doctors.tsx. For any doctor whose image field is an empty string or a broken path, do not show any image at all. Instead show a circle avatar with the doctor initials. For example Dr. Ramesh Kumar shows “RK” in a circle. Circle background: light gray #F3F4F6. Initials text: dark gray #374151, Montserrat font weight 700, font size 20px. This applies to ALL doctors who do not have a real local image file confirmed to exist in src/assets/doctors/.
+
+STEP 10 — Final check on all colors
+After all above steps confirm that across the entire website:
+
+	•	Every filled button is #C0392B background, white text, no exceptions
+	•	Every outline button is #C0392B border and text
+	•	Every heading uses Montserrat font
+	•	Every body text uses Inter font
+	•	No purple, blue, pink, or green accent colors exist anywhere
+	•	Footer background is #0f172a
+	•	All section backgrounds are either white #FFFFFF or light gray #F9FAFB alternating
+
+After all 10 steps run:
+
+npm run build
+
+
+Fix any TypeScript or build errors immediately. List every file changed. Confirm zero errors before reporting done.
+
+
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-05-30T22:10:26+05:30.
+</ADDITIONAL_METADATA>
+<USER_SETTINGS_CHANGE>
+The user changed setting `Model Selection` from Gemini 3.5 Flash (High) to Gemini 3.1 Pro (High). No need to comment on this change if the user doesn't ask about it. If reporting what model you are, please use a human readable name instead of the exact string.
+</USER_SETTINGS_CHANGE>

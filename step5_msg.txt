@@ -1,0 +1,76 @@
+<USER_REQUEST>
+First run this command before making any changes:
+
+git add .
+git commit -m "backup before complete update"
+
+
+Now make all these changes one by one. Do not skip any step.
+
+STEP 1 — Remove top bar white space line
+Open src/components/Navbar.tsx. Find the top bar that shows phone number on left and email on right. Delete this entire top bar div completely. The navbar should start directly with the logo and navigation links. No white line, no phone, no email bar above the navbar.
+
+STEP 2 — Fix Nursing Packages pricing cards
+Open src/components/NursingPackages.tsx. Right now only the middle card is highlighted red when selected. Fix this so that when you click ANY card it gets the red highlighted border and styling. Not just the middle one. All three cards should be individually selectable and show red border when active. Add a useState to track which card is selected. Default selected card should be the middle one.
+
+STEP 3 — Add Hero Section to Nursing Packages page
+Open src/components/NursingPackages.tsx. At the very top before the pricing cards add a hero section with:
+
+	•	Background: brand red #C0392B
+	•	Large white heading: “Health Packages For Every Family”
+	•	Subtitle in white: “Affordable home healthcare packages with free sample collection”
+	•	No image needed, clean text only with subtle gradient
+
+STEP 4 — Fix Founder Section credential cards
+Open src/components/FounderSection.tsx. In the three credential cards on the right side fix so both logos show side by side centered inside each card. Remove the lone red text names like “Fortis Healthcare”, “Elsevier”, “India Book of Records” that appear alone on the left. Just show both logo images centered and balanced. Both logos in each card should be max height 40px with object-fit contain.
+
+STEP 5 — Fix Footer to be full width with all sections
+Open src/components/Footer.tsx. Redesign it completely. Full width dark navy background #0f172a. Four columns on desktop, stacked on mobile:
+
+Column 1 — Brand
+
+	•	Med
+<truncated 4103 bytes>
+elow the 3 cards add a centered “View All Articles” button with red outline style linking to /blog.
+
+STEP 8 — Add Instagram Social Link in Navbar
+Open src/components/Navbar.tsx. In the mobile menu at the bottom add a small row of social icons. Instagram icon from lucide-react linking to https://www.instagram.com/we.medicoline/ opening in new tab. Style with brand red color.
+
+STEP 9 — Add Partner logos correctly
+Open src/components/OurPartners.tsx. Make sure ALL logos from src/assets/partners/ are included. Both PARTNER-LOGO-01 through PARTNER-LOGO-12 and partner-01 through partner-09 if they exist. All in one scrolling carousel row.
+
+STEP 10 — Add Social Media to Contact Page
+Open src/pages/ContactPage.tsx. Find the contact information section. After the phone and email add a row of social icons with label “Follow Us On”:
+
+	•	Instagram icon → https://www.instagram.com/we.medicoline/ in new tab
+	•	Facebook icon → # placeholder
+	•	YouTube icon → # placeholder
+Style icons in brand red, larger size 24px, with hover scale effect.
+
+STEP 11 — Add Blog and FAQ links to Navbar
+Open src/components/Navbar.tsx. Find the navGroups array. Add Blog as a direct link:
+
+{ label: 'Blog', to: '/blog' }
+
+
+Add it between ICU@Home and Team. Also inside the About dropdown add FAQ as a link:
+
+{ label: 'FAQ', to: '/#faq' }
+
+
+Make sure the FAQ section has id="faq" on its container div.
+
+After all 11 steps are done run:
+
+npm run build
+
+
+List every single file that was changed or created. Confirm zero build errors. If any error occurs fix it before reporting done. / make sure some are already done check adn excute 
+
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-05-30T21:07:06+05:30.
+</ADDITIONAL_METADATA>
+<USER_SETTINGS_CHANGE>
+The user changed setting `Model Selection` from None to Gemini 3.5 Flash (High). No need to comment on this change if the user doesn't ask about it. If reporting what model you are, please use a human readable name instead of the exact string.
+</USER_SETTINGS_CHANGE>
