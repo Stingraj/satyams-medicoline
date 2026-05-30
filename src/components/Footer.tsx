@@ -22,8 +22,8 @@ export default function Footer() {
                 className="shrink-0"
               />
               <div className="leading-tight">
-                <span className="font-extrabold text-white text-[17px] tracking-tight block">Medicoline</span>
-                <span className="block text-[10px] text-gray-400 tracking-[0.15em] uppercase font-semibold">Healthcare</span>
+                <span className="font-heading font-black text-white text-[17px] tracking-tight block">Medicoline</span>
+                <span className="block text-[10px] text-gray-400 tracking-[0.15em] uppercase font-body font-medium">Healthcare</span>
               </div>
             </Link>
             

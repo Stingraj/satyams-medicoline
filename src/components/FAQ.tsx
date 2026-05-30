@@ -46,13 +46,13 @@ export default function FAQ() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Centered section title with red underline */}
         <div className="text-center mb-16">
-          <h2 className="font-extrabold text-[#111111] text-3xl sm:text-4xl tracking-tight mb-4">
+          <h2 className="font-heading font-black text-[#111111] text-3xl sm:text-4xl tracking-tight mb-4">
             Frequently Asked Questions
           </h2>
           <div className="flex justify-center mb-5">
             <div className="w-16 h-1 bg-[#C0392B] rounded-full"></div>
           </div>
-          <p className="text-gray-500 text-base max-w-xl mx-auto">
+          <p className="font-body text-[#6B7280] text-base max-w-xl mx-auto">
             Everything you need to know about our home care services.
           </p>
         </div>
@@ -75,7 +75,7 @@ export default function FAQ() {
                   className="w-full flex items-center justify-between p-6 text-left focus:outline-none transition-colors duration-200"
                 >
                   <span
-                    className={`font-bold text-base sm:text-lg pr-4 transition-colors duration-200 ${
+                    className={`font-heading font-bold text-base sm:text-lg pr-4 transition-colors duration-200 ${
                       isOpen ? 'text-[#C0392B]' : 'text-gray-800 hover:text-[#C0392B]'
                     }`}
                   >

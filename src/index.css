@@ -1,15 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --red: #e30000;
-    --red-dark: #c40000;
-    --navy: #07122b;
+    --color-primary: #C0392B;
+    --color-primary-dark: #922B21;
+    --color-primary-light: #E8514A;
+    --color-gray: #6B7280;
+    --color-gray-dark: #374151;
+    --color-gray-light: #F3F4F6;
+    --color-navy: #0f172a;
+    --color-white: #FFFFFF;
+    --color-black: #111111;
+    --color-border: #E5E7EB;
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --red: #C0392B;
+    --red-dark: #922B21;
+    --navy: #0f172a;
     --blue: #1e4fa3;
-    --gray-text: #4b5563;
-    --bg-light: #f8f9fc;
+    --gray-text: #374151;
+    --bg-light: #F3F4F6;
     --white: #ffffff;
     --radius-card: 20px;
     --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.07);
@@ -21,10 +35,10 @@
   }
 
   body {
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
     font-weight: 400;
-    color: #111111;
-    background-color: #ffffff;
+    color: var(--color-gray-dark);
+    background-color: var(--color-white);
     -webkit-font-smoothing: antialiased;
   }
 
@@ -34,11 +48,75 @@
   h4,
   h5,
   h6 {
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-heading);
     font-weight: 800;
     letter-spacing: -0.02em;
+    color: var(--color-black);
   }
 }
+
+a {
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--color-primary);
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 12px 28px;
+  transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.btn-outline {
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 10px 28px;
+  transition: all 0.2s ease;
+}
+
+.btn-outline:hover {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: 2rem;
+  color: var(--color-black);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.section-subtitle {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-gray);
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.red-underline {
+  width: 60px;
+  height: 3px;
+  background-color: var(--color-primary);
+  margin: 8px auto 40px auto;
+  border-radius: 2px;
+}
+
 
 .dot-pattern {
   background-image: radial-gradient(circle, #e8e8e8 1px, transparent 1px);

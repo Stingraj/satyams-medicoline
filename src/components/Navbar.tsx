@@ -138,7 +138,7 @@ export default function Navbar() {
   };
 
   const linkClass = (link: NavLinkItem) =>
-    `text-sm font-medium transition-colors duration-200 ${isLinkActive(link) ? 'text-[#cc0000]' : 'text-gray-600 hover:text-[#cc0000]'
+    `text-sm font-medium transition-colors duration-200 font-heading font-semibold ${isLinkActive(link) ? 'text-[#C0392B]' : 'text-[#374151] hover:text-[#C0392B]'
     }`;
 
   const renderNavLink = (link: NavLinkItem, extraClass = '') => {
@@ -169,8 +169,8 @@ export default function Navbar() {
                 <img src={LOGO_SRC} alt="Medicoline Healthcare" className="brand-logo" />
               </div>
               <div className="leading-tight">
-                <span className="font-extrabold text-[#cc0000] text-[15px] leading-none">Medicoline</span>
-                <span className="block text-[9px] text-gray-500 tracking-[0.15em] uppercase leading-none mt-0.5 font-medium">
+                <span className="font-heading font-black text-[#C0392B] text-[15px] leading-none">Medicoline</span>
+                <span className="block text-[9px] text-[#6B7280] tracking-[0.15em] uppercase leading-none mt-0.5 font-medium">
                   Healthcare
                 </span>
               </div>
@@ -192,7 +192,7 @@ export default function Navbar() {
                   >
                     <button
                       type="button"
-                      className={`inline-flex items-center gap-1 text-sm font-medium transition-colors duration-200 ${active ? 'text-[#cc0000]' : 'text-gray-600 hover:text-[#cc0000]'
+                      className={`inline-flex items-center gap-1 text-sm font-medium font-heading font-semibold transition-colors duration-200 ${active ? 'text-[#C0392B]' : 'text-[#374151] hover:text-[#C0392B]'
                         }`}
                       onClick={() => setOpenDropdown((current) => (current === group.label ? null : group.label))}
                     >
@@ -221,7 +221,7 @@ export default function Navbar() {
             <div className="hidden lg:flex nav-right items-center gap-3">
               <Link
                 to="/contact"
-                className="bg-[#cc0000] text-white text-sm font-semibold px-6 py-2.5 rounded-full hover:bg-[#aa0000] transition-colors duration-200"
+                className="bg-[#C0392B] text-white text-sm font-heading font-bold px-6 py-2.5 rounded-full hover:bg-[#922B21] transition-colors duration-200"
                 onClick={() => handleLinkClick('/contact')}
               >
                 Book Appointment
@@ -231,7 +231,7 @@ export default function Navbar() {
             {/* Mobile Right Action Controls */}
             <div className="flex lg:hidden items-center">
               <button
-                className="p-2 text-gray-600 hover:text-[#cc0000] focus:outline-none w-11 h-11 flex items-center justify-center shrink-0"
+                className="p-2 text-[#374151] hover:text-[#C0392B] focus:outline-none w-11 h-11 flex items-center justify-center shrink-0"
                 onClick={() => setMenuOpen(!menuOpen)}
                 aria-label="Toggle menu"
                 style={{ minWidth: '44px', minHeight: '44px' }}
@@ -255,15 +255,15 @@ export default function Navbar() {
               <img src={LOGO_SRC} alt="Medicoline Healthcare" className="brand-logo" />
             </div>
             <div className="leading-tight">
-              <span className="font-extrabold text-[#cc0000] text-[15px] leading-none">Medicoline</span>
-              <span className="block text-[9px] text-gray-500 tracking-[0.15em] uppercase leading-none mt-0.5 font-medium">
+              <span className="font-heading font-black text-[#C0392B] text-[15px] leading-none">Medicoline</span>
+              <span className="block text-[9px] text-[#6B7280] tracking-[0.15em] uppercase leading-none mt-0.5 font-medium">
                 Healthcare
               </span>
             </div>
           </Link>
           <button
             type="button"
-            className="p-2 text-gray-600 hover:text-[#cc0000] focus:outline-none w-11 h-11 flex items-center justify-center"
+            className="p-2 text-[#374151] hover:text-[#C0392B] focus:outline-none w-11 h-11 flex items-center justify-center"
             onClick={() => setMenuOpen(false)}
             aria-label="Close menu"
             style={{ minWidth: '44px', minHeight: '44px' }}
@@ -275,8 +275,8 @@ export default function Navbar() {
         {/* Large Navigation Menu Items */}
         <div className="flex-1 flex flex-col justify-center py-8 space-y-6">
           {mobileNavItems.map((item) => (
-            <div key={item.label} className="block text-2xl font-bold py-2">
-              {renderNavLink(item, 'text-2xl font-bold')}
+            <div key={item.label} className="block text-2xl font-bold font-heading py-2">
+              {renderNavLink(item, 'text-2xl font-bold font-heading')}
             </div>
           ))}
         </div>
