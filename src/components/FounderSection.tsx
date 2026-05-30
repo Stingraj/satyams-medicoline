@@ -491,13 +491,14 @@ export default function FounderSection() {
               {brandCards.map((card) => (
                 <div key={card.title} className="founder-brand-card">
                   <div className="founder-brand-title">{card.title}</div>
-                  <div className="founder-brand-logos">
+                  <div className="flex justify-center items-center gap-6 py-4">
                     {card.logos.map((logo) => (
-                      'src' in logo && (
-                        <div key={logo.alt} className="founder-brand-logo-box">
-                          <img src={logo.src} alt={logo.alt} className="founder-brand-logo" />
-                        </div>
-                      )
+                      <img
+                        key={logo.alt}
+                        src={logo.src}
+                        alt={logo.alt}
+                        style={{ maxHeight: '44px', width: 'auto', objectFit: 'contain' }}
+                      />
                     ))}
                   </div>
                 </div>

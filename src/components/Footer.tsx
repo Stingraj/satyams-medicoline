@@ -121,11 +121,6 @@ export default function Footer() {
                   Contact
                 </Link>
               </li>
-              <li>
-                <Link to="/blog" className="text-gray-300 hover:text-[#C0392B] transition-colors duration-200 block py-0.5">
-                  Blog
-                </Link>
-              </li>
             </ul>
           </div>
 
@@ -191,7 +186,7 @@ export default function Footer() {
             <div className="pt-2">
               <Link
                 to="/contact#contact"
-                className="w-full text-center block bg-[#C0392B] text-white text-sm font-bold py-2.5 px-4 rounded-xl hover:bg-[#A93226] transition-colors duration-200 shadow-md"
+                className="w-full text-center block bg-[#C0392B] text-white text-sm font-bold py-2.5 px-4 rounded-xl hover:bg-[#C0392B] transition-colors duration-200 shadow-md"
               >
                 Book Appointment
               </Link>

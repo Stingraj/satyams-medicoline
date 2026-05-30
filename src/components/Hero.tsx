@@ -6,14 +6,14 @@ export default function Hero() {
   const { ref, visible } = useScrollReveal();
 
   return (
-    <section className="bg-white pt-[72px] lg:pt-[104px]">
+    <section className="bg-white pt-16 lg:pt-20">
       <div
         ref={ref}
-        className={`min-h-[calc(100svh-72px)] lg:min-h-[calc(100svh-104px)] sm:min-h-[85vh] flex items-center justify-center dot-pattern ${visible ? 'section-visible' : 'section-hidden'
+        className={`min-h-[60vh] lg:min-h-[70vh] flex items-center justify-center dot-pattern ${visible ? 'section-visible' : 'section-hidden'
           }`}
       >
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-20 lg:py-28 text-center">
-          <div className="hidden sm:inline-flex items-center gap-2 bg-[#fff5f5] border border-[#C0392B]/20 rounded-full px-5 py-2 mb-8">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-16 lg:py-20 text-center">
+          <div className="hidden sm:inline-flex items-center gap-2 bg-[#fff5f5] border border-[#C0392B]/20 rounded-full px-5 py-2 mb-4">
             <span className="w-2 h-2 rounded-full bg-[#C0392B] inline-block"></span>
             <span className="text-xs font-semibold text-[#C0392B] tracking-widest uppercase">
               Medicoline Home Care Services
@@ -42,7 +42,7 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-[10px] sm:gap-4 w-full px-2 sm:px-0">
             <Link
               to="/contact"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#C0392B] text-white font-semibold px-9 py-3 sm:py-4 rounded-full hover:bg-[#A93226] transition-colors duration-200 text-base shadow-[0_14px_30px_rgba(192,57,43,0.22)]"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#C0392B] text-white font-semibold px-9 py-3 sm:py-4 rounded-full hover:bg-[#C0392B] transition-colors duration-200 text-base shadow-[0_14px_30px_rgba(192,57,43,0.22)]"
             >
               Book Appointment
               <ArrowRight size={18} />

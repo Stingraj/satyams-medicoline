@@ -198,7 +198,7 @@ export default function CareersPage() {
       <style>{`
         .careers-page {
           background-color: #ffffff;
-          font-family: 'Poppins', sans-serif;
+          font-family: 'Montserrat', sans-serif;
           color: #111111;
           padding-top: 72px;
         }

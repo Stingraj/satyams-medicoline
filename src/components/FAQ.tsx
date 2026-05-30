@@ -42,16 +42,14 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0); // First question open by default
 
   return (
-    <section id="faq" className="bg-[#fbf9f8] py-20 lg:py-28 scroll-mt-20">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="faq" className="bg-[#F9FAFB] py-20 scroll-mt-20">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Centered section title with red underline */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <h2 className="font-heading font-black text-[#111111] text-3xl sm:text-4xl tracking-tight mb-4">
             Frequently Asked Questions
           </h2>
-          <div className="flex justify-center mb-5">
-            <div className="w-16 h-1 bg-[#C0392B] rounded-full"></div>
-          </div>
+          <div className="w-[60px] h-[3px] bg-[#C0392B] mx-auto mb-5"></div>
           <p className="font-body text-[#6B7280] text-base max-w-xl mx-auto">
             Everything you need to know about our home care services.
           </p>
@@ -67,37 +65,34 @@ export default function FAQ() {
             return (
               <div
                 key={i}
-                className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden transition-all duration-300"
+                className="bg-white border-b border-[#E5E7EB] transition-all duration-300"
               >
                 <button
                   type="button"
                   onClick={() => setOpenIndex(isOpen ? null : i)}
-                  className="w-full flex items-center justify-between p-6 text-left focus:outline-none transition-colors duration-200"
+                  className="w-full flex items-center justify-between py-[16px] px-[20px] text-left focus:outline-none transition-colors duration-200"
                 >
                   <span
-                    className={`font-heading font-bold text-base sm:text-lg pr-4 transition-colors duration-200 ${isOpen ? 'text-[#C0392B]' : 'text-gray-800 hover:text-[#C0392B]'
+                    className={`font-heading font-bold text-[16px] transition-colors duration-200 ${isOpen ? 'text-[#C0392B]' : 'text-[#111111] hover:text-[#C0392B]'
                       }`}
                   >
                     {faq.q}
                   </span>
-                  <span
-                    className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-200 ${isOpen ? 'bg-[#fff5f5]' : 'bg-gray-50'
-                      }`}
-                  >
+                  <span className="flex-shrink-0 ml-4">
                     {isOpen ? (
-                      <Minus size={16} className="text-[#C0392B]" strokeWidth={2.5} />
+                      <Minus size={18} className="text-[#C0392B]" />
                     ) : (
-                      <Plus size={16} className="text-gray-500" strokeWidth={2.5} />
+                      <Plus size={18} className="text-[#C0392B]" />
                     )}
                   </span>
                 </button>
 
                 {/* Accordion Body */}
                 <div
-                  className={`transition-all duration-300 ease-in-out overflow-hidden ${isOpen ? 'max-h-[300px] border-t border-gray-50' : 'max-h-0'
+                  className={`transition-all duration-300 ease-in-out overflow-hidden ${isOpen ? 'max-h-[300px]' : 'max-h-0'
                     }`}
                 >
-                  <div className="p-6 text-gray-600 text-sm sm:text-base leading-relaxed">
+                  <div className="pb-[16px] px-[20px] pt-0 text-[#374151] font-body text-[15px] font-normal leading-relaxed">
                     {faq.a}
                   </div>
                 </div>

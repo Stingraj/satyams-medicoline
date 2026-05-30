@@ -17,7 +17,6 @@ const navGroups = [
     ],
   },
   { label: 'ICU@Home', to: '/icu-at-home' },
-  { label: 'Blog', to: '/blog' },
   {
     label: 'Team',
     items: [
@@ -45,7 +44,6 @@ const mobileNavItems = [
   { label: 'Our Founder', to: '/about#founder' },
   { label: 'About', to: '/about#about' },
   { label: 'Careers', to: '/careers' },
-  { label: 'Blog', to: '/blog' },
   { label: 'FAQ', to: '/#faq' },
   { label: 'Contact', to: '/contact#contact' },
 ] as const;

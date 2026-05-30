@@ -38,11 +38,23 @@ export default function Doctors() {
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <div className="flex h-full w-full items-center justify-center bg-[#f8f9fa] px-6 text-center">
-                    <div>
-                      <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#C0392B]">Medicoline</p>
-                      <p className="mt-2 text-base font-semibold leading-relaxed text-[#111111]">{doc.name}</p>
-                    </div>
+                  <div className="flex h-full w-full items-center justify-center bg-[#F3F4F6]">
+                    <span
+                      style={{
+                        fontFamily: 'Montserrat, sans-serif',
+                        fontWeight: 700,
+                        fontSize: '24px',
+                        color: '#374151',
+                      }}
+                    >
+                      {doc.name
+                        .split(' ')
+                        .filter((n: string) => n !== 'Dr.' && n !== 'Dr')
+                        .slice(0, 2)
+                        .map((n: string) => n[0])
+                        .join('')
+                        .toUpperCase()}
+                    </span>
                   </div>
                 )}
               </div>
