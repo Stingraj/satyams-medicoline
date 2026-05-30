@@ -2,6 +2,9 @@ import Hero from '../components/Hero';
 import Services from '../components/Services';
 import EcgAtHome from '../components/EcgAtHome';
 import NursingPackages from '../components/NursingPackages';
+import WhyChooseUs from '../components/WhyChooseUs';
+import FAQ from '../components/FAQ';
+import BlogPreview from '../components/BlogPreview';
 
 export default function HomePage() {
   return (
@@ -16,6 +19,9 @@ export default function HomePage() {
 
       <EcgAtHome />
       <NursingPackages />
+      <WhyChooseUs />
+      <FAQ />
+      <BlogPreview />
     </>
   );
 }

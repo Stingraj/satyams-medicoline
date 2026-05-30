@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, MapPin, Phone } from 'lucide-react';
+import { Mail, MapPin, Phone, Instagram, Facebook, Youtube } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 const MAP_EMBED_SRC =
@@ -242,6 +242,34 @@ export default function ContactMapSection() {
                   <Mail size={16} strokeWidth={2} className="text-[#cc0000]" />
                   <span>{CONTACT_EMAIL}</span>
                 </a>
+                <div className="pt-2 border-t border-gray-100 mt-2">
+                  <p className="text-[10px] font-bold text-gray-400 mb-2 uppercase tracking-widest">Follow Us On</p>
+                  <div className="flex items-center gap-4">
+                    <a
+                      href="https://www.instagram.com/we.medicoline/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#C0392B] hover:scale-110 transform transition-transform duration-200"
+                      aria-label="Instagram"
+                    >
+                      <Instagram size={24} />
+                    </a>
+                    <a
+                      href="#"
+                      className="text-[#C0392B] hover:scale-110 transform transition-transform duration-200"
+                      aria-label="Facebook"
+                    >
+                      <Facebook size={24} />
+                    </a>
+                    <a
+                      href="#"
+                      className="text-[#C0392B] hover:scale-110 transform transition-transform duration-200"
+                      aria-label="YouTube"
+                    >
+                      <Youtube size={24} />
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

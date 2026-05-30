@@ -1,17 +1,27 @@
 import { useEffect, useRef, useState } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import partner01 from '../assets/partners/PARTNER-LOGO-01.png';
-import partner02 from '../assets/partners/PARTNER-LOGO-02.png';
-import partner03 from '../assets/partners/PARTNER-LOGO-03.png';
-import partner04 from '../assets/partners/PARTNER-LOGO-04.png';
-import partner05 from '../assets/partners/PARTNER-LOGO-05.png';
-import partner06 from '../assets/partners/PARTNER-LOGO-06.png';
-import partner07 from '../assets/partners/PARTNER-LOGO-07.png';
-import partner08 from '../assets/partners/PARTNER-LOGO-08.png';
-import partner09 from '../assets/partners/PARTNER-LOGO-09.png';
-import partner10 from '../assets/partners/PARTNER-LOGO-10.png';
-import partner11 from '../assets/partners/PARTNER-LOGO-11.png';
-import partner12 from '../assets/partners/PARTNER-LOGO-12.png';
+import partnerLogo01 from '../assets/partners/PARTNER-LOGO-01.png';
+import partnerLogo02 from '../assets/partners/PARTNER-LOGO-02.png';
+import partnerLogo03 from '../assets/partners/PARTNER-LOGO-03.png';
+import partnerLogo04 from '../assets/partners/PARTNER-LOGO-04.png';
+import partnerLogo05 from '../assets/partners/PARTNER-LOGO-05.png';
+import partnerLogo06 from '../assets/partners/PARTNER-LOGO-06.png';
+import partnerLogo07 from '../assets/partners/PARTNER-LOGO-07.png';
+import partnerLogo08 from '../assets/partners/PARTNER-LOGO-08.png';
+import partnerLogo09 from '../assets/partners/PARTNER-LOGO-09.png';
+import partnerLogo10 from '../assets/partners/PARTNER-LOGO-10.png';
+import partnerLogo11 from '../assets/partners/PARTNER-LOGO-11.png';
+import partnerLogo12 from '../assets/partners/PARTNER-LOGO-12.png';
+
+import partner01 from '../assets/partners/partner-01.png';
+import partner02 from '../assets/partners/partner-02.png';
+import partner03 from '../assets/partners/partner-03.png';
+import partner04 from '../assets/partners/partner-04.png';
+import partner05 from '../assets/partners/partner-05.png';
+import partner06 from '../assets/partners/partner-06.png';
+import partner07 from '../assets/partners/partner-07.png';
+import partner08 from '../assets/partners/partner-08.png';
+import partner09 from '../assets/partners/partner-09.png';
 
 type Partner = {
   name: string;
@@ -19,18 +29,27 @@ type Partner = {
 };
 
 const partners: Partner[] = [
-  { name: 'Apollo Diagnostics', src: partner01 },
-  { name: 'Manipal TRUtest', src: partner02 },
-  { name: 'Sri Chakra Super Speciality Hospital', src: partner03 },
-  { name: "Dr. Divya's Polyclinic", src: partner04 },
-  { name: 'Medisure Diagnostics', src: partner05 },
-  { name: 'Sri Sri Neuro Centre / OP Neuro Cure', src: partner06 },
-  { name: 'Hari Hospital', src: partner07 },
-  { name: 'Fortis Hospitals', src: partner08 },
-  { name: 'MGM Healthcare', src: partner09 },
-  { name: 'Sakra World Hospital', src: partner10 },
-  { name: 'S.L. Raheja Hospital', src: partner11 },
-  { name: 'Saifee Hospital', src: partner12 },
+  { name: 'Apollo Diagnostics', src: partnerLogo01 },
+  { name: 'Manipal TRUtest', src: partnerLogo02 },
+  { name: 'Sri Chakra Super Speciality Hospital', src: partnerLogo03 },
+  { name: "Dr. Divya's Polyclinic", src: partnerLogo04 },
+  { name: 'Medisure Diagnostics', src: partnerLogo05 },
+  { name: 'Sri Sri Neuro Centre / OP Neuro Cure', src: partnerLogo06 },
+  { name: 'Hari Hospital', src: partnerLogo07 },
+  { name: 'Fortis Hospitals', src: partnerLogo08 },
+  { name: 'MGM Healthcare', src: partnerLogo09 },
+  { name: 'Sakra World Hospital', src: partnerLogo10 },
+  { name: 'S.L. Raheja Hospital', src: partnerLogo11 },
+  { name: 'Saifee Hospital', src: partnerLogo12 },
+  { name: 'Partner 01', src: partner01 },
+  { name: 'Partner 02', src: partner02 },
+  { name: 'Partner 03', src: partner03 },
+  { name: 'Partner 04', src: partner04 },
+  { name: 'Partner 05', src: partner05 },
+  { name: 'Partner 06', src: partner06 },
+  { name: 'Partner 07', src: partner07 },
+  { name: 'Partner 08', src: partner08 },
+  { name: 'Partner 09', src: partner09 },
 ];
 
 // Create 3 copies for a seamless loop

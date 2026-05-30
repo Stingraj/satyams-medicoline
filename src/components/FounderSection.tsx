@@ -12,6 +12,9 @@ import satyamPortrait from '../assets/founder/satyam-suman.jpg';
 import maxLogo from '../assets/founder/logos/max-logo.png';
 import woltersLogo from '../assets/founder/logos/wolters-logo.png';
 import internationalRecordsLogo from '../assets/founder/logos/international-records-logo.png';
+import fortisLogo from '../assets/founder/logos/fortis-logo.png';
+import elsevierLogo from '../assets/founder/logos/elsevier-logo.png';
+import indiaBookOfRecordsLogo from '../assets/founder/logos/india-book-of-records-logo.png';
 import medicolineLogo from '../assets/images/medicoline-logo.png';
 
 const highlightRows = [
@@ -58,21 +61,21 @@ const brandCards = [
   {
     title: 'WORKED WITH LEADING HEALTHCARE BRANDS',
     logos: [
-      { label: 'Fortis Healthcare', alt: 'Fortis Healthcare logo placeholder' },
+      { src: fortisLogo, alt: 'Fortis Healthcare logo' },
       { src: maxLogo, alt: 'Max Healthcare logo' },
     ],
   },
   {
     title: 'RESEARCH PUBLICATIONS WITH',
     logos: [
-      { label: 'Elsevier', alt: 'Elsevier logo placeholder' },
+      { src: elsevierLogo, alt: 'Elsevier logo' },
       { src: woltersLogo, alt: 'Wolters Kluwer logo' },
     ],
   },
   {
     title: 'WORLD RECORDS ACHIEVED',
     logos: [
-      { label: 'India Book of Records', alt: 'India Book of Records logo placeholder' },
+      { src: indiaBookOfRecordsLogo, alt: 'India Book of Records logo' },
       { src: internationalRecordsLogo, alt: 'International World Records logo' },
     ],
   },
@@ -433,7 +436,6 @@ export default function FounderSection() {
             height: 320px;
           }
 
-          .founder-brand-logos,
           .founder-values-grid {
             grid-template-columns: 1fr;
           }

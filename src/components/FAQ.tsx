@@ -5,74 +5,108 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 const faqs = [
   {
     q: 'What areas do you serve?',
-    a: 'We currently serve Warangal, Hanamkonda, and Kazipet.',
+    a: 'We currently serve Warangal, Hanamkonda, and Kazipet. We are expanding to more areas soon.',
   },
   {
-    q: 'Are your nurses certified?',
-    a: 'Yes. All our nursing staff are verified, trained professionals operating under a medico-legal framework.',
+    q: 'How quickly can a doctor visit my home?',
+    a: 'We typically arrange home visits within 2 to 4 hours of booking. For emergencies we prioritize immediately.',
   },
   {
-    q: 'How quickly can you send someone to my home?',
-    a: 'We have 24/7 emergency backup and aim for the fastest response possible.',
+    q: 'What services are available 24/7?',
+    a: 'ICU at home, nursing care, and emergency doctor visits are available round the clock.',
   },
   {
-    q: 'How do I book a service?',
-    a: 'Call us at +91 7654247569 or email info.medicoline@gmail.com to book any service.',
+    q: 'How do I book an appointment?',
+    a: 'You can book through our website, call us at +91 76542 47569, or WhatsApp us directly.',
   },
   {
-    q: 'Do you offer ICU setup at home?',
-    a: 'Yes. We provide comprehensive critical care setup at home with 24/7 monitoring.',
+    q: 'Are your doctors verified and certified?',
+    a: 'Yes, all our doctors and healthcare professionals are verified, licensed, and experienced.',
   },
   {
-    q: 'What equipment can I rent?',
-    a: 'BiPAP machines, Air Beds, Patient Beds, oxygen concentrators and more.',
+    q: 'What payment methods do you accept?',
+    a: 'We accept cash, UPI, net banking, and all major credit and debit cards.',
+  },
+  {
+    q: 'Do you provide services for senior citizens?',
+    a: 'Yes, we have a dedicated Senior Citizen Package with specialized care and priority visits.',
+  },
+  {
+    q: 'Can I reschedule or cancel my appointment?',
+    a: 'Yes, you can reschedule or cancel up to 2 hours before your scheduled visit by calling us.',
   },
 ];
 
 export default function FAQ() {
   const { ref, visible } = useScrollReveal();
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(0); // First question open by default
 
   return (
-    <section className="bg-white py-20 lg:py-28">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-14">
-          <h2 className="font-extrabold text-[#111111] text-3xl sm:text-4xl mb-3 tracking-tight">
+    <section id="faq" className="bg-[#fbf9f8] py-20 lg:py-28 scroll-mt-20">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Centered section title with red underline */}
+        <div className="text-center mb-16">
+          <h2 className="font-extrabold text-[#111111] text-3xl sm:text-4xl tracking-tight mb-4">
             Frequently Asked Questions
           </h2>
           <div className="flex justify-center mb-5">
-            <div className="w-14 h-1 bg-[#cc0000] rounded-full"></div>
+            <div className="w-16 h-1 bg-[#C0392B] rounded-full"></div>
           </div>
           <p className="text-gray-500 text-base max-w-xl mx-auto">
             Everything you need to know about our home care services.
           </p>
         </div>
 
-        <div ref={ref} className={`space-y-0 ${visible ? 'section-visible' : 'section-hidden'}`}>
-          {faqs.map((faq, i) => (
-            <div key={i} className="border-b border-gray-200">
-              <button
-                onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className="w-full flex items-center justify-between py-5 text-left group"
+        {/* Accordion Wrapper */}
+        <div
+          ref={ref}
+          className={`space-y-4 ${visible ? 'section-visible' : 'section-hidden'}`}
+        >
+          {faqs.map((faq, i) => {
+            const isOpen = openIndex === i;
+            return (
+              <div
+                key={i}
+                className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden transition-all duration-300"
               >
-                <span className="font-bold text-[#cc0000] text-base sm:text-lg pr-4">
-                  {faq.q}
-                </span>
-                <span className="flex-shrink-0 w-8 h-8 rounded-full bg-[#fff5f5] flex items-center justify-center">
-                  {openIndex === i ? (
-                    <Minus size={16} color="#cc0000" strokeWidth={2.5} />
-                  ) : (
-                    <Plus size={16} color="#cc0000" strokeWidth={2.5} />
-                  )}
-                </span>
-              </button>
-              <div className={`accordion-content ${openIndex === i ? 'open' : ''}`}>
-                <p className="text-gray-600 text-sm sm:text-base leading-relaxed pb-5 pr-12">
-                  {faq.a}
-                </p>
+                <button
+                  type="button"
+                  onClick={() => setOpenIndex(isOpen ? null : i)}
+                  className="w-full flex items-center justify-between p-6 text-left focus:outline-none transition-colors duration-200"
+                >
+                  <span
+                    className={`font-bold text-base sm:text-lg pr-4 transition-colors duration-200 ${
+                      isOpen ? 'text-[#C0392B]' : 'text-gray-800 hover:text-[#C0392B]'
+                    }`}
+                  >
+                    {faq.q}
+                  </span>
+                  <span
+                    className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-200 ${
+                      isOpen ? 'bg-[#fff5f5]' : 'bg-gray-50'
+                    }`}
+                  >
+                    {isOpen ? (
+                      <Minus size={16} className="text-[#C0392B]" strokeWidth={2.5} />
+                    ) : (
+                      <Plus size={16} className="text-gray-500" strokeWidth={2.5} />
+                    )}
+                  </span>
+                </button>
+                
+                {/* Accordion Body */}
+                <div
+                  className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                    isOpen ? 'max-h-[300px] border-t border-gray-50' : 'max-h-0'
+                  }`}
+                >
+                  <div className="p-6 text-gray-600 text-sm sm:text-base leading-relaxed">
+                    {faq.a}
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
