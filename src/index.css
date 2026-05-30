@@ -1,0 +1,337 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --red: #e30000;
+    --red-dark: #c40000;
+    --navy: #07122b;
+    --blue: #1e4fa3;
+    --gray-text: #4b5563;
+    --bg-light: #f8f9fc;
+    --white: #ffffff;
+    --radius-card: 20px;
+    --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.07);
+    --font: 'Inter', sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    color: #111111;
+    background-color: #ffffff;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+}
+
+.dot-pattern {
+  background-image: radial-gradient(circle, #e8e8e8 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.section-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.section-hidden {
+  opacity: 0;
+  transform: translateY(32px);
+  pointer-events: none;
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.partner-scroll {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  user-select: none;
+}
+
+.partner-track {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.partner-item {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 10rem;
+  width: auto;
+  cursor: default;
+}
+
+.partner-item:hover .partner-logo {
+  filter: grayscale(0);
+  opacity: 1;
+}
+
+.partner-logo {
+  max-height: 3.5rem;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(0.75);
+  opacity: 0.75;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.scroll-horizontal .partner-track {
+  flex-direction: row;
+  animation: scroll-horizontal 26s linear infinite;
+}
+
+.scroll-vertical {
+  height: 420px;
+}
+
+.scroll-vertical .partner-track {
+  flex-direction: column;
+  animation: scroll-vertical 18s linear infinite;
+}
+
+@keyframes scroll-horizontal {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll-vertical {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.brand-logo {
+  width: auto;
+  height: 100%;
+  max-height: 2.5rem;
+  object-fit: contain;
+}
+
+.nav-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  height: 90px;
+  gap: 20px;
+  padding: 0 20px;
+}
+
+.logo {
+  flex-shrink: 0;
+  min-width: 160px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex: 1;
+  justify-content: center;
+}
+
+.nav-right {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.service-card {
+  transition: all 0.25s ease;
+  border-left: 3px solid transparent;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(204, 0, 0, 0.1);
+  border-left-color: #cc0000;
+}
+
+.doctor-card {
+  transition: all 0.25s ease;
+  border-top: 3px solid transparent;
+}
+
+.doctor-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(204, 0, 0, 0.1);
+  border-top-color: #cc0000;
+}
+
+.doctor-card p,
+.founder-bio p,
+.service-card p,
+.founder-desc {
+  font-size: clamp(14px, 1.5vw, 18px);
+  line-height: 1.7;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+}
+
+.doctor-card h2,
+.doctor-card h3,
+.founder-name {
+  font-size: clamp(18px, 2.5vw, 30px);
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+.doctor-card,
+.founder-card {
+  overflow: hidden;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.section,
+.hero,
+.services,
+.about,
+.careers,
+.founder,
+.doctors,
+.packages {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  overflow: hidden;
+  display: block;
+  clear: both;
+}
+
+#icu-section {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative;
+  z-index: 1;
+}
+
+.packages-section {
+  padding: 80px 0;
+  overflow: visible;
+  height: auto;
+  min-height: unset;
+}
+
+.packages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px;
+  overflow: visible;
+}
+
+* {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .hero-title {
+    font-size: clamp(28px, 8vw, 44px);
+  }
+
+  .service-grid,
+  .packages-grid,
+  .careers-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  section, 
+  .careers-section-container, 
+  .founder-container,
+  #app-root > div,
+  footer {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  body, p, li, .opening-desc, .why-join-card-desc, .testimonial-quote, .founder-bio-p, .careers-subheading-text, .careers-hero-subheading {
+    font-size: 16px !important;
+  }
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease-out;
+}
+
+.accordion-content.open {
+  max-height: 300px;
+  transition: max-height 0.45s ease-in;
+}
+
+.medical-cross {
+  background:
+    linear-gradient(#cc0000, #cc0000) center / 18% 100% no-repeat,
+    linear-gradient(#cc0000, #cc0000) center / 100% 18% no-repeat;
+  border-radius: 4px;
+}
+
+.journey-node-active {
+  box-shadow: 0 0 0 4px rgba(204, 0, 0, 0.12), 0 0 24px rgba(204, 0, 0, 0.35);
+}
+
+.journey-node {
+  animation: journey-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes journey-pulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(204, 0, 0, 0.35);
+  }
+
+  50% {
+    box-shadow: 0 0 0 8px rgba(204, 0, 0, 0);
+  }
+}
