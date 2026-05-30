@@ -491,13 +491,11 @@ export default function FounderSection() {
                   <div className="founder-brand-title">{card.title}</div>
                   <div className="founder-brand-logos">
                     {card.logos.map((logo) => (
-                      <div key={logo.alt} className="founder-brand-logo-box">
-                        {'src' in logo ? (
+                      'src' in logo && (
+                        <div key={logo.alt} className="founder-brand-logo-box">
                           <img src={logo.src} alt={logo.alt} className="founder-brand-logo" />
-                        ) : (
-                          <div className="founder-brand-text-logo">{logo.label}</div>
-                        )}
-                      </div>
+                        </div>
+                      )
                     ))}
                   </div>
                 </div>

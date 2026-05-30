@@ -157,22 +157,6 @@ export default function Navbar() {
         scrolled ? 'shadow-md' : 'shadow-none'
       }`}
     >
-      <div className="hidden md:flex border-b border-[#e5e5e5] bg-white py-2 text-sm text-[#555555]">
-        <div className="max-w-7xl mx-auto flex w-full items-center justify-between px-4 sm:px-6 lg:px-8">
-          <a href="tel:+917654247569" className="inline-flex items-center gap-2 hover:text-[#1a1a1a]">
-            <Phone size={14} strokeWidth={2.1} />
-            <span>+91 76542 47569</span>
-          </a>
-          <a
-            href={`mailto:${CONTACT_EMAIL}`}
-            className="inline-flex items-center gap-2 hover:text-[#C0392B]"
-          >
-            <Mail size={14} strokeWidth={2.1} />
-            <span>{CONTACT_EMAIL}</span>
-          </a>
-        </div>
-      </div>
-
       <div className="border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-[72px]">

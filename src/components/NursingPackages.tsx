@@ -1,5 +1,6 @@
 import { Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 const packages = [
@@ -52,9 +53,22 @@ const packages = [
 
 export default function NursingPackages() {
   const { ref, visible } = useScrollReveal();
+  const [selectedCard, setSelectedCard] = useState(1); // Default selected to middle card (index 1)
 
   return (
-    <section id="packages" className="packages-section bg-[#fbf9f8] py-[60px]">
+    <section id="packages" className="packages-section">
+      <div className="bg-[#C0392B] text-white py-24 sm:py-32">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="font-extrabold text-4xl sm:text-5xl lg:text-6xl mb-6 tracking-tight">
+            Health Packages For Every Family
+          </h1>
+          <p className="text-lg sm:text-xl text-red-100 max-w-2xl mx-auto">
+            Affordable home healthcare packages with free sample collection
+          </p>
+        </div>
+      </div>
+
+      <div className="bg-[#fbf9f8] py-[60px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
           <h2 className="font-extrabold text-[#111111] text-3xl sm:text-4xl mb-3 tracking-tight">
@@ -76,7 +90,8 @@ export default function NursingPackages() {
           {packages.map((pkg, i) => (
             <div
               key={i}
-              className={`bg-white rounded-xl border-2 p-8 relative flex flex-col ${pkg.popular
+              onClick={() => setSelectedCard(i)}
+              className={`bg-white rounded-xl border-2 p-8 relative flex flex-col cursor-pointer transition-all duration-200 ${selectedCard === i
                   ? 'border-[#cc0000] shadow-xl shadow-red-100 md:scale-105'
                   : 'border-gray-100 shadow-sm'
                 }`}
@@ -122,6 +137,7 @@ export default function NursingPackages() {
             </div>
           ))}
         </div>
+      </div>
       </div>
     </section>
   );
