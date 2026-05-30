@@ -75,16 +75,14 @@ export default function FAQ() {
                   className="w-full flex items-center justify-between p-6 text-left focus:outline-none transition-colors duration-200"
                 >
                   <span
-                    className={`font-heading font-bold text-base sm:text-lg pr-4 transition-colors duration-200 ${
-                      isOpen ? 'text-[#C0392B]' : 'text-gray-800 hover:text-[#C0392B]'
-                    }`}
+                    className={`font-heading font-bold text-base sm:text-lg pr-4 transition-colors duration-200 ${isOpen ? 'text-[#C0392B]' : 'text-gray-800 hover:text-[#C0392B]'
+                      }`}
                   >
                     {faq.q}
                   </span>
                   <span
-                    className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-200 ${
-                      isOpen ? 'bg-[#fff5f5]' : 'bg-gray-50'
-                    }`}
+                    className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-200 ${isOpen ? 'bg-[#fff5f5]' : 'bg-gray-50'
+                      }`}
                   >
                     {isOpen ? (
                       <Minus size={16} className="text-[#C0392B]" strokeWidth={2.5} />
@@ -93,12 +91,11 @@ export default function FAQ() {
                     )}
                   </span>
                 </button>
-                
+
                 {/* Accordion Body */}
                 <div
-                  className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                    isOpen ? 'max-h-[300px] border-t border-gray-50' : 'max-h-0'
-                  }`}
+                  className={`transition-all duration-300 ease-in-out overflow-hidden ${isOpen ? 'max-h-[300px] border-t border-gray-50' : 'max-h-0'
+                    }`}
                 >
                   <div className="p-6 text-gray-600 text-sm sm:text-base leading-relaxed">
                     {faq.a}

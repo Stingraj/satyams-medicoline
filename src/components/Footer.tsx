@@ -11,7 +11,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         {/* Four Column Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-12">
-          
+
           {/* Column 1: Brand & Contacts */}
           <div className="space-y-4">
             <Link to="/" className="inline-flex items-center gap-2.5">
@@ -26,9 +26,9 @@ export default function Footer() {
                 <span className="block text-[10px] text-gray-400 tracking-[0.15em] uppercase font-body font-medium">Healthcare</span>
               </div>
             </Link>
-            
+
             <p className="text-gray-300 text-sm italic">“Your Health, Our Priority”</p>
-            
+
             <div className="space-y-2.5 pt-2">
               <a
                 href="tel:+917654247569"
@@ -37,7 +37,7 @@ export default function Footer() {
                 <Phone size={16} className="text-[#C0392B]" />
                 <span>+91 76542 47569</span>
               </a>
-              
+
               <a
                 href={`mailto:${CONTACT_EMAIL}`}
                 className="flex items-center gap-2.5 text-gray-300 hover:text-[#C0392B] transition-colors duration-200 text-sm font-medium break-all"
@@ -45,7 +45,7 @@ export default function Footer() {
                 <Mail size={16} className="text-[#C0392B]" />
                 <span>{CONTACT_EMAIL}</span>
               </a>
-              
+
               <div className="flex items-center gap-2.5 text-gray-300 text-sm font-medium">
                 <MapPin size={16} className="text-[#C0392B] shrink-0" />
                 <span>Warangal | Hanamkonda | Kazipet</span>
