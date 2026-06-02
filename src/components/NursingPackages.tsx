@@ -128,7 +128,7 @@ export default function NursingPackages() {
                 <Link
                   to="/contact"
                   className={`block text-center font-heading font-bold text-sm py-3 rounded-full transition-colors duration-200 ${selectedCard === i
-                    ? 'bg-[#C0392B] text-white hover:bg-[#C0392B]'
+                    ? 'bg-[#C0392B] text-white hover:bg-[#A93226]'
                     : 'border-2 border-[#C0392B] text-[#C0392B] hover:bg-[#C0392B] hover:text-white'
                     }`}
                 >

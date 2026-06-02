@@ -31,7 +31,7 @@ export default function BlogPage() {
           <button
             type="button"
             onClick={() => setSelectedPost(null)}
-            className="inline-flex items-center gap-2 text-[#C0392B] hover:text-[#C0392B] font-bold text-sm mb-8 transition-colors duration-200"
+            className="inline-flex items-center gap-2 text-[#C0392B] hover:text-[#A93226] font-bold text-sm mb-8 transition-colors duration-200"
           >
             <ArrowLeft size={16} />
             Back to Articles

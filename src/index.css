@@ -5,7 +5,7 @@
 @layer base {
   :root {
     --color-primary: #C0392B;
-    --color-primary-dark: #C0392B;
+    --color-primary-dark: #A93226;
     --color-primary-light: #E8514A;
     --color-gray: #6B7280;
     --color-gray-dark: #374151;
@@ -17,7 +17,7 @@
     --font-heading: 'Montserrat', sans-serif;
     --font-body: 'Inter', sans-serif;
     --red: #C0392B;
-    --red-dark: #C0392B;
+    --red-dark: #A93226;
     --navy: #0f172a;
     --blue: #1e4fa3;
     --gray-text: #374151;

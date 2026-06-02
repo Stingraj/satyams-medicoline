@@ -111,7 +111,7 @@ export default function EcgAtHome() {
                 setIsModalOpen(true);
                 setIsSuccess(false);
               }}
-              className="inline-flex items-center justify-center self-start bg-[#C0392B] text-white font-semibold px-8 py-4 rounded-full hover:bg-[#C0392B] transition-colors duration-200 text-base shadow-[0_14px_30px_rgba(192,57,43,0.22)]"
+              className="inline-flex items-center justify-center self-start bg-[#C0392B] text-white font-semibold px-8 py-4 rounded-full hover:bg-[#A93226] transition-colors duration-200 text-base shadow-[0_14px_30px_rgba(192,57,43,0.22)]"
             >
               Book an ECG at Home
             </button>
@@ -145,7 +145,7 @@ export default function EcgAtHome() {
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="bg-[#C0392B] text-white px-8 py-2.5 rounded-full font-semibold hover:bg-[#C0392B] transition-colors"
+                  className="bg-[#C0392B] text-white px-8 py-2.5 rounded-full font-semibold hover:bg-[#A93226] transition-colors"
                 >
                   Close
                 </button>
@@ -248,7 +248,7 @@ export default function EcgAtHome() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-[#C0392B] text-white font-semibold py-3.5 rounded-xl hover:bg-[#C0392B] transition-colors duration-200 shadow-md disabled:opacity-50 mt-2"
+                    className="w-full bg-[#C0392B] text-white font-semibold py-3.5 rounded-xl hover:bg-[#A93226] transition-colors duration-200 shadow-md disabled:opacity-50 mt-2"
                   >
                     {isSubmitting ? 'Booking...' : 'Confirm ECG Booking'}
                   </button>

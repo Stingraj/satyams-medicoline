@@ -42,7 +42,7 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-[10px] sm:gap-4 w-full px-2 sm:px-0">
             <Link
               to="/contact"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#C0392B] text-white font-semibold px-9 py-3 sm:py-4 rounded-full hover:bg-[#C0392B] transition-colors duration-200 text-base shadow-[0_14px_30px_rgba(192,57,43,0.22)]"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#C0392B] text-white font-semibold px-9 py-3 sm:py-4 rounded-full hover:bg-[#A93226] transition-colors duration-200 text-base shadow-[0_14px_30px_rgba(192,57,43,0.22)]"
             >
               Book Appointment
               <ArrowRight size={18} />

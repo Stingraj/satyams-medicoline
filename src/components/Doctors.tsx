@@ -73,7 +73,7 @@ export default function Doctors() {
                     </p>
                     <Link
                       to="/about#founder"
-                      className="block w-full bg-[#C0392B] text-white text-xs sm:text-sm font-semibold px-2 py-2 sm:px-4 sm:py-2.5 rounded-full hover:bg-[#C0392B] transition-colors duration-200"
+                      className="block w-full bg-[#C0392B] text-white text-xs sm:text-sm font-semibold px-2 py-2 sm:px-4 sm:py-2.5 rounded-full hover:bg-[#A93226] transition-colors duration-200"
                     >
                       View Profile
                     </Link>
