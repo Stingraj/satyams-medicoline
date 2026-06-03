@@ -68,6 +68,7 @@ export default function OurPartners() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const [partnerForm, setPartnerForm] = useState({
     fullName: '',
     organisationName: '',
@@ -80,27 +81,53 @@ export default function OurPartners() {
   const handlePartnerSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitError('');
+
+    const payload = {
+      formType: 'Partner Request',
+      subject: 'New Partner Request — Medicoline Healthcare',
+      userEmail: partnerForm.email,
+      formData: {
+        'Full Name': partnerForm.fullName,
+        'Organisation Name': partnerForm.organisationName,
+        'Phone': partnerForm.phone,
+        'Email': partnerForm.email,
+        'Type of Partnership': partnerForm.partnershipType,
+        'Message': partnerForm.message,
+      },
+    };
+
+    console.log('[Partner form] Submit started', {
+      formType: payload.formType,
+      hasEmail: Boolean(partnerForm.email),
+      fields: Object.keys(payload.formData),
+    });
+
     try {
+      console.log('[Partner form] Sending API request', payload);
+
       const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          formType: 'Partner Request',
-          subject: 'New Partner Request — Medicoline Healthcare',
-          userEmail: partnerForm.email,
-          formData: {
-            'Full Name': partnerForm.fullName,
-            'Organisation Name': partnerForm.organisationName,
-            'Phone': partnerForm.phone,
-            'Email': partnerForm.email,
-            'Type of Partnership': partnerForm.partnershipType,
-            'Message': partnerForm.message,
-          },
-        }),
+        body: JSON.stringify(payload),
       });
 
-      const resData = await response.json();
-      if (resData.success) {
+      const responseText = await response.text();
+      let resData: { success?: boolean; error?: string } = {};
+
+      try {
+        resData = responseText ? JSON.parse(responseText) : {};
+      } catch {
+        resData = { error: responseText || 'Invalid JSON response from server.' };
+      }
+
+      console.log('[Partner form] API response received', {
+        status: response.status,
+        ok: response.ok,
+        body: resData,
+      });
+
+      if (response.ok && resData.success) {
         setIsSuccess(true);
         setPartnerForm({
           fullName: '',
@@ -111,10 +138,17 @@ export default function OurPartners() {
           message: '',
         });
       } else {
-        alert('Something went wrong. Please try again.');
+        const exactError = resData.error || `Request failed with status ${response.status}.`;
+        console.error('[Partner form] API request failed', {
+          status: response.status,
+          body: resData,
+        });
+        setSubmitError(exactError);
       }
-    } catch (err) {
-      alert('Failed to submit. Please check your connection.');
+    } catch (error) {
+      const exactError = error instanceof Error ? error.message : 'Unknown network error.';
+      console.error('[Partner form] Submit crashed', error);
+      setSubmitError(exactError);
     } finally {
       setIsSubmitting(false);
     }
@@ -210,7 +244,7 @@ export default function OurPartners() {
   };
 
   return (
-    <section className="bg-[#f8f9fa] py-[60px] border-y border-gray-100">
+    <section id="our-partners" className="bg-[#F9FAFB] py-[60px] border-y border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
           ref={ref}
@@ -262,6 +296,8 @@ export default function OurPartners() {
                       alt={partner.name}
                       title={partner.name}
                       className="w-full h-full object-contain"
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                 ))}
@@ -288,8 +324,9 @@ export default function OurPartners() {
             onClick={() => {
               setIsModalOpen(true);
               setIsSuccess(false);
+              setSubmitError('');
             }}
-            className="bg-[#C0392B] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#A93226] transition-colors duration-200"
+            className="bg-[#C0392B] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#8F2D22] transition-colors duration-200"
           >
             Join as a Partner
           </button>
@@ -309,19 +346,19 @@ export default function OurPartners() {
 
               {isSuccess ? (
                 <div className="text-center py-8">
-                  <div className="w-16 h-16 bg-[#fff5f5] text-[#C0392B] rounded-full flex items-center justify-center mx-auto mb-6">
+                  <div className="w-16 h-16 bg-[#F3F4F6] text-[#C0392B] rounded-full flex items-center justify-center mx-auto mb-6">
                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
                   </div>
-                  <h3 className="font-extrabold text-2xl text-[#111111] mb-3">Partner Request Submitted!</h3>
+                  <h3 className="font-extrabold text-2xl text-[#1F2937] mb-3">Partner Request Submitted!</h3>
                   <p className="text-gray-500 max-w-md mx-auto mb-8 text-sm">
                     Thank you, we will contact you within 24 hours.
                   </p>
                   <button
                     type="button"
                     onClick={() => setIsModalOpen(false)}
-                    className="bg-[#C0392B] text-white px-8 py-2.5 rounded-full font-semibold hover:bg-[#A93226] transition-colors"
+                    className="bg-[#C0392B] text-white px-8 py-2.5 rounded-full font-semibold hover:bg-[#8F2D22] transition-colors"
                   >
                     Close
                   </button>
@@ -341,7 +378,7 @@ export default function OurPartners() {
                         value={partnerForm.fullName}
                         onChange={(e) => setPartnerForm({ ...partnerForm, fullName: e.target.value })}
                         placeholder="Enter your full name"
-                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow"
+                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#1F2937] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow"
                       />
                     </div>
 
@@ -356,7 +393,7 @@ export default function OurPartners() {
                         value={partnerForm.organisationName}
                         onChange={(e) => setPartnerForm({ ...partnerForm, organisationName: e.target.value })}
                         placeholder="Enter your company or organization name"
-                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow"
+                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#1F2937] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow"
                       />
                     </div>
 
@@ -372,7 +409,7 @@ export default function OurPartners() {
                           value={partnerForm.phone}
                           onChange={(e) => setPartnerForm({ ...partnerForm, phone: e.target.value })}
                           placeholder="Your phone number"
-                          className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow"
+                          className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#1F2937] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow"
                         />
                       </div>
 
@@ -387,7 +424,7 @@ export default function OurPartners() {
                           value={partnerForm.email}
                           onChange={(e) => setPartnerForm({ ...partnerForm, email: e.target.value })}
                           placeholder="you@email.com"
-                          className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow"
+                          className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#1F2937] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow"
                         />
                       </div>
                     </div>
@@ -401,7 +438,7 @@ export default function OurPartners() {
                         required
                         value={partnerForm.partnershipType}
                         onChange={(e) => setPartnerForm({ ...partnerForm, partnershipType: e.target.value })}
-                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow"
+                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#1F2937] focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow"
                       >
                         <option value="Diagnostic Center">Diagnostic Center</option>
                         <option value="Hospital">Hospital</option>
@@ -422,17 +459,20 @@ export default function OurPartners() {
                         value={partnerForm.message}
                         onChange={(e) => setPartnerForm({ ...partnerForm, message: e.target.value })}
                         placeholder="Tell us about the proposed collaboration..."
-                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow resize-none"
+                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#1F2937] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow resize-none"
                       />
                     </div>
 
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full bg-[#C0392B] text-white font-semibold py-3.5 rounded-xl hover:bg-[#A93226] transition-colors duration-200 shadow-md disabled:opacity-50 mt-2"
+                      className="w-full bg-[#C0392B] text-white font-semibold py-3.5 rounded-xl hover:bg-[#8F2D22] transition-colors duration-200 shadow-md disabled:opacity-50 mt-2"
                     >
                       {isSubmitting ? 'Submitting Request...' : 'Submit Partner Request'}
                     </button>
+                    {submitError ? (
+                      <p className="text-sm font-medium text-[#C0392B]">{submitError}</p>
+                    ) : null}
                   </form>
                 </div>
               )}

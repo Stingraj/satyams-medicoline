@@ -21,14 +21,15 @@ const SERVICE_OPTIONS = [
 ] as const;
 
 const inputClass =
-  'w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow';
-const CONTACT_EMAIL = 'info@medicolinehealthcare.com';
+  'w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#1F2937] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow';
+const CONTACT_EMAIL = 'support@medicolinehealthcare.com';
 
 export default function AppointmentBooking() {
   const { ref, visible } = useScrollReveal();
   const [selectedService, setSelectedService] = useState<string>(SERVICE_OPTIONS[0].id);
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const [form, setForm] = useState({
     fullName: '',
     phone: '',
@@ -48,30 +49,55 @@ export default function AppointmentBooking() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setSubmitError('');
+
+    const payload = {
+      formType: 'Appointment Booking Form',
+      subject: 'New Appointment Booking — Medicoline Healthcare',
+      userEmail: form.email,
+      formData: {
+        'Name': form.fullName,
+        'Phone': form.phone,
+        'Email': form.email,
+        'Address': form.address,
+        'Service selected': SERVICE_OPTIONS.find((s) => s.id === selectedService)?.label ?? selectedService,
+        'Preferred Date': form.date,
+        'Preferred Time': form.time,
+        'Additional Notes': form.notes || 'None',
+      },
+    };
+
+    console.log('[Appointment form] Submit started', {
+      formType: payload.formType,
+      hasEmail: Boolean(form.email),
+      fields: Object.keys(payload.formData),
+    });
 
     try {
+      console.log('[Appointment form] Sending API request', payload);
+
       const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          formType: 'Appointment Booking Form',
-          subject: 'New Appointment Booking — Medicoline Healthcare',
-          userEmail: form.email,
-          formData: {
-            'Name': form.fullName,
-            'Phone': form.phone,
-            'Email': form.email,
-            'Address': form.address,
-            'Service selected': SERVICE_OPTIONS.find((s) => s.id === selectedService)?.label ?? selectedService,
-            'Preferred Date': form.date,
-            'Preferred Time': form.time,
-            'Additional Notes': form.notes || 'None',
-          },
-        }),
+        body: JSON.stringify(payload),
       });
 
-      const resData = await response.json();
-      if (resData.success) {
+      const responseText = await response.text();
+      let resData: { success?: boolean; error?: string } = {};
+
+      try {
+        resData = responseText ? JSON.parse(responseText) : {};
+      } catch {
+        resData = { error: responseText || 'Invalid JSON response from server.' };
+      }
+
+      console.log('[Appointment form] API response received', {
+        status: response.status,
+        ok: response.ok,
+        body: resData,
+      });
+
+      if (response.ok && resData.success) {
         setSubmitted(true);
         setForm({
           fullName: '',
@@ -83,20 +109,27 @@ export default function AppointmentBooking() {
           notes: '',
         });
       } else {
-        alert('Something went wrong. Please try again.');
+        const exactError = resData.error || `Request failed with status ${response.status}.`;
+        console.error('[Appointment form] API request failed', {
+          status: response.status,
+          body: resData,
+        });
+        setSubmitError(exactError);
       }
-    } catch (err) {
-      alert('Failed to submit. Please check your connection.');
+    } catch (error) {
+      const exactError = error instanceof Error ? error.message : 'Unknown network error.';
+      console.error('[Appointment form] Submit crashed', error);
+      setSubmitError(exactError);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <section id="book-appointment" className="bg-[#fbf9f8] py-12 md:py-20">
+    <section id="book-appointment" className="bg-[#F9FAFB] py-12 md:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10 md:mb-12">
-          <h2 className="font-extrabold text-[#111111] text-3xl sm:text-4xl tracking-tight mb-3">
+          <h2 className="font-extrabold text-[#1F2937] text-3xl sm:text-4xl tracking-tight mb-3">
             Book Your Appointment
           </h2>
           <div className="flex justify-center mb-4">
@@ -115,12 +148,12 @@ export default function AppointmentBooking() {
         >
           {submitted ? (
             <div className="text-center py-8">
-              <div className="w-16 h-16 bg-[#fff5f5] text-[#C0392B] rounded-full flex items-center justify-center mx-auto mb-6">
+              <div className="w-16 h-16 bg-[#F3F4F6] text-[#C0392B] rounded-full flex items-center justify-center mx-auto mb-6">
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
               </div>
-              <h3 className="font-extrabold text-2xl text-[#111111] mb-3">Booking Requested!</h3>
+              <h3 className="font-extrabold text-2xl text-[#1F2937] mb-3">Booking Requested!</h3>
               <p className="text-gray-500 max-w-md mx-auto mb-8">
                 Thank you for choosing Medicoline Healthcare. Our support team will call you shortly to confirm your booking and coordinate details.
               </p>
@@ -130,7 +163,7 @@ export default function AppointmentBooking() {
                 For urgent queries contact{' '}
                 <a
                   href={`mailto:${CONTACT_EMAIL}`}
-                  className="inline-flex items-center gap-1 text-[#C0392B] hover:text-[#A93226] transition-colors"
+                  className="inline-flex items-center gap-1 text-[#C0392B] hover:text-[#C0392B] transition-colors"
                 >
                   <Mail size={14} strokeWidth={2} />
                   <span>{CONTACT_EMAIL}</span>
@@ -139,7 +172,7 @@ export default function AppointmentBooking() {
               <button
                 type="button"
                 onClick={() => setSubmitted(false)}
-                className="bg-[#C0392B] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#A93226] transition-colors"
+                className="bg-[#C0392B] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#8F2D22] transition-colors"
               >
                 Book Another Visit
               </button>
@@ -148,7 +181,7 @@ export default function AppointmentBooking() {
             <form onSubmit={handleSubmit} className="space-y-8">
               <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
                 <div>
-                  <label htmlFor="fullName" className="block text-sm font-semibold text-[#111111] mb-1.5">
+                  <label htmlFor="fullName" className="block text-sm font-semibold text-[#1F2937] mb-1.5">
                     Full Name *
                   </label>
                   <input
@@ -163,7 +196,7 @@ export default function AppointmentBooking() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-semibold text-[#111111] mb-1.5">
+                  <label htmlFor="phone" className="block text-sm font-semibold text-[#1F2937] mb-1.5">
                     Phone *
                   </label>
                   <input
@@ -174,11 +207,11 @@ export default function AppointmentBooking() {
                     value={form.phone}
                     onChange={handleChange}
                     className={inputClass}
-                    placeholder="+91 76542 47569"
+                    placeholder="+91 7654247569"
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-semibold text-[#111111] mb-1.5">
+                  <label htmlFor="email" className="block text-sm font-semibold text-[#1F2937] mb-1.5">
                     Email *
                   </label>
                   <input
@@ -193,7 +226,7 @@ export default function AppointmentBooking() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="address" className="block text-sm font-semibold text-[#111111] mb-1.5">
+                  <label htmlFor="address" className="block text-sm font-semibold text-[#1F2937] mb-1.5">
                     Address *
                   </label>
                   <input
@@ -210,7 +243,7 @@ export default function AppointmentBooking() {
               </div>
 
               <div>
-                <p className="text-sm font-semibold text-[#111111] mb-3">Select Service</p>
+                <p className="text-sm font-semibold text-[#1F2937] mb-3">Select Service</p>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
                   {SERVICE_OPTIONS.map(({ id, label, icon: Icon }) => {
                     const selected = selectedService === id;
@@ -221,20 +254,20 @@ export default function AppointmentBooking() {
                         onClick={() => setSelectedService(id)}
                         className={`flex flex-col items-center gap-2 rounded-xl border p-4 text-center transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 ${
                           selected
-                            ? 'border-[#C0392B] bg-[#fff5f5] shadow-sm ring-2 ring-[#C0392B]/20'
+                            ? 'border-[#C0392B] bg-[#F3F4F6] shadow-sm ring-2 ring-[#C0392B]/20'
                             : 'border-gray-200 bg-white hover:border-[#C0392B]/40'
                         }`}
                       >
                         <span
                           className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${
-                            selected ? 'bg-[#C0392B] text-white' : 'bg-[#fff5f5] text-[#C0392B]'
+                            selected ? 'bg-[#C0392B] text-white' : 'bg-[#F3F4F6] text-[#C0392B]'
                           }`}
                         >
                           <Icon size={20} strokeWidth={2} />
                         </span>
                         <span
                           className={`text-xs sm:text-sm font-semibold leading-snug ${
-                            selected ? 'text-[#C0392B]' : 'text-[#111111]'
+                            selected ? 'text-[#C0392B]' : 'text-[#1F2937]'
                           }`}
                         >
                           {label}
@@ -247,7 +280,7 @@ export default function AppointmentBooking() {
 
               <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
                 <div>
-                  <label htmlFor="date" className="block text-sm font-semibold text-[#111111] mb-1.5">
+                  <label htmlFor="date" className="block text-sm font-semibold text-[#1F2937] mb-1.5">
                     Preferred Date *
                   </label>
                   <input
@@ -261,7 +294,7 @@ export default function AppointmentBooking() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="time" className="block text-sm font-semibold text-[#111111] mb-1.5">
+                  <label htmlFor="time" className="block text-sm font-semibold text-[#1F2937] mb-1.5">
                     Preferred Time *
                   </label>
                   <input
@@ -277,7 +310,7 @@ export default function AppointmentBooking() {
               </div>
 
               <div>
-                <label htmlFor="notes" className="block text-sm font-semibold text-[#111111] mb-1.5">
+                <label htmlFor="notes" className="block text-sm font-semibold text-[#1F2937] mb-1.5">
                   Additional Notes
                 </label>
                 <textarea
@@ -294,17 +327,21 @@ export default function AppointmentBooking() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full flex items-center justify-center gap-2 bg-[#C0392B] text-white font-semibold py-4 rounded-xl hover:bg-[#A93226] transition-colors duration-200 shadow-[0_14px_30px_rgba(192,57,43,0.22)] disabled:opacity-50"
+                className="w-full flex items-center justify-center gap-2 bg-[#C0392B] text-white font-semibold py-4 rounded-xl hover:bg-[#8F2D22] transition-colors duration-200 shadow-[0_14px_30px_rgba(192,57,43,0.22)] disabled:opacity-50"
               >
                 {loading ? 'Submitting...' : 'Book Appointment'}
                 <ArrowRight size={18} />
               </button>
 
-              <p className="text-center text-xs text-[#888888] leading-relaxed">
+              {submitError ? (
+                <p className="text-center text-sm font-medium text-[#C0392B]">{submitError}</p>
+              ) : null}
+
+              <p className="text-center text-xs text-[#6B7280] leading-relaxed">
                 Or email us directly at{' '}
                 <a
                   href={`mailto:${CONTACT_EMAIL}`}
-                  className="inline-flex items-center gap-1 text-[#C0392B] hover:text-[#A93226] transition-colors"
+                  className="inline-flex items-center gap-1 text-[#C0392B] hover:text-[#C0392B] transition-colors"
                 >
                   <Mail size={14} strokeWidth={2} />
                   <span>{CONTACT_EMAIL}</span>

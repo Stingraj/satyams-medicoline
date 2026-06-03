@@ -1,314 +1,285 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ChevronDown, Mail, Menu, Phone, X, Instagram, Facebook, Youtube } from 'lucide-react';
+import { Menu, MessageSquare, Phone, X } from 'lucide-react';
 import medicolineLogo from '../assets/images/medicoline-logo.png';
-import { scrollToHashTarget } from '../utils/scroll';
 
-const LOGO_SRC = medicolineLogo;
-const CONTACT_EMAIL = 'info@medicolinehealthcare.com';
-
-const navGroups = [
-  { label: 'Home', to: '/' },
-  {
-    label: 'Services',
-    items: [
-      { label: 'Services', to: '/#services' },
-      { label: 'Packages', to: '/#packages' },
-    ],
-  },
-  { label: 'ICU@Home', to: '/icu-at-home' },
-  {
-    label: 'Team',
-    items: [
-      { label: 'Doctors', to: '/doctors#doctors' },
-      { label: 'Our Founder', to: '/about#founder' },
-    ],
-  },
-  {
-    label: 'About',
-    items: [
-      { label: 'About', to: '/about#about' },
-      { label: 'Careers', to: '/careers' },
-      { label: 'FAQ', to: '/#faq' },
-    ],
-  },
-  { label: 'Contact', to: '/contact#contact' },
+const navItems = [
+  { label: 'HOME', to: '/' },
+  { label: 'ABOUT US', to: '/about' },
+  { label: 'SERVICES', to: '/services' },
+  { label: "FOUNDER'S PAGE", to: '/founders' },
+  { label: 'ICU@HOME', to: '/icu-at-home' },
+  { label: 'INVESTORS & PARTNERS', to: '/investors-partners' },
+  { label: 'CAREERS', to: '/careers' },
+  { label: 'FAQs', to: '/faqs' },
+  { label: 'CONTACT', to: '/contact' },
 ] as const;
-
-const mobileNavItems = [
-  { label: 'Home', to: '/' },
-  { label: 'Services', to: '/#services' },
-  { label: 'ICU@Home', to: '/icu-at-home' },
-  { label: 'Packages', to: '/#packages' },
-  { label: 'Doctors', to: '/doctors#doctors' },
-  { label: 'Our Founder', to: '/about#founder' },
-  { label: 'About', to: '/about#about' },
-  { label: 'Careers', to: '/careers' },
-  { label: 'FAQ', to: '/#faq' },
-  { label: 'Contact', to: '/contact#contact' },
-] as const;
-
-type HomeSection = 'home' | 'services' | 'icu' | 'founder' | 'packages' | 'doctors' | 'faq';
-type NavLinkItem = { label: string; to: string };
-
-function getHomeSectionFromScroll(): HomeSection {
-  const offset = 140;
-  const y = window.scrollY + offset;
-  const doctorsTop = document.getElementById('doctors')?.offsetTop ?? Infinity;
-  const servicesTop = document.getElementById('services')?.offsetTop ?? Infinity;
-  const founderTop = document.getElementById('founder')?.offsetTop ?? Infinity;
-  const packagesTop = document.getElementById('packages')?.offsetTop ?? Infinity;
-  const icuTop = document.getElementById('icu')?.offsetTop ?? Infinity;
-  const faqTop = document.getElementById('faq')?.offsetTop ?? Infinity;
-
-  if (y >= doctorsTop) return 'doctors';
-  if (y >= faqTop) return 'faq';
-  if (y >= packagesTop) return 'packages';
-  if (y >= founderTop) return 'founder';
-  if (y >= icuTop) return 'icu';
-  if (y >= servicesTop) return 'services';
-  return 'home';
-}
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const [homeSection, setHomeSection] = useState<HomeSection>('home');
+  const [helpOpen, setHelpOpen] = useState(false);
+  const [helpPopupStyle, setHelpPopupStyle] = useState<{ top: number; left: number; width: number } | null>(null);
   const location = useLocation();
-  const isHomeOnly = location.pathname === '/';
+  const helpTriggerRef = useRef<HTMLButtonElement | null>(null);
+  const helpPopupRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   useEffect(() => {
     setMenuOpen(false);
-    setOpenDropdown(null);
+    setHelpOpen(false);
   }, [location]);
 
   useEffect(() => {
-    if (!isHomeOnly) return;
+    if (!helpOpen) {
+      return;
+    }
 
-    const updateSection = () => setHomeSection(getHomeSectionFromScroll());
-    updateSection();
+    const updatePopupPosition = () => {
+      const triggerRect = helpTriggerRef.current?.getBoundingClientRect();
+      if (!triggerRect) {
+        return;
+      }
 
-    window.addEventListener('scroll', updateSection, { passive: true });
-    window.addEventListener('resize', updateSection);
-    window.addEventListener('hashchange', updateSection);
+      const popupWidth = window.innerWidth < 640 ? Math.min(window.innerWidth - 24, 350) : 350;
+      const left = Math.min(
+        Math.max(12, triggerRect.right - popupWidth),
+        window.innerWidth - popupWidth - 12,
+      );
+      const top = triggerRect.bottom + 12;
+
+      setHelpPopupStyle({ top, left, width: popupWidth });
+    };
+
+    const handleOutsideClick = (event: MouseEvent) => {
+      const target = event.target as Node;
+      if (
+        helpTriggerRef.current?.contains(target) ||
+        helpPopupRef.current?.contains(target)
+      ) {
+        return;
+      }
+
+      setHelpOpen(false);
+    };
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setHelpOpen(false);
+      }
+    };
+
+    updatePopupPosition();
+    window.addEventListener('resize', updatePopupPosition);
+    window.addEventListener('scroll', updatePopupPosition, true);
+    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener('keydown', handleEscape);
 
     return () => {
-      window.removeEventListener('scroll', updateSection);
-      window.removeEventListener('resize', updateSection);
-      window.removeEventListener('hashchange', updateSection);
+      window.removeEventListener('resize', updatePopupPosition);
+      window.removeEventListener('scroll', updatePopupPosition, true);
+      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener('keydown', handleEscape);
     };
-  }, [isHomeOnly]);
+  }, [helpOpen]);
 
-  const isLinkActive = (link: NavLinkItem): boolean => {
-    const [path, hash] = link.to.split('#');
-    const isSamePath = location.pathname === path;
-
-    if (!isSamePath) return false;
-
-    if (isHomeOnly) {
-      if (!hash) {
-        return homeSection === 'home';
-      }
-      return homeSection === hash;
+  const isActive = (path: string) => {
+    if (path === '/') {
+      return location.pathname === '/';
     }
 
-    return true;
-  };
-
-  const isGroupActive = (group: (typeof navGroups)[number]) =>
-    'items' in group ? group.items.some((item) => isLinkActive(item)) : isLinkActive(group);
-
-  const handleLinkClick = (to: string) => {
-    setMenuOpen(false);
-    setOpenDropdown(null);
-
-    const [path, hash] = to.split('#');
-    if (location.pathname === path && hash) {
-      scrollToHashTarget(hash, 50);
-    }
-  };
-
-  const linkClass = (link: NavLinkItem) =>
-    `text-sm font-medium transition-colors duration-200 font-heading font-semibold ${isLinkActive(link) ? 'text-[#C0392B]' : 'text-[#374151] hover:text-[#C0392B]'
-    }`;
-
-  const renderNavLink = (link: NavLinkItem, extraClass = '') => {
-    const className = `${linkClass(link)} ${extraClass}`.trim();
-
-    return (
-      <Link
-        key={link.label}
-        to={link.to}
-        className={className}
-        onClick={() => handleLinkClick(link.to)}
-      >
-        {link.label}
-      </Link>
-    );
+    return location.pathname.startsWith(path);
   };
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-[1000] bg-white transition-shadow duration-300 ${scrolled ? 'shadow-md' : 'shadow-none'
+    <>
+      <nav
+        className={`fixed left-0 right-0 top-0 z-[1000] bg-white transition-all duration-300 ${
+          scrolled
+            ? 'border-b border-[#E5E7EB] bg-white/95 shadow-[0_10px_30px_rgba(17,17,17,0.05)] backdrop-blur-md'
+            : 'border-b border-[#E5E7EB]'
         }`}
-    >
-      <div className="border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-[72px]">
-            <Link to="/" className="logo flex items-center gap-2.5 flex-shrink-0">
-              <div className="h-10 flex items-center shrink-0">
-                <img src={LOGO_SRC} alt="Medicoline Healthcare" className="brand-logo" />
-              </div>
-              <div className="leading-tight">
-                <span className="font-heading font-black text-[#C0392B] text-[15px] leading-none">Medicoline</span>
-                <span className="block text-[9px] text-[#6B7280] tracking-[0.15em] uppercase leading-none mt-0.5 font-medium">
-                  Healthcare
-                </span>
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex h-[76px] items-center justify-between gap-3 lg:h-[86px]">
+            <Link to="/" className="group flex shrink-0 items-center">
+              <div className="flex h-10 items-center lg:h-11">
+                <img
+                  src={medicolineLogo}
+                  alt="Medicoline Healthcare logo"
+                  className="h-full object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
+                />
               </div>
             </Link>
 
-            <div className="hidden lg:flex items-center gap-8 flex-1 justify-center">
-              {navGroups.map((group) => {
-                if (!('items' in group)) return renderNavLink(group);
+            <div className="hidden min-w-0 flex-1 items-center justify-center px-4 lg:flex">
+              <div className="flex min-w-0 items-center justify-center">
+                {navItems.map((item, index) => (
+                  <div key={item.label} className="flex items-center">
+                    <Link
+                      to={item.to}
+                      className={`whitespace-nowrap text-[11px] font-medium uppercase tracking-[0.04em] transition-colors duration-200 xl:text-[12px] ${
+                        isActive(item.to) ? 'text-[#C0392B]' : 'text-[#6B7280] hover:text-[#C0392B]'
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                    {index < navItems.length - 1 && (
+                      <span className="mx-3 text-[#C7CCD4] xl:mx-4">|</span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
 
-                const isOpen = openDropdown === group.label;
-                const active = isGroupActive(group);
+            <div className="hidden shrink-0 items-center gap-3 lg:flex">
+              <a
+                href="tel:+917654247569"
+                className="flex h-12 w-12 items-center justify-center rounded-full bg-[#C0392B] text-white transition-colors hover:bg-[#8F2D22]"
+                aria-label="Call Medicoline Healthcare"
+              >
+                <Phone size={22} fill="currentColor" strokeWidth={1.5} />
+              </a>
 
-                return (
+              <div className="relative">
+                <button
+                  ref={helpTriggerRef}
+                  type="button"
+                  onClick={() => setHelpOpen((prev) => !prev)}
+                  className="flex h-12 w-12 items-center justify-center text-[#7B7B7B] transition-colors hover:text-[#C0392B] focus:outline-none"
+                  aria-label="Open support information"
+                  aria-expanded={helpOpen}
+                >
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                    <path d="M19 10v2c0 3.87-3.13 7-7 7s-7-3.13-7-7v-2h2v2c0 2.76 2.24 5 5 5s5-2.24 5-5v-2h-2z" />
+                  </svg>
+                </button>
+
+                {helpOpen && (
                   <div
-                    key={group.label}
-                    className="relative group"
-                    onMouseEnter={() => setOpenDropdown(group.label)}
-                    onMouseLeave={() => setOpenDropdown((current) => (current === group.label ? null : current))}
+                    ref={helpPopupRef}
+                    className="fixed z-[1400] rounded-2xl border border-[#E5E7EB] bg-white p-6 text-left shadow-[0_18px_40px_rgba(17,17,17,0.08)]"
+                    style={{
+                      top: helpPopupStyle?.top ?? 88,
+                      left: helpPopupStyle?.left ?? 12,
+                      width: helpPopupStyle?.width ?? 350,
+                    }}
                   >
-                    <button
-                      type="button"
-                      className={`inline-flex items-center gap-1 text-sm font-medium font-heading font-semibold transition-colors duration-200 ${active ? 'text-[#C0392B]' : 'text-[#374151] hover:text-[#C0392B]'
-                        }`}
-                      onClick={() => setOpenDropdown((current) => (current === group.label ? null : group.label))}
-                    >
-                      {group.label}
-                      <ChevronDown size={15} className={`transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
-                    </button>
-
-                    {/* Invisible hover tunnel to prevent dropdown from closing when moving mouse from button to menu */}
-                    {isOpen && <div className="absolute left-0 right-0 top-full h-2 pointer-events-auto" />}
-
-                    <div
-                      className={`absolute left-1/2 top-full z-[999] mt-2 min-w-[200px] -translate-x-1/2 rounded-2xl border border-gray-100 bg-white py-2 text-[#1a1a1a] shadow-[0_18px_38px_rgba(52,12,14,0.28)] transition-all duration-200 ${isOpen ? 'pointer-events-auto translate-y-0 scale-100 opacity-100' : 'pointer-events-none -translate-y-1 scale-95 opacity-0'
-                        }`}
-                    >
-                      {group.items.map((item) => (
-                        <div key={item.label} className="px-2">
-                          {renderNavLink(item, 'block rounded-xl px-3 py-2 font-bold text-[#1a1a1a] hover:text-[#1a1a1a] hover:bg-[#f5f5f5]')}
+                    <div className="grid gap-5">
+                      <div className="rounded-xl bg-[#F9FAFB] p-4">
+                        <div className="mb-3 flex items-center gap-3">
+                          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#C0392B] text-white">
+                            <Phone size={16} fill="currentColor" strokeWidth={0} />
+                          </span>
+                          <div>
+                            <h4 className="text-[16px] font-bold text-[#1F2937]">Support</h4>
+                            <p className="text-[12px] uppercase tracking-[0.14em] text-[#9CA3AF]">Need help fast?</p>
+                          </div>
                         </div>
-                      ))}
+                        <div className="space-y-2 text-[14px] leading-relaxed text-[#6B7280]">
+                          <a href="mailto:support@medicolinehealthcare.com" className="block font-medium text-[#1F2937] transition-colors hover:text-[#C0392B]">
+                            support@medicolinehealthcare.com
+                          </a>
+                          <a href="tel:+917654247569" className="block font-medium text-[#1F2937] transition-colors hover:text-[#C0392B]">
+                            +91 7654247569
+                          </a>
+                        </div>
+                      </div>
+
+                      <div className="rounded-xl border border-[#E5E7EB] p-4">
+                        <div className="mb-3 flex items-center gap-3">
+                          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#F3F4F6] text-[#C0392B]">
+                            <MessageSquare size={16} fill="currentColor" strokeWidth={0} />
+                          </span>
+                          <div>
+                            <h4 className="text-[16px] font-bold text-[#1F2937]">Feedback</h4>
+                            <p className="text-[12px] uppercase tracking-[0.14em] text-[#9CA3AF]">Reach the founder</p>
+                          </div>
+                        </div>
+                        <a href="mailto:founder@medicolinehealthcare.com" className="block text-[14px] font-medium leading-relaxed text-[#1F2937] transition-colors hover:text-[#C0392B]">
+                          founder@medicolinehealthcare.com
+                        </a>
+                      </div>
                     </div>
                   </div>
-                );
-              })}
+                )}
+              </div>
             </div>
 
-            <div className="hidden lg:flex nav-right items-center gap-3">
-              <Link
-                to="/contact"
-                className="bg-[#C0392B] text-white text-sm font-heading font-bold px-6 py-2.5 rounded-full hover:bg-[#A93226] transition-colors duration-200"
-                onClick={() => handleLinkClick('/contact')}
+            <div className="flex items-center gap-3 lg:hidden">
+              <a
+                href="tel:+917654247569"
+                className="flex shrink-0 items-center justify-center rounded-full border border-gray-100 p-2.5 text-[#374151] transition-colors hover:bg-gray-50 hover:text-[#C0392B]"
+                aria-label="Call Us"
               >
-                Book Appointment
-              </Link>
-            </div>
-
-            {/* Mobile Right Action Controls */}
-            <div className="flex lg:hidden items-center">
+                <Phone size={18} />
+              </a>
               <button
-                className="p-2 text-[#374151] hover:text-[#C0392B] focus:outline-none w-11 h-11 flex items-center justify-center shrink-0"
+                className="flex items-center justify-center rounded-full border border-gray-100 p-2.5 text-[#374151] transition-colors hover:bg-gray-50 hover:text-[#C0392B] focus:outline-none"
                 onClick={() => setMenuOpen(!menuOpen)}
                 aria-label="Toggle menu"
-                style={{ minWidth: '44px', minHeight: '44px' }}
               >
-                <Menu size={26} />
+                {menuOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Mobile Drawer (with smooth slide/fade 300ms transition) */}
-      <div
-        className={`lg:hidden fixed inset-0 z-[1001] bg-white px-6 py-6 flex flex-col justify-between overflow-y-auto transition-all duration-300 ease-in-out ${menuOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-4 pointer-events-none'
+        <div
+          className={`fixed inset-x-0 top-[77px] z-[999] border-t border-gray-100 bg-white transition-all duration-300 ease-in-out lg:hidden ${
+            menuOpen ? 'translate-y-0 opacity-100' : 'pointer-events-none -translate-y-4 opacity-0'
           }`}
-      >
-        {/* Header Row */}
-        <div className="flex items-center justify-between">
-          <Link to="/" className="logo flex items-center gap-2.5 flex-shrink-0" onClick={() => handleLinkClick('/')}>
-            <div className="h-10 flex items-center shrink-0">
-              <img src={LOGO_SRC} alt="Medicoline Healthcare" className="brand-logo" />
+        >
+          <div className="flex min-h-[calc(100vh-77px)] flex-col gap-5 bg-white px-6 py-8">
+            <div className="flex flex-col gap-4">
+              {navItems.map((item) => (
+                <Link
+                  key={item.label}
+                  to={item.to}
+                  onClick={() => setMenuOpen(false)}
+                  className={`rounded-xl border border-transparent px-4 py-2.5 font-heading text-lg font-bold transition-all ${
+                    isActive(item.to)
+                      ? 'border-[#C0392B]/10 bg-[#fff5f5] pl-6 text-[#C0392B]'
+                      : 'text-[#374151] hover:bg-[#F9FAFB] hover:text-[#C0392B]'
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
             </div>
-            <div className="leading-tight">
-              <span className="font-heading font-black text-[#C0392B] text-[15px] leading-none">Medicoline</span>
-              <span className="block text-[9px] text-[#6B7280] tracking-[0.15em] uppercase leading-none mt-0.5 font-medium">
-                Healthcare
-              </span>
-            </div>
-          </Link>
-          <button
-            type="button"
-            className="p-2 text-[#374151] hover:text-[#C0392B] focus:outline-none w-11 h-11 flex items-center justify-center"
-            onClick={() => setMenuOpen(false)}
-            aria-label="Close menu"
-            style={{ minWidth: '44px', minHeight: '44px' }}
-          >
-            <X size={28} />
-          </button>
-        </div>
 
-        {/* Large Navigation Menu Items */}
-        <div className="flex-1 flex flex-col justify-center py-8 space-y-6">
-          {mobileNavItems.map((item) => (
-            <div key={item.label} className="block text-2xl font-bold font-heading py-2">
-              {renderNavLink(item, 'text-2xl font-bold font-heading')}
+            <div className="mt-auto flex flex-col gap-4 border-t border-gray-100 pt-6">
+              <a
+                href="tel:+917654247569"
+                className="flex items-center justify-center gap-3 rounded-full border border-gray-100 bg-gray-50 py-4 text-sm font-bold text-[#374151]"
+              >
+                <Phone size={16} className="text-[#C0392B]" />
+                Call +91 76542 47569
+              </a>
+              <a
+                href="mailto:support@medicolinehealthcare.com"
+                className="flex items-center justify-center gap-3 rounded-full border border-[#E5E7EB] px-5 py-4 text-sm font-bold text-[#374151]"
+              >
+                <MessageSquare size={16} className="text-[#C0392B]" />
+                Need Help? Email Support
+              </a>
             </div>
-          ))}
-        </div>
-
-        {/* Social Icons Row at the Bottom of mobile menu */}
-        <div className="border-t border-gray-100 pt-6 mt-auto">
-          <p className="text-xs font-bold text-gray-400 mb-3 uppercase tracking-wider">Follow Us On</p>
-          <div className="flex items-center gap-5">
-            <a
-              href="https://www.instagram.com/we.medicoline/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#C0392B] hover:text-[#A93226] transition-colors duration-200"
-              aria-label="Instagram"
-            >
-              <Instagram size={22} />
-            </a>
-            <a
-              href="#"
-              className="text-gray-400 hover:text-[#C0392B] transition-colors duration-200"
-              aria-label="Facebook"
-            >
-              <Facebook size={22} />
-            </a>
-            <a
-              href="#"
-              className="text-gray-400 hover:text-[#C0392B] transition-colors duration-200"
-              aria-label="YouTube"
-            >
-              <Youtube size={22} />
-            </a>
           </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+      <div className="h-[76px] bg-transparent" />
+    </>
   );
 }

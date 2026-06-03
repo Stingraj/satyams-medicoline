@@ -41,7 +41,7 @@ export default function ServiceDetailModal({ service, onClose }: ServiceDetailMo
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-4 right-4 w-9 h-9 flex items-center justify-center rounded-lg text-gray-400 hover:text-[#111111] hover:bg-gray-100 transition-colors"
+          className="absolute top-4 right-4 w-9 h-9 flex items-center justify-center rounded-lg text-gray-400 hover:text-[#1F2937] hover:bg-gray-100 transition-colors"
           aria-label="Close"
         >
           <X size={20} strokeWidth={2} />
@@ -50,7 +50,7 @@ export default function ServiceDetailModal({ service, onClose }: ServiceDetailMo
         <div className="pr-8">
           <h3
             id="service-modal-title"
-            className="font-extrabold text-[#111111] text-xl sm:text-2xl tracking-tight leading-snug"
+            className="font-extrabold text-[#1F2937] text-xl sm:text-2xl tracking-tight leading-snug"
           >
             {service.title}
           </h3>

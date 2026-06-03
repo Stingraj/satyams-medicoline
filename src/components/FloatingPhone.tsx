@@ -5,10 +5,10 @@ export default function FloatingPhone() {
     <a
       href="tel:+917654247569"
       aria-label="Call Medicoline Healthcare"
-      className="fixed bottom-6 right-6 z-50 w-12 h-12 bg-[#C0392B] text-white rounded-full shadow-lg hover:bg-[#A93226] hover:shadow-xl transition-all duration-200 flex items-center justify-center group"
+      className="fixed bottom-[92px] right-6 z-50 w-12 h-12 bg-[#C0392B] hover:bg-[#8F2D22] text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center group"
     >
       <Phone size={20} strokeWidth={2} />
-      <span className="absolute right-14 bg-[#2B2B2B] text-white text-xs px-3 py-1.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+      <span className="pointer-events-none absolute right-full mr-3 max-w-[calc(100vw-6rem)] rounded-lg bg-gray-800 px-3 py-1.5 text-xs whitespace-nowrap text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
         +91 7654247569
       </span>
     </a>

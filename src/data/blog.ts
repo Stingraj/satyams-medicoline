@@ -4,8 +4,8 @@ export interface BlogPost {
   title: string;
   excerpt: string;
   date: string;
-  bgColor: string; // Pastel background color
-  textColor: string; // Dark text color for the category text on placeholder
+  bgColor: string;
+  textColor: string;
   fullContent: string[];
 }
 
@@ -16,8 +16,8 @@ export const blogPosts: BlogPost[] = [
     title: '10 Essential Tips for Elderly Care at Home',
     excerpt: 'Caring for our elders requires patience, love, and a structured healthcare routine.',
     date: 'May 28, 2026',
-    bgColor: '#FFF3E0', // subtle pastel orange
-    textColor: '#E65100',
+    bgColor: '#F3F4F6',
+    textColor: '#C0392B',
     fullContent: [
       'Caring for our elders requires patience, love, and a structured healthcare routine. As our loved ones age, their health needs become more complex and require focused, professional attention to ensure safety and comfort.',
       '1. Create a Safe Home Environment: Remove tripping hazards, install grab bars in bathrooms, ensure proper lighting, and use non-slip rugs throughout the house. Fall prevention is the single most critical factor in elderly home safety.',
@@ -38,8 +38,8 @@ export const blogPosts: BlogPost[] = [
     title: 'Understanding ICU at Home — What Families Need to Know',
     excerpt: 'Setting up a critical care unit at home can be overwhelming.',
     date: 'May 20, 2026',
-    bgColor: '#E3F2FD', // subtle pastel blue
-    textColor: '#0D47A1',
+    bgColor: '#F3F4F6',
+    textColor: '#C0392B',
     fullContent: [
       'Setting up a critical care unit at home can be overwhelming. When a loved one requires critical care after a major hospital procedure or during terminal illness, transitioning to an ICU at home is a highly compassionate and clinical solution.',
       'Required Medical Equipment: A comprehensive home ICU requires professional medical setups, including mechanical ventilators, BiPAP/CPAP machines, oxygen concentrators, multi-parameter vital monitors, suction machines, and specialized ICU beds with alpha mattresses to prevent pressure ulcers.',
@@ -58,8 +58,8 @@ export const blogPosts: BlogPost[] = [
     title: 'The Importance of Regular Health Checkups',
     excerpt: 'Preventive healthcare is the key to a long healthy life.',
     date: 'May 15, 2026',
-    bgColor: '#E8F5E9', // subtle pastel green
-    textColor: '#1B5E20',
+    bgColor: '#F3F4F6',
+    textColor: '#C0392B',
     fullContent: [
       'Preventive healthcare is the key to a long healthy life. Many chronic diseases, including diabetes, hypertension, and early-stage cardiovascular issues, develop silently without noticeable symptoms until they reach advanced stages.',
       'Why Annual Checkups Matter: Routine checkups allow doctors to establish a baseline of your health metrics and catch warning signs early. Early detection significantly increases the effectiveness of medical treatments and lifestyle adjustments.',

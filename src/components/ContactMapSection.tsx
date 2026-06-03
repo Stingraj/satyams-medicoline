@@ -7,12 +7,13 @@ const MAP_EMBED_SRC =
 const CONTACT_EMAIL = 'info@medicolinehealthcare.com';
 
 const inputClass =
-  'w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow';
+  'w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#1F2937] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow';
 
 export default function ContactMapSection() {
   const { ref, visible } = useScrollReveal();
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const [form, setForm] = useState({
     name: '',
     service: 'Nursing Care',
@@ -30,28 +31,53 @@ export default function ContactMapSection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setSubmitError('');
+
+    const payload = {
+      formType: 'Contact Request',
+      subject: 'New Contact Request — Medicoline Healthcare',
+      userEmail: form.email,
+      formData: {
+        'Name': form.name,
+        'Phone': form.phone,
+        'Email': form.email,
+        'Service selected': form.service,
+        'Message': form.message,
+        'Date submitted': new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+      },
+    };
+
+    console.log('[Contact form] Submit started', {
+      formType: payload.formType,
+      hasEmail: Boolean(form.email),
+      fields: Object.keys(payload.formData),
+    });
 
     try {
+      console.log('[Contact form] Sending API request', payload);
+
       const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          formType: 'Contact Request',
-          subject: 'New Contact Request — Medicoline Healthcare',
-          userEmail: form.email,
-          formData: {
-            'Name': form.name,
-            'Phone': form.phone,
-            'Email': form.email,
-            'Service selected': form.service,
-            'Message': form.message,
-            'Date submitted': new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
-          },
-        }),
+        body: JSON.stringify(payload),
       });
 
-      const resData = await response.json();
-      if (resData.success) {
+      const responseText = await response.text();
+      let resData: { success?: boolean; error?: string } = {};
+
+      try {
+        resData = responseText ? JSON.parse(responseText) : {};
+      } catch {
+        resData = { error: responseText || 'Invalid JSON response from server.' };
+      }
+
+      console.log('[Contact form] API response received', {
+        status: response.status,
+        ok: response.ok,
+        body: resData,
+      });
+
+      if (response.ok && resData.success) {
         setSubmitted(true);
         setForm({
           name: '',
@@ -61,10 +87,17 @@ export default function ContactMapSection() {
           message: '',
         });
       } else {
-        alert('Something went wrong. Please try again.');
+        const exactError = resData.error || `Request failed with status ${response.status}.`;
+        console.error('[Contact form] API request failed', {
+          status: response.status,
+          body: resData,
+        });
+        setSubmitError(exactError);
       }
-    } catch (err) {
-      alert('Failed to submit. Please check your connection.');
+    } catch (error) {
+      const exactError = error instanceof Error ? error.message : 'Unknown network error.';
+      console.error('[Contact form] Submit crashed', error);
+      setSubmitError(exactError);
     } finally {
       setLoading(false);
     }
@@ -74,7 +107,7 @@ export default function ContactMapSection() {
     <section className="bg-white py-12 md:py-20 border-t border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10 md:mb-12">
-          <h2 className="font-extrabold text-[#111111] text-3xl sm:text-4xl tracking-tight mb-3">
+          <h2 className="font-extrabold text-[#1F2937] text-3xl sm:text-4xl tracking-tight mb-3">
             Get In Touch
           </h2>
           <div className="flex justify-center mb-4">
@@ -91,22 +124,22 @@ export default function ContactMapSection() {
             visible ? 'section-visible' : 'section-hidden'
           }`}
         >
-          <div className="bg-[#fbf9f8] rounded-xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col justify-center min-h-[380px]">
+          <div className="bg-[#F9FAFB] rounded-xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col justify-center min-h-[380px]">
             {submitted ? (
               <div className="text-center py-6">
-                <div className="w-14 h-14 bg-[#fff5f5] text-[#C0392B] rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-14 h-14 bg-[#F3F4F6] text-[#C0392B] rounded-full flex items-center justify-center mx-auto mb-4">
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                 </div>
-                <h3 className="font-extrabold text-xl text-[#111111] mb-2">Message Sent!</h3>
+                <h3 className="font-extrabold text-xl text-[#1F2937] mb-2">Message Sent!</h3>
                 <p className="text-sm text-gray-500 max-w-sm mx-auto mb-6">
                   Thank you for reaching out. We have received your inquiry and our support team will get in touch with you shortly.
                 </p>
                 <button
                   type="button"
                   onClick={() => setSubmitted(false)}
-                  className="bg-[#C0392B] text-white text-sm font-semibold px-6 py-2.5 rounded-full hover:bg-[#A93226] transition-colors"
+                  className="bg-[#C0392B] text-white text-sm font-semibold px-6 py-2.5 rounded-full hover:bg-[#8F2D22] transition-colors"
                 >
                   Send Another Message
                 </button>
@@ -115,7 +148,7 @@ export default function ContactMapSection() {
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <label htmlFor="contact-name" className="block text-sm font-semibold text-[#111111] mb-1.5">
+                    <label htmlFor="contact-name" className="block text-sm font-semibold text-[#1F2937] mb-1.5">
                       Name
                     </label>
                     <input
@@ -130,7 +163,7 @@ export default function ContactMapSection() {
                     />
                   </div>
                   <div>
-                    <label htmlFor="contact-service" className="block text-sm font-semibold text-[#111111] mb-1.5">
+                    <label htmlFor="contact-service" className="block text-sm font-semibold text-[#1F2937] mb-1.5">
                       Service Selected *
                     </label>
                     <select
@@ -153,7 +186,7 @@ export default function ContactMapSection() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <label htmlFor="contact-phone" className="block text-sm font-semibold text-[#111111] mb-1.5">
+                    <label htmlFor="contact-phone" className="block text-sm font-semibold text-[#1F2937] mb-1.5">
                       Phone *
                     </label>
                     <input
@@ -168,7 +201,7 @@ export default function ContactMapSection() {
                     />
                   </div>
                   <div>
-                    <label htmlFor="contact-email" className="block text-sm font-semibold text-[#111111] mb-1.5">
+                    <label htmlFor="contact-email" className="block text-sm font-semibold text-[#1F2937] mb-1.5">
                       Email *
                     </label>
                     <input
@@ -185,7 +218,7 @@ export default function ContactMapSection() {
                 </div>
 
                 <div>
-                  <label htmlFor="contact-message" className="block text-sm font-semibold text-[#111111] mb-1.5">
+                  <label htmlFor="contact-message" className="block text-sm font-semibold text-[#1F2937] mb-1.5">
                     Message *
                   </label>
                   <textarea
@@ -203,10 +236,13 @@ export default function ContactMapSection() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-[#C0392B] text-white font-semibold py-4 rounded-xl hover:bg-[#A93226] transition-colors duration-200 shadow-sm disabled:opacity-50"
+                  className="w-full bg-[#C0392B] text-white font-semibold py-4 rounded-xl hover:bg-[#8F2D22] transition-colors duration-200 shadow-sm disabled:opacity-50"
                 >
                   {loading ? 'Sending Message...' : '✉ Send Message'}
                 </button>
+                {submitError ? (
+                  <p className="text-sm font-medium text-[#C0392B]">{submitError}</p>
+                ) : null}
               </form>
             )}
           </div>
@@ -221,23 +257,23 @@ export default function ContactMapSection() {
               allowFullScreen
             />
             <div className="absolute bottom-4 left-4 right-4 sm:left-auto sm:right-4 sm:max-w-sm bg-white rounded-xl shadow-lg border border-gray-100 px-4 py-3 flex gap-3 items-start">
-              <span className="w-9 h-9 rounded-lg bg-[#fff5f5] flex items-center justify-center shrink-0 text-[#C0392B]">
+              <span className="w-9 h-9 rounded-lg bg-[#F3F4F6] flex items-center justify-center shrink-0 text-[#C0392B]">
                 <MapPin size={18} />
               </span>
               <div className="space-y-2">
-                <p className="text-sm text-[#111111] font-semibold leading-snug">
+                <p className="text-sm text-[#1F2937] font-semibold leading-snug">
                   Medicoline HQ: Near MGM Hospital, Warangal, Telangana - 506007.
                 </p>
                 <a
                   href="tel:+917654247569"
-                  className="inline-flex items-center gap-2 text-sm text-[#111111] font-semibold hover:text-[#C0392B] transition-colors"
+                  className="inline-flex items-center gap-2 text-sm text-[#1F2937] font-semibold hover:text-[#C0392B] transition-colors"
                 >
                   <Phone size={16} strokeWidth={2} className="text-[#C0392B]" />
-                  <span>+91 76542 47569</span>
+                  <span>+91 7654247569</span>
                 </a>
                 <a
                   href={`mailto:${CONTACT_EMAIL}`}
-                  className="inline-flex items-center gap-2 text-sm text-[#111111] font-semibold hover:text-[#C0392B] transition-colors"
+                  className="inline-flex items-center gap-2 text-sm text-[#1F2937] font-semibold hover:text-[#C0392B] transition-colors"
                 >
                   <Mail size={16} strokeWidth={2} className="text-[#C0392B]" />
                   <span>{CONTACT_EMAIL}</span>

@@ -31,7 +31,7 @@ export default function BlogPage() {
           <button
             type="button"
             onClick={() => setSelectedPost(null)}
-            className="inline-flex items-center gap-2 text-[#C0392B] hover:text-[#A93226] font-bold text-sm mb-8 transition-colors duration-200"
+            className="inline-flex items-center gap-2 text-[#C0392B] hover:text-[#C0392B] font-bold text-sm mb-8 transition-colors duration-200"
           >
             <ArrowLeft size={16} />
             Back to Articles
@@ -40,7 +40,7 @@ export default function BlogPage() {
           {/* Article Header */}
           <article className="bg-white border border-gray-100 rounded-3xl overflow-hidden shadow-sm p-6 sm:p-10">
             <div className="flex items-center gap-4 text-xs font-bold text-gray-500 uppercase mb-6">
-              <span className="bg-[#fff5f5] text-[#C0392B] border border-[#C0392B]/20 px-3 py-1 rounded-full">
+              <span className="bg-[#F3F4F6] text-[#C0392B] border border-[#C0392B]/20 px-3 py-1 rounded-full">
                 {selectedPost.category}
               </span>
               <span className="flex items-center gap-1.5 font-body">
@@ -49,7 +49,7 @@ export default function BlogPage() {
               </span>
             </div>
 
-            <h1 className="font-heading font-black text-[#111111] text-3xl sm:text-4xl lg:text-5xl mb-6 tracking-tight leading-tight">
+            <h1 className="font-heading font-black text-[#1F2937] text-3xl sm:text-4xl lg:text-5xl mb-6 tracking-tight leading-tight">
               {selectedPost.title}
             </h1>
 
@@ -70,7 +70,7 @@ export default function BlogPage() {
                 // If it starts with a number, style it as a header or bullet
                 if (/^\d+\./.test(paragraph)) {
                   return (
-                    <h3 key={index} className="font-heading font-bold text-xl text-[#111111] pt-4 mb-2">
+                    <h3 key={index} className="font-heading font-bold text-xl text-[#1F2937] pt-4 mb-2">
                       {paragraph}
                     </h3>
                   );
@@ -91,7 +91,7 @@ export default function BlogPage() {
   return (
     <div className="pt-20 lg:pt-24 bg-[#F9FAFB] min-h-screen pb-16">
       {/* Blog Hero Section */}
-      <div className="bg-gradient-to-br from-[#0f172a] to-[#1e293b] text-white py-16 sm:py-20 text-center">
+      <div className="bg-[#1F2937] text-white py-16 sm:py-20 text-center">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <span className="text-[#C0392B] text-xs font-bold uppercase tracking-widest bg-[#C0392B]/10 px-3.5 py-1.5 rounded-full border border-[#C0392B]/20 mb-4 inline-block font-heading">
             Medicoline Journal
@@ -128,13 +128,13 @@ export default function BlogPage() {
               {/* Article Body */}
               <div className="p-6 flex flex-col flex-1">
                 <div className="flex items-center gap-3 text-[11px] font-bold text-gray-400 uppercase mb-3 font-body">
-                  <span className="bg-[#fff5f5] text-[#C0392B] px-2 py-0.5 rounded-full border border-[#C0392B]/10">
+                  <span className="bg-[#F3F4F6] text-[#C0392B] px-2 py-0.5 rounded-full border border-[#C0392B]/10">
                     {post.category}
                   </span>
                   <span>{post.date}</span>
                 </div>
 
-                <h2 className="font-heading font-bold text-[#111111] text-lg sm:text-xl mb-3 tracking-tight leading-snug hover:text-[#C0392B] transition-colors duration-200">
+                <h2 className="font-heading font-bold text-[#1F2937] text-lg sm:text-xl mb-3 tracking-tight leading-snug hover:text-[#C0392B] transition-colors duration-200">
                   {post.title}
                 </h2>
 

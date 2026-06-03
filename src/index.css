@@ -5,21 +5,21 @@
 @layer base {
   :root {
     --color-primary: #C0392B;
-    --color-primary-dark: #A93226;
+    --color-primary-dark: #8F2D22;
     --color-primary-light: #E8514A;
     --color-gray: #6B7280;
     --color-gray-dark: #374151;
     --color-gray-light: #F3F4F6;
-    --color-navy: #0f172a;
+    --color-dark-surface: #1F2937;
     --color-white: #FFFFFF;
-    --color-black: #111111;
+    --color-black: #1F2937; /* Replaced harsh black with dark grey */
     --color-border: #E5E7EB;
     --font-heading: 'Montserrat', sans-serif;
     --font-body: 'Inter', sans-serif;
     --red: #C0392B;
-    --red-dark: #A93226;
-    --navy: #0f172a;
-    --blue: #1e4fa3;
+    --red-dark: #8F2D22;
+    --dark-surface: #1F2937;
+    --muted-accent: #6B7280;
     --gray-text: #374151;
     --bg-light: #F3F4F6;
     --white: #ffffff;
@@ -117,7 +117,7 @@ a:hover {
 
 
 .dot-pattern {
-  background-image: radial-gradient(circle, #e8e8e8 1px, transparent 1px);
+  background-image: none;
   background-size: 24px 24px;
 }
 
@@ -129,9 +129,9 @@ a:hover {
 }
 
 .section-hidden {
-  opacity: 0;
-  transform: translateY(32px);
-  pointer-events: none;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
   transition: opacity 0.7s ease-out, transform 0.7s ease-out;
 }
 
@@ -273,8 +273,6 @@ a:hover {
 .founder-bio p,
 .service-card p,
 .founder-desc {
-  font-size: clamp(14px, 1.5vw, 18px);
-  line-height: 1.7;
   max-width: 100%;
   overflow-wrap: break-word;
   word-break: break-word;
@@ -284,7 +282,6 @@ a:hover {
 .doctor-card h2,
 .doctor-card h3,
 .founder-name {
-  font-size: clamp(18px, 2.5vw, 30px);
   white-space: normal;
   overflow-wrap: break-word;
 }
@@ -394,9 +391,7 @@ img {
 }
 
 .medical-cross {
-  background:
-    linear-gradient(#C0392B, #C0392B) center / 18% 100% no-repeat,
-    linear-gradient(#C0392B, #C0392B) center / 100% 18% no-repeat;
+  background: #C0392B;
   border-radius: 4px;
 }
 
@@ -412,10 +407,10 @@ img {
 
   0%,
   100% {
-    box-shadow: 0 0 0 0 rgba(204, 0, 0, 0.35);
+    box-shadow: 0 0 0 0 rgba(192, 57, 43, 0.35);
   }
 
   50% {
-    box-shadow: 0 0 0 8px rgba(204, 0, 0, 0);
+    box-shadow: 0 0 0 8px rgba(192, 57, 43, 0);
   }
 }

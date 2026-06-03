@@ -28,7 +28,7 @@ export default function Services() {
     <section id="services" className="bg-white py-[60px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
-          <h2 className="font-extrabold text-[#111111] text-3xl sm:text-4xl mb-3 tracking-tight">
+          <h2 className="font-extrabold text-[#1F2937] text-3xl sm:text-4xl mb-3 tracking-tight">
             OUR SERVICES
           </h2>
           <div className="flex justify-center mb-5">
@@ -52,10 +52,10 @@ export default function Services() {
               className="service-card bg-white border border-gray-100 rounded-xl p-5 text-center cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C0392B] focus-visible:ring-offset-2"
               aria-haspopup="dialog"
             >
-              <div className="mb-3 w-11 h-11 rounded-lg bg-[#fff5f5] flex items-center justify-center mx-auto">
+              <div className="mb-3 w-11 h-11 rounded-lg bg-[#F3F4F6] flex items-center justify-center mx-auto">
                 {serviceIcons[i]}
               </div>
-              <h3 className="font-bold text-[#111111] text-sm mb-1 leading-snug">
+              <h3 className="font-bold text-[#1F2937] text-sm mb-1 leading-snug">
                 {service.title}
               </h3>
               <p className="text-gray-500 text-xs leading-relaxed">

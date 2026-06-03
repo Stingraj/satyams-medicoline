@@ -59,19 +59,19 @@ export default function NursingPackages() {
     <section id="packages" className="packages-section">
       <div className="bg-[#C0392B] text-white py-24 sm:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl mb-6 tracking-tight">
+          <h2 className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl mb-6 tracking-tight">
             Health Packages For Every Family
-          </h1>
+          </h2>
           <p className="font-body text-lg sm:text-xl text-white/90 max-w-2xl mx-auto">
             Affordable home healthcare packages with free sample collection
           </p>
         </div>
       </div>
 
-      <div className="bg-[#fbf9f8] py-[60px]">
+      <div className="bg-[#F9FAFB] py-[60px]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <h2 className="font-heading font-black text-[#111111] text-3xl sm:text-4xl mb-3 tracking-tight">
+            <h2 className="font-heading font-black text-[#1F2937] text-3xl sm:text-4xl mb-3 tracking-tight">
               Offers &amp; Packages
             </h2>
             <div className="flex justify-center mb-5">
@@ -97,7 +97,7 @@ export default function NursingPackages() {
                   }`}
               >
                 <div className="flex items-center justify-between mb-6">
-                  <span className="bg-[#fff5f5] text-[#C0392B] text-xs font-heading font-bold px-3 py-1 rounded-full">
+                  <span className="bg-[#F3F4F6] text-[#C0392B] text-xs font-heading font-bold px-3 py-1 rounded-full">
                     {pkg.badge}
                   </span>
                   {pkg.popular && (
@@ -107,17 +107,17 @@ export default function NursingPackages() {
                   )}
                 </div>
 
-                <h3 className="font-heading font-extrabold text-[#111111] text-xl mb-4 tracking-tight">{pkg.title}</h3>
+                <h3 className="font-heading font-extrabold text-[#1F2937] text-xl mb-4 tracking-tight">{pkg.title}</h3>
 
                 <div className="mb-6">
                   <span className="font-heading font-black text-[#C0392B] text-4xl tracking-tight">{pkg.price}</span>
-                  <span className="font-body text-[#999999] text-sm line-through ml-2">{pkg.originalPrice}</span>
+                  <span className="font-body text-[#6B7280] text-sm line-through ml-2">{pkg.originalPrice}</span>
                 </div>
 
                 <ul className="space-y-3 mb-8 flex-1">
                   {pkg.features.map((f, j) => (
                     <li key={j} className="flex items-start gap-3">
-                      <div className="w-5 h-5 rounded-full bg-[#fff5f5] flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <div className="w-5 h-5 rounded-full bg-[#F3F4F6] flex items-center justify-center flex-shrink-0 mt-0.5">
                         <Check size={11} color="#C0392B" strokeWidth={3} />
                       </div>
                       <span className="font-body text-sm text-[#374151]">{f}</span>
@@ -128,8 +128,8 @@ export default function NursingPackages() {
                 <Link
                   to="/contact"
                   className={`block text-center font-heading font-bold text-sm py-3 rounded-full transition-colors duration-200 ${selectedCard === i
-                    ? 'bg-[#C0392B] text-white hover:bg-[#A93226]'
-                    : 'border-2 border-[#C0392B] text-[#C0392B] hover:bg-[#C0392B] hover:text-white'
+                    ? 'bg-[#C0392B] text-white hover:bg-[#8F2D22]'
+                    : 'border-2 border-[#C0392B] text-[#C0392B] hover:bg-[#8F2D22] hover:text-white'
                     }`}
                 >
                   Book Package

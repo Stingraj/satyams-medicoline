@@ -17,7 +17,7 @@ const faqs = [
   },
   {
     q: 'How do I book an appointment?',
-    a: 'You can book through our website, call us at +91 76542 47569, or WhatsApp us directly.',
+    a: 'You can book through our website, call us at +91 7654247569, or WhatsApp us directly.',
   },
   {
     q: 'Are your doctors verified and certified?',
@@ -46,7 +46,7 @@ export default function FAQ() {
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Centered section title with red underline */}
         <div className="text-center mb-12">
-          <h2 className="font-heading font-black text-[#111111] text-3xl sm:text-4xl tracking-tight mb-4">
+          <h2 className="font-heading font-black text-[#1F2937] text-3xl sm:text-4xl tracking-tight mb-4">
             Frequently Asked Questions
           </h2>
           <div className="w-[60px] h-[3px] bg-[#C0392B] mx-auto mb-5"></div>
@@ -73,7 +73,7 @@ export default function FAQ() {
                   className="w-full flex items-center justify-between py-[16px] px-[20px] text-left focus:outline-none transition-colors duration-200"
                 >
                   <span
-                    className={`font-heading font-bold text-[16px] transition-colors duration-200 ${isOpen ? 'text-[#C0392B]' : 'text-[#111111] hover:text-[#C0392B]'
+                    className={`font-heading font-bold text-[16px] transition-colors duration-200 ${isOpen ? 'text-[#C0392B]' : 'text-[#1F2937] hover:text-[#C0392B]'
                       }`}
                   >
                     {faq.q}

@@ -98,6 +98,7 @@ export default function CareersPage() {
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [resumeFile, setResumeFile] = useState<File | null>(null);
+  const [submitError, setSubmitError] = useState('');
   const [formData, setFormData] = useState({
     fullName: '',
     mobile: '',
@@ -127,6 +128,7 @@ export default function CareersPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setSubmitError('');
 
     try {
       const attachments: ResumeAttachment[] = [];
@@ -148,28 +150,56 @@ export default function CareersPage() {
         });
       }
 
+      const payload = {
+        formType: 'Careers Application Form',
+        subject: `New Career Application — ${position} — Medicoline Healthcare`,
+        userEmail: formData.email,
+        formData: {
+          'Full Name': formData.fullName,
+          'Mobile': formData.mobile,
+          'Email': formData.email,
+          'Position Applied For': position,
+          'Experience': formData.experience || 'Not Provided',
+          'Resume filename': resumeFile ? resumeFile.name : 'Not Provided',
+          'Message': formData.message || 'None',
+        },
+        attachments,
+      };
+
+      console.log('[Careers form] Submit started', {
+        formType: payload.formType,
+        hasEmail: Boolean(formData.email),
+        hasAttachment: attachments.length > 0,
+        fields: Object.keys(payload.formData),
+      });
+
+      console.log('[Careers form] Sending API request', {
+        ...payload,
+        attachments: attachments.map(a => ({ filename: a.filename, contentLength: a.content.length })),
+      });
+
       const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          formType: 'Careers Application Form',
-          subject: `New Career Application — ${position} — Medicoline Healthcare`,
-          userEmail: formData.email,
-          formData: {
-            'Full Name': formData.fullName,
-            'Mobile': formData.mobile,
-            'Email': formData.email,
-            'Position Applied For': position,
-            'Experience': formData.experience || 'Not Provided',
-            'Resume filename': resumeFile ? resumeFile.name : 'Not Provided',
-            'Message': formData.message || 'None',
-          },
-          attachments,
-        }),
+        body: JSON.stringify(payload),
       });
 
-      const resData = await response.json();
-      if (resData.success) {
+      const responseText = await response.text();
+      let resData: { success?: boolean; error?: string } = {};
+
+      try {
+        resData = responseText ? JSON.parse(responseText) : {};
+      } catch {
+        resData = { error: responseText || 'Invalid JSON response from server.' };
+      }
+
+      console.log('[Careers form] API response received', {
+        status: response.status,
+        ok: response.ok,
+        body: resData,
+      });
+
+      if (response.ok && resData.success) {
         setSubmitted(true);
         setFormData({
           fullName: '',
@@ -184,10 +214,17 @@ export default function CareersPage() {
           fileInput.value = '';
         }
       } else {
-        alert(resData.error || 'Something went wrong. Please try again.');
+        const exactError = resData.error || `Request failed with status ${response.status}.`;
+        console.error('[Careers form] API request failed', {
+          status: response.status,
+          body: resData,
+        });
+        setSubmitError(exactError);
       }
-    } catch {
-      alert('Failed to submit. Please check your connection.');
+    } catch (error) {
+      const exactError = error instanceof Error ? error.message : 'Unknown network error.';
+      console.error('[Careers form] Submit crashed', error);
+      setSubmitError(exactError);
     } finally {
       setLoading(false);
     }
@@ -199,7 +236,7 @@ export default function CareersPage() {
         .careers-page {
           background-color: #ffffff;
           font-family: 'Montserrat', sans-serif;
-          color: #111111;
+          color: #1F2937;
           padding-top: 72px;
         }
 
@@ -233,7 +270,7 @@ export default function CareersPage() {
         .careers-main-heading {
           font-size: 32px;
           font-weight: 800;
-          color: #111111;
+          color: #1F2937;
           margin: 0 0 16px 0;
           letter-spacing: -0.02em;
         }
@@ -254,7 +291,7 @@ export default function CareersPage() {
 
         .careers-subheading-text {
           font-size: 16px;
-          color: #666666;
+          color: #6B7280;
           max-w: 680px;
           margin: 0 auto;
           line-height: 1.6;
@@ -262,8 +299,8 @@ export default function CareersPage() {
 
         /* SECTION 1: HERO */
         .careers-hero {
-          background: linear-gradient(135deg, #fffcfb 0%, #fff5f5 100%);
-          border-bottom: 1px solid #fce8e6;
+          background: #F9FAFB;
+          border-bottom: 1px solid #E5E7EB;
           text-align: center;
           padding: 100px 24px;
         }
@@ -278,7 +315,7 @@ export default function CareersPage() {
           font-weight: 900;
           line-height: 1.15;
           letter-spacing: -0.03em;
-          color: #111111;
+          color: #1F2937;
           margin-bottom: 24px;
         }
 
@@ -291,7 +328,7 @@ export default function CareersPage() {
         .careers-hero-subheading {
           font-size: 16px;
           line-height: 1.8;
-          color: #4b5563;
+          color: #6B7280;
           margin-bottom: 40px;
         }
 
@@ -316,7 +353,7 @@ export default function CareersPage() {
         }
 
         .careers-btn-red:hover {
-          background-color: #A93226;
+          background-color: #C0392B;
           transform: translateY(-2px);
         }
 
@@ -366,7 +403,7 @@ export default function CareersPage() {
 
         .why-join-card {
           background-color: #ffffff;
-          border: 1px solid #f0f0f0;
+          border: 1px solid #E5E7EB;
           border-radius: 20px;
           padding: 32px;
           box-shadow: 0 8px 30px rgba(0, 0, 0, 0.02);
@@ -376,14 +413,14 @@ export default function CareersPage() {
         .why-join-card:hover {
           transform: translateY(-4px);
           box-shadow: 0 12px 32px rgba(192, 57, 43, 0.06);
-          border-color: #fce8e6;
+          border-color: #E5E7EB;
         }
 
         .why-join-icon-box {
           width: 48px;
           height: 48px;
           border-radius: 12px;
-          background-color: #fff5f5;
+          background-color: #F3F4F6;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -399,21 +436,21 @@ export default function CareersPage() {
         .why-join-card-title {
           font-size: 18px;
           font-weight: 800;
-          color: #111111;
+          color: #1F2937;
           margin: 0 0 12px 0;
         }
 
         .why-join-card-desc {
           font-size: 14px;
           line-height: 1.7;
-          color: #666666;
+          color: #6B7280;
           margin: 0;
         }
 
         /* SECTION 3: CURRENT OPENINGS */
         .careers-openings {
           background-color: #ffffff;
-          border-top: 1px solid #f3f3f3;
+          border-top: 1px solid #E5E7EB;
         }
 
         .openings-grid {
@@ -424,7 +461,7 @@ export default function CareersPage() {
 
         .opening-card {
           background-color: #ffffff;
-          border: 1px solid #f0f0f0;
+          border: 1px solid #E5E7EB;
           border-radius: 20px;
           padding: 32px;
           display: flex;
@@ -442,7 +479,7 @@ export default function CareersPage() {
         }
 
         .opening-card:hover {
-          border-color: #fce8e6;
+          border-color: #E5E7EB;
           box-shadow: 0 8px 30px rgba(0, 0, 0, 0.03);
         }
 
@@ -463,12 +500,12 @@ export default function CareersPage() {
         .opening-title {
           font-size: 20px;
           font-weight: 800;
-          color: #111111;
+          color: #1F2937;
           margin: 0;
         }
 
         .opening-badge {
-          background-color: #fff5f5;
+          background-color: #F3F4F6;
           color: #C0392B;
           font-size: 11px;
           font-weight: 700;
@@ -481,14 +518,14 @@ export default function CareersPage() {
         .opening-location {
           font-size: 13px;
           font-weight: 600;
-          color: #666666;
+          color: #6B7280;
           margin: 0;
         }
 
         .opening-desc {
           font-size: 14px;
           line-height: 1.7;
-          color: #4b5563;
+          color: #6B7280;
           margin: 4px 0 0 0;
         }
 
@@ -523,13 +560,13 @@ export default function CareersPage() {
 
         /* SECTION 4: TESTIMONIALS */
         .careers-testimonials {
-          background-color: #fbf9f8;
+          background-color: #F9FAFB;
         }
 
         .testimonials-intro {
           font-size: 16px;
           line-height: 1.7;
-          color: #666666;
+          color: #6B7280;
           max-width: 720px;
           margin: 0 auto;
         }
@@ -554,7 +591,7 @@ export default function CareersPage() {
 
         .testimonial-card {
           background-color: #ffffff;
-          border: 1px solid #f0f0f0;
+          border: 1px solid #E5E7EB;
           border-radius: 20px;
           padding: 32px;
           box-shadow: 0 4px 20px rgba(0, 0, 0, 0.01);
@@ -566,7 +603,7 @@ export default function CareersPage() {
         .testimonial-quote {
           font-size: 15px;
           line-height: 1.7;
-          color: #4b5563;
+          color: #6B7280;
           font-style: italic;
           margin: 0 0 20px 0;
           position: relative;
@@ -595,12 +632,12 @@ export default function CareersPage() {
         /* SECTION 5: APPLICATION FORM */
         .careers-apply {
           background-color: #ffffff;
-          border-top: 1px solid #f3f3f3;
+          border-top: 1px solid #E5E7EB;
         }
 
         .apply-card {
           background-color: #ffffff;
-          border: 1px solid #f0f0f0;
+          border: 1px solid #E5E7EB;
           border-radius: 24px;
           padding: 40px 24px;
           box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
@@ -639,16 +676,16 @@ export default function CareersPage() {
         .form-label {
           font-size: 13px;
           font-weight: 700;
-          color: #111111;
+          color: #1F2937;
         }
 
         .form-input {
-          border: 1px solid #e5e7eb;
+          border: 1px solid #E5E7EB;
           background-color: #ffffff;
           border-radius: 10px;
           padding: 12px 16px;
           font-size: 14px;
-          color: #111111;
+          color: #1F2937;
           outline: none;
           transition: border-color 0.25s ease;
           font-family: inherit;
@@ -678,7 +715,7 @@ export default function CareersPage() {
 
         .form-file-info {
           font-size: 11px;
-          color: #666666;
+          color: #6B7280;
           margin-top: 4px;
         }
 
@@ -699,8 +736,8 @@ export default function CareersPage() {
         }
 
         .form-success-alert {
-          background-color: #fff5f5;
-          border: 1px solid #fce8e6;
+          background-color: #F3F4F6;
+          border: 1px solid #E5E7EB;
           border-radius: 12px;
           padding: 24px;
           text-align: center;
@@ -715,9 +752,9 @@ export default function CareersPage() {
 
         /* SECTION 6: FINAL CTA */
         .careers-cta {
-          background: linear-gradient(135deg, #fffcfb 0%, #fff5f5 100%);
-          border-top: 1px solid #fce8e6;
-          border-bottom: 1px solid #fce8e6;
+          background: #F9FAFB;
+          border-top: 1px solid #E5E7EB;
+          border-bottom: 1px solid #E5E7EB;
           text-align: center;
           padding: 80px 24px;
         }
@@ -730,14 +767,14 @@ export default function CareersPage() {
         .careers-cta-heading {
           font-size: 28px;
           font-weight: 800;
-          color: #111111;
+          color: #1F2937;
           margin-bottom: 16px;
         }
 
         .careers-cta-subtext {
           font-size: 15px;
           line-height: 1.7;
-          color: #666666;
+          color: #6B7280;
           margin-bottom: 32px;
         }
       `}</style>
@@ -959,6 +996,11 @@ export default function CareersPage() {
                     >
                       {loading ? 'Submitting Application...' : 'Submit Application'}
                     </button>
+                    {submitError ? (
+                      <p style={{ marginTop: '12px', color: '#C0392B', fontSize: '14px', fontWeight: 600 }}>
+                        {submitError}
+                      </p>
+                    ) : null}
                   </div>
                 </form>
               )}

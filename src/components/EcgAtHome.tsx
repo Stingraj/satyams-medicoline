@@ -11,11 +11,14 @@ const features = [
   'Instant Digital Reports Shared with Your Doctor',
 ];
 
+const ECG_SUBMIT_URL = '/api/send-email';
+
 export default function EcgAtHome() {
   const { ref, visible } = useScrollReveal();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const [ecgForm, setEcgForm] = useState({
     name: '',
     phone: '',
@@ -28,27 +31,54 @@ export default function EcgAtHome() {
   const handleEcgSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitError('');
+
+    const payload = {
+      formType: 'ECG Booking',
+      subject: 'New ECG Booking — Medicoline Healthcare',
+      userEmail: ecgForm.email,
+      formData: {
+        Name: ecgForm.name,
+        Phone: ecgForm.phone,
+        Email: ecgForm.email,
+        Address: ecgForm.address,
+        'Preferred Date': ecgForm.date,
+        Message: ecgForm.message,
+      },
+    };
+
+    console.log('[ECG form] Submit started', {
+      endpoint: ECG_SUBMIT_URL,
+      formType: payload.formType,
+      hasEmail: Boolean(ecgForm.email),
+      fields: Object.keys(payload.formData),
+    });
+
     try {
-      const response = await fetch('/api/send-email', {
+      console.log('[ECG form] Sending API request', payload);
+
+      const response = await fetch(ECG_SUBMIT_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          formType: 'ECG Booking',
-          subject: 'New ECG Booking — Medicoline Healthcare',
-          userEmail: ecgForm.email,
-          formData: {
-            'Name': ecgForm.name,
-            'Phone': ecgForm.phone,
-            'Email': ecgForm.email,
-            'Address': ecgForm.address,
-            'Preferred Date': ecgForm.date,
-            'Message': ecgForm.message,
-          },
-        }),
+        body: JSON.stringify(payload),
       });
 
-      const resData = await response.json();
-      if (resData.success) {
+      const responseText = await response.text();
+      let resData: { success?: boolean; error?: string } = {};
+
+      try {
+        resData = responseText ? JSON.parse(responseText) : {};
+      } catch {
+        resData = { error: responseText || 'Invalid JSON response from server.' };
+      }
+
+      console.log('[ECG form] API response received', {
+        status: response.status,
+        ok: response.ok,
+        body: resData,
+      });
+
+      if (response.ok && resData.success) {
         setIsSuccess(true);
         setEcgForm({
           name: '',
@@ -59,10 +89,17 @@ export default function EcgAtHome() {
           message: '',
         });
       } else {
-        alert('Something went wrong. Please try again.');
+        const exactError = resData.error || `Request failed with status ${response.status}.`;
+        console.error('[ECG form] API request failed', {
+          status: response.status,
+          body: resData,
+        });
+        setSubmitError(exactError);
       }
-    } catch (err) {
-      alert('Failed to submit. Please check your connection.');
+    } catch (error) {
+      const exactError = error instanceof Error ? error.message : 'Unknown network error.';
+      console.error('[ECG form] Submit crashed', error);
+      setSubmitError(exactError);
     } finally {
       setIsSubmitting(false);
     }
@@ -82,11 +119,13 @@ export default function EcgAtHome() {
               src={ECG_BANNER_SRC}
               alt="Medicoline technician performing a 12-lead ECG at home"
               className="absolute inset-0 w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
             />
           </div>
 
           <div className="flex flex-col justify-center">
-            <h2 className="font-extrabold text-[#111111] text-3xl sm:text-4xl tracking-tight leading-tight mb-4">
+            <h2 className="font-extrabold text-[#1F2937] text-3xl sm:text-4xl tracking-tight leading-tight mb-4">
               Professional ECG Test at Your Doorstep
             </h2>
             <div className="w-12 h-1 bg-[#C0392B] rounded-full mb-6" />
@@ -97,10 +136,10 @@ export default function EcgAtHome() {
             <ul className="space-y-4 mb-10">
               {features.map((feature) => (
                 <li key={feature} className="flex items-start gap-3">
-                  <span className="mt-0.5 flex-shrink-0 w-6 h-6 rounded-full bg-[#fff5f5] flex items-center justify-center">
+                  <span className="mt-0.5 flex-shrink-0 w-6 h-6 rounded-full bg-[#F3F4F6] flex items-center justify-center">
                     <Check size={14} className="text-[#C0392B]" strokeWidth={3} />
                   </span>
-                  <span className="text-[#111111] text-base font-semibold leading-snug">{feature}</span>
+                  <span className="text-[#1F2937] text-base font-semibold leading-snug">{feature}</span>
                 </li>
               ))}
             </ul>
@@ -110,8 +149,9 @@ export default function EcgAtHome() {
               onClick={() => {
                 setIsModalOpen(true);
                 setIsSuccess(false);
+                setSubmitError('');
               }}
-              className="inline-flex items-center justify-center self-start bg-[#C0392B] text-white font-semibold px-8 py-4 rounded-full hover:bg-[#A93226] transition-colors duration-200 text-base shadow-[0_14px_30px_rgba(192,57,43,0.22)]"
+              className="inline-flex items-center justify-center self-start bg-[#C0392B] text-white font-semibold px-8 py-4 rounded-full hover:bg-[#8F2D22] transition-colors duration-200 text-base shadow-[0_14px_30px_rgba(192,57,43,0.22)]"
             >
               Book an ECG at Home
             </button>
@@ -133,19 +173,19 @@ export default function EcgAtHome() {
 
             {isSuccess ? (
               <div className="text-center py-8">
-                <div className="w-16 h-16 bg-[#fff5f5] text-[#C0392B] rounded-full flex items-center justify-center mx-auto mb-6">
+                <div className="w-16 h-16 bg-[#F3F4F6] text-[#C0392B] rounded-full flex items-center justify-center mx-auto mb-6">
                   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                 </div>
-                <h3 className="font-extrabold text-2xl text-[#111111] mb-3">ECG Booking Confirmed!</h3>
+                <h3 className="font-extrabold text-2xl text-[#1F2937] mb-3">ECG Booking Confirmed!</h3>
                 <p className="text-gray-500 max-w-md mx-auto mb-8 text-sm">
                   Thank you, we will contact you within 24 hours.
                 </p>
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="bg-[#C0392B] text-white px-8 py-2.5 rounded-full font-semibold hover:bg-[#A93226] transition-colors"
+                  className="bg-[#C0392B] text-white px-8 py-2.5 rounded-full font-semibold hover:bg-[#8F2D22] transition-colors"
                 >
                   Close
                 </button>
@@ -165,7 +205,7 @@ export default function EcgAtHome() {
                       value={ecgForm.name}
                       onChange={(e) => setEcgForm({ ...ecgForm, name: e.target.value })}
                       placeholder="Your full name"
-                      className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow"
+                      className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#1F2937] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow"
                     />
                   </div>
 
@@ -181,7 +221,7 @@ export default function EcgAtHome() {
                         value={ecgForm.phone}
                         onChange={(e) => setEcgForm({ ...ecgForm, phone: e.target.value })}
                         placeholder="Your phone number"
-                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow"
+                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#1F2937] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow"
                       />
                     </div>
 
@@ -196,7 +236,7 @@ export default function EcgAtHome() {
                         value={ecgForm.email}
                         onChange={(e) => setEcgForm({ ...ecgForm, email: e.target.value })}
                         placeholder="you@email.com"
-                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow"
+                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#1F2937] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow"
                       />
                     </div>
                   </div>
@@ -212,7 +252,7 @@ export default function EcgAtHome() {
                       value={ecgForm.address}
                       onChange={(e) => setEcgForm({ ...ecgForm, address: e.target.value })}
                       placeholder="Home address for ECG visit"
-                      className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow"
+                      className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#1F2937] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow"
                     />
                   </div>
 
@@ -226,7 +266,7 @@ export default function EcgAtHome() {
                       required
                       value={ecgForm.date}
                       onChange={(e) => setEcgForm({ ...ecgForm, date: e.target.value })}
-                      className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow"
+                      className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#1F2937] focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow"
                     />
                   </div>
 
@@ -241,17 +281,20 @@ export default function EcgAtHome() {
                       value={ecgForm.message}
                       onChange={(e) => setEcgForm({ ...ecgForm, message: e.target.value })}
                       placeholder="Tell us about the patient's symptoms or requirements..."
-                      className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow resize-none"
+                      className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#1F2937] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow resize-none"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-[#C0392B] text-white font-semibold py-3.5 rounded-xl hover:bg-[#A93226] transition-colors duration-200 shadow-md disabled:opacity-50 mt-2"
+                    className="w-full bg-[#C0392B] text-white font-semibold py-3.5 rounded-xl hover:bg-[#8F2D22] transition-colors duration-200 shadow-md disabled:opacity-50 mt-2"
                   >
                     {isSubmitting ? 'Booking...' : 'Confirm ECG Booking'}
                   </button>
+                  {submitError ? (
+                    <p className="text-sm font-medium text-[#C0392B]">{submitError}</p>
+                  ) : null}
                 </form>
               </div>
             )}

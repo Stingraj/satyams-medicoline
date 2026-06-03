@@ -17,7 +17,7 @@ export default function WhyChooseUs() {
       <section className="bg-white py-[60px]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <h2 className="font-extrabold text-[#111111] text-3xl sm:text-4xl mb-3 tracking-tight">
+            <h2 className="font-extrabold text-[#1F2937] text-3xl sm:text-4xl mb-3 tracking-tight">
               Why Choose Medicoline?
             </h2>
             <div className="flex justify-center mb-5">
@@ -39,13 +39,13 @@ export default function WhyChooseUs() {
                 key={i}
                 className="service-card bg-white border border-gray-100 rounded-xl p-6 flex items-start gap-4"
               >
-                <div className="w-8 h-8 rounded-full bg-[#fff5f5] flex items-center justify-center flex-shrink-0 mt-0.5">
+                <div className="w-8 h-8 rounded-full bg-[#F3F4F6] flex items-center justify-center flex-shrink-0 mt-0.5">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
                     <path d="M20 6L9 17l-5-5" stroke="#C0392B" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-bold text-[#111111] text-base leading-snug mb-1">
+                  <h3 className="font-bold text-[#1F2937] text-base leading-snug mb-1">
                     {f.title}
                   </h3>
                   <p className="text-gray-500 text-sm leading-relaxed">

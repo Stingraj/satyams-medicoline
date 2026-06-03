@@ -14,7 +14,7 @@ export default function BlogPreview() {
         
         {/* Centered Heading with Red Underline */}
         <div className="text-center mb-16">
-          <h2 className="font-extrabold text-[#111111] text-3xl sm:text-4xl tracking-tight mb-4">
+          <h2 className="font-extrabold text-[#1F2937] text-3xl sm:text-4xl tracking-tight mb-4">
             Latest Health Tips &amp; News
           </h2>
           <div className="flex justify-center mb-5">
@@ -37,10 +37,10 @@ export default function BlogPreview() {
               key={post.id}
               className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col h-full"
             >
-              {/* Blog Thumbnail Image / Colorful Gradient Placeholder */}
+              {/* Blog Thumbnail Color Panel */}
               <div
                 className="h-48 w-full flex items-center justify-center text-white font-extrabold text-lg select-none"
-                style={{ background: post.imageBgColor }}
+                style={{ background: post.bgColor }}
               >
                 <div className="bg-black/10 backdrop-blur-[2px] w-full h-full flex items-center justify-center p-6 text-center">
                   <span className="text-shadow-sm">{post.category}</span>
@@ -70,7 +70,7 @@ export default function BlogPreview() {
                 <div className="mt-auto pt-4 border-t border-gray-50 flex items-center justify-between">
                   <Link
                     to={`/blog#${post.id}`}
-                    className="text-[#C0392B] hover:text-[#A93226] text-sm font-bold inline-flex items-center gap-1 group transition-colors duration-200"
+                    className="text-[#C0392B] hover:text-[#C0392B] text-sm font-bold inline-flex items-center gap-1 group transition-colors duration-200"
                   >
                     Read More 
                     <span className="transform translate-x-0 group-hover:translate-x-1 transition-transform">&rarr;</span>
@@ -86,7 +86,7 @@ export default function BlogPreview() {
         <div className="text-center">
           <Link
             to="/blog"
-            className="inline-block border-2 border-[#C0392B] text-[#C0392B] hover:bg-[#C0392B] hover:text-white transition-all duration-200 text-sm font-bold px-8 py-3.5 rounded-xl"
+            className="inline-block border-2 border-[#C0392B] text-[#C0392B] hover:bg-[#8F2D22] hover:text-white transition-all duration-200 text-sm font-bold px-8 py-3.5 rounded-xl"
           >
             View All Articles
           </Link>

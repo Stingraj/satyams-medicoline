@@ -93,9 +93,9 @@ export default function FounderSection() {
     <>
       <style>{`
         .founder-section {
-          background: #f8f9fa;
+          background: #F9FAFB;
           padding: 80px 0;
-          color: #1f2937;
+          color: #1F2937;
         }
 
         .founder-shell {
@@ -136,7 +136,7 @@ export default function FounderSection() {
           font-size: 12px;
           font-weight: 700;
           letter-spacing: 0.18em;
-          color: #4b5563;
+          color: #6B7280;
           text-transform: uppercase;
           line-height: 1.5;
         }
@@ -147,7 +147,7 @@ export default function FounderSection() {
           line-height: 0.95;
           letter-spacing: -0.04em;
           font-weight: 900;
-          color: #1f2937;
+          color: #1F2937;
         }
 
         .founder-role {
@@ -160,7 +160,7 @@ export default function FounderSection() {
         .founder-company {
           margin: 0 0 28px 0;
           font-size: 0.98rem;
-          color: #6b7280;
+          color: #6B7280;
         }
 
         .founder-highlights {
@@ -176,13 +176,13 @@ export default function FounderSection() {
           gap: 16px;
           align-items: start;
           padding: 18px 20px;
-          color: #4b5563;
+          color: #6B7280;
           font-size: 15px;
           line-height: 1.8;
         }
 
         .founder-highlight-row + .founder-highlight-row {
-          border-top: 1px solid #eceff3;
+          border-top: 1px solid #E5E7EB;
         }
 
         .founder-highlight-icon {
@@ -211,7 +211,7 @@ export default function FounderSection() {
         }
 
         .founder-photo-panel {
-          background: linear-gradient(145deg, #eef1f5 0%, #f8f9fa 100%);
+          background: #F9FAFB;
           border-radius: 20px;
           padding: 16px 16px 0 16px;
           box-shadow: 0 18px 44px rgba(15, 23, 42, 0.08);
@@ -267,7 +267,7 @@ export default function FounderSection() {
         .founder-brand-logo-box {
           min-height: 74px;
           border-radius: 12px;
-          background: #f8f9fa;
+          background: #F9FAFB;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -299,7 +299,7 @@ export default function FounderSection() {
           line-height: 1.2;
           letter-spacing: -0.03em;
           font-weight: 900;
-          color: #1f2937;
+          color: #1F2937;
         }
 
         .founder-values-heading .accent {
@@ -342,7 +342,7 @@ export default function FounderSection() {
 
         .founder-quote-banner {
           margin-top: 28px;
-          background: #8f2d22;
+          background: #8F2D22;
           color: #ffffff;
           border-radius: 16px;
           padding: 24px 26px;

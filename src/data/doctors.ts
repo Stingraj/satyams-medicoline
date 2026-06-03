@@ -1,4 +1,3 @@
-import satyamPortrait from '../assets/founder/satyam-suman.jpg';
 import doctor01 from '../assets/doctors/doctor-01.png';
 import doctor02 from '../assets/doctors/doctor-02.png';
 import doctor03 from '../assets/doctors/doctor-03.png';
@@ -18,6 +17,8 @@ import doctor16 from '../assets/doctors/doctor-16.png';
 import doctor17 from '../assets/doctors/doctor-17.png';
 import doctor18 from '../assets/doctors/doctor-18.png';
 import doctor19 from '../assets/doctors/doctor-19.png';
+import doctor20 from '../assets/doctors/doctor-20.png';
+import satyamSuman from '../assets/founder/satyam-suman.jpg';
 
 export interface DoctorProfile {
     id: string;
@@ -25,21 +26,27 @@ export interface DoctorProfile {
     qualification: string;
     specialty: string;
     image?: string;
+    hasRealPhoto?: boolean;
+    linkTo?: string;
 }
 
 const doctors: DoctorProfile[] = [
     {
         id: 'satyam-suman',
-        name: 'Satyam Suman',
-        qualification: '',
-        specialty: 'Founder & MD',
-        image: satyamPortrait,
+        name: 'Dr. Satyam Suman',
+        qualification: 'Founder & MD',
+        specialty: 'Healthcare Operations & Management',
+        image: satyamSuman,
+        hasRealPhoto: true,
+        linkTo: '/founders',
     },
     {
         id: 'dr-v-prasad-rao',
         name: 'Dr. V. Prasad Rao',
         qualification: 'MBBS, DNB (General Medicine)',
         specialty: 'Senior Consultant and Diabetologist',
+        image: doctor01,
+        hasRealPhoto: false,
     },
     {
         id: 'dr-d-shravan-kumar',
@@ -47,6 +54,7 @@ const doctors: DoctorProfile[] = [
         qualification: 'MBBS, MD (General Medicine)',
         specialty: 'Consultant and Diabetologist',
         image: doctor02,
+        hasRealPhoto: false,
     },
     {
         id: 'dr-a-n-divya-dhathri',
@@ -54,6 +62,7 @@ const doctors: DoctorProfile[] = [
         qualification: 'MBBS, MD (General Medicine)',
         specialty: 'Consultant Physician & Visiting Doctor',
         image: doctor03,
+        hasRealPhoto: false,
     },
     {
         id: 'dr-ch-gopinadh',
@@ -61,6 +70,7 @@ const doctors: DoctorProfile[] = [
         qualification: 'MBBS, DNB, IDCCM, FIPM',
         specialty: 'Consultant Critical Care & Pain Specialist',
         image: doctor04,
+        hasRealPhoto: false,
     },
     {
         id: 'dr-p-naveena',
@@ -68,6 +78,7 @@ const doctors: DoctorProfile[] = [
         qualification: 'MBBS, DNB (Critical Care Medicine)',
         specialty: 'Consultant Critical Care Physician & Visiting Doctor',
         image: doctor05,
+        hasRealPhoto: false,
     },
     {
         id: 'dr-om-prakash-prasad',
@@ -75,6 +86,7 @@ const doctors: DoctorProfile[] = [
         qualification: 'MBBS, MD (Medicine), DM (Neurology)',
         specialty: 'Senior Neurophysician',
         image: doctor06,
+        hasRealPhoto: false,
     },
     {
         id: 'dr-d-deepika',
@@ -82,6 +94,7 @@ const doctors: DoctorProfile[] = [
         qualification: 'MBBS, DNB (Medicine), DrNB (Neurology)',
         specialty: 'Consultant Neurophysician & Visiting Doctor',
         image: doctor07,
+        hasRealPhoto: false,
     },
     {
         id: 'dr-raja-chaitanya-reddy',
@@ -89,6 +102,7 @@ const doctors: DoctorProfile[] = [
         qualification: 'MBBS, MS (General Surgery), MCh (Neurosurgery)',
         specialty: 'Consultant Neurosurgery',
         image: doctor08,
+        hasRealPhoto: false,
     },
     {
         id: 'dr-n-prashanth-reddy',
@@ -96,6 +110,7 @@ const doctors: DoctorProfile[] = [
         qualification: 'MBBS, MS (General Surgery)',
         specialty: 'Consultant General Surgeon',
         image: doctor09,
+        hasRealPhoto: false,
     },
     {
         id: 'dr-g-nikhil',
@@ -103,6 +118,7 @@ const doctors: DoctorProfile[] = [
         qualification: 'MBBS, MS (General Surgery)',
         specialty: 'General Surgery',
         image: doctor10,
+        hasRealPhoto: false,
     },
     {
         id: 'dr-s-divya-sree',
@@ -110,6 +126,7 @@ const doctors: DoctorProfile[] = [
         qualification: 'BPT, MPT (Neuro-physiotherapist)',
         specialty: 'Neuro-physiotherapist',
         image: doctor11,
+        hasRealPhoto: false,
     },
     {
         id: 'dr-y-manohar',
@@ -117,6 +134,7 @@ const doctors: DoctorProfile[] = [
         qualification: 'BPT (Physiotherapist)',
         specialty: 'Physiotherapist',
         image: doctor12,
+        hasRealPhoto: false,
     },
     {
         id: 'dr-a-harichandana',
@@ -124,6 +142,7 @@ const doctors: DoctorProfile[] = [
         qualification: 'MBBS',
         specialty: 'Doctor',
         image: doctor13,
+        hasRealPhoto: false,
     },
     {
         id: 'dr-bhaskar',
@@ -131,6 +150,7 @@ const doctors: DoctorProfile[] = [
         qualification: 'MBBS',
         specialty: 'Doctor',
         image: doctor14,
+        hasRealPhoto: false,
     },
     {
         id: 'dr-krishna-chaithanya',
@@ -138,6 +158,7 @@ const doctors: DoctorProfile[] = [
         qualification: 'BAMS',
         specialty: 'Doctor',
         image: doctor15,
+        hasRealPhoto: false,
     },
     {
         id: 'dr-s-nikhil',
@@ -145,6 +166,7 @@ const doctors: DoctorProfile[] = [
         qualification: 'BAMS',
         specialty: 'Doctor',
         image: doctor16,
+        hasRealPhoto: false,
     },
     {
         id: 'dr-a-prashanth',
@@ -152,6 +174,7 @@ const doctors: DoctorProfile[] = [
         qualification: 'Pharm D',
         specialty: 'Doctor',
         image: doctor17,
+        hasRealPhoto: false,
     },
     {
         id: 'dr-k-praveen-kumar',
@@ -159,6 +182,7 @@ const doctors: DoctorProfile[] = [
         qualification: 'Pharm D',
         specialty: 'Doctor',
         image: doctor19,
+        hasRealPhoto: false,
     },
     {
         id: 'dr-k-bhasker',
@@ -166,6 +190,15 @@ const doctors: DoctorProfile[] = [
         qualification: 'MBBS',
         specialty: 'Doctor',
         image: doctor18,
+        hasRealPhoto: false,
+    },
+    {
+        id: 'medicoline-specialist',
+        name: 'Medicoline Specialist',
+        qualification: 'Clinical Support Team',
+        specialty: 'Visiting Doctor Network',
+        image: doctor20,
+        hasRealPhoto: false,
     },
 ];
 
