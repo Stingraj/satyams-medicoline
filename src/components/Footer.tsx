@@ -7,31 +7,29 @@ const CONTACT_EMAIL = 'info@medicolinehealthcare.com';
 
 export default function Footer() {
   return (
-    <footer className="bg-white text-gray-800 w-full border-t border-gray-200 mt-auto">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+    <footer className="mt-auto w-full border-t border-[#E7D9D6] bg-[#FBF9F8] text-gray-800">
+      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-12">
         {/* Four Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-12">
+        <div className="mb-8 grid grid-cols-1 items-start gap-8 md:mb-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-10">
 
           {/* Column 1: Brand & Contacts */}
-          <div className="space-y-4">
-            <Link to="/" className="inline-flex items-center gap-2.5">
+          <div className="space-y-5">
+            <Link to="/" className="inline-flex" aria-label="Medicoline home">
               <img
                 src={LOGO_SRC}
                 alt="Medicoline Healthcare logo"
-                style={{ objectFit: 'cover', maxHeight: '40px' }}
-                className="shrink-0"
+                style={{ objectFit: 'cover', maxHeight: '48px' }}
+                className="h-auto w-auto shrink-0"
                 loading="lazy"
                 decoding="async"
               />
-              <div className="leading-tight">
-                <span className="font-heading font-black text-[#1F2937] text-[17px] tracking-tight block">Medicoline</span>
-                <span className="block text-[10px] text-gray-500 tracking-[0.15em] uppercase font-body font-medium">Healthcare</span>
-              </div>
             </Link>
 
-            <p className="text-gray-600 text-sm italic">Medicoline Healthcare | Your Health, Our Priority</p>
+            <p className="max-w-xs text-sm leading-6 text-gray-600">
+              Medicoline Healthcare | Your Health, Our Priority
+            </p>
 
-            <div className="space-y-2.5 pt-2">
+            <div className="space-y-3 pt-1">
               <a
                 href="tel:+917654247569"
                 className="flex items-center gap-2.5 text-gray-600 hover:text-[#C0392B] transition-colors duration-200 text-sm font-medium"
@@ -55,26 +53,26 @@ export default function Footer() {
             </div>
 
             {/* Social Icons row for Column 1 */}
-            <div className="flex items-center gap-4 pt-2">
+            <div className="flex items-center gap-3 pt-1">
               <a
                 href="https://www.instagram.com/we.medicoline/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-600 hover:text-[#C0392B] transition-colors duration-200"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-[#E7D9D6] bg-white text-gray-600 transition-colors duration-200 hover:border-[#C0392B] hover:text-[#C0392B]"
                 aria-label="Instagram"
               >
                 <Instagram size={20} />
               </a>
               <a
                 href="#"
-                className="text-gray-600 hover:text-[#C0392B] transition-colors duration-200"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-[#E7D9D6] bg-white text-gray-600 transition-colors duration-200 hover:border-[#C0392B] hover:text-[#C0392B]"
                 aria-label="Facebook"
               >
                 <Facebook size={20} />
               </a>
               <a
                 href="#"
-                className="text-gray-600 hover:text-[#C0392B] transition-colors duration-200"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-[#E7D9D6] bg-white text-gray-600 transition-colors duration-200 hover:border-[#C0392B] hover:text-[#C0392B]"
                 aria-label="YouTube"
               >
                 <Youtube size={20} />
@@ -171,7 +169,7 @@ export default function Footer() {
           </div>
 
           {/* Column 4: Email Directory & Support */}
-          <div id="email-directory" className="space-y-4 rounded-[1.75rem] bg-white border border-gray-200 p-6 text-[#1F2937] shadow-sm">
+          <div id="email-directory" className="space-y-4 rounded-[1.5rem] border border-[#E7D9D6] bg-white p-5 text-[#1F2937] shadow-sm">
             <h3 className="mb-1 border-b border-gray-200 pb-2 text-base font-bold uppercase tracking-wider text-[#1F2937]">
               Email Directory
             </h3>
@@ -219,43 +217,12 @@ export default function Footer() {
                 <span className="text-gray-600">24/7 Available</span>
               </p>
             </div>
-
-            <div className="pt-3">
-              <h4 className="mb-3 text-xs font-bold uppercase tracking-widest text-[#1F2937]">
-                Follow Us
-              </h4>
-              <div className="flex items-center gap-4">
-                <a
-                  href="https://www.instagram.com/we.medicoline/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="transform text-gray-500 transition-colors duration-200 hover:scale-110 hover:text-[#C0392B]"
-                  aria-label="Instagram"
-                >
-                  <Instagram size={20} />
-                </a>
-                <a
-                  href="#"
-                  className="transform text-gray-500 transition-colors duration-200 hover:scale-110 hover:text-[#C0392B]"
-                  aria-label="Facebook"
-                >
-                  <Facebook size={20} />
-                </a>
-                <a
-                  href="#"
-                  className="transform text-gray-500 transition-colors duration-200 hover:scale-110 hover:text-[#C0392B]"
-                  aria-label="YouTube"
-                >
-                  <Youtube size={20} />
-                </a>
-              </div>
-            </div>
           </div>
 
         </div>
 
         {/* Bottom copyright bar */}
-        <div className="border-t border-gray-200 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="flex flex-col items-center justify-between gap-4 border-t border-gray-200 pt-5 md:flex-row md:pt-6">
           <p className="text-gray-500 text-xs text-center md:text-left">
             &copy; 2026 Medicoline Healthcare LLP. All Rights Reserved.
           </p>

@@ -60,8 +60,86 @@ export default function FoundersPage() {
                 </div>
             </section>
 
+            {/* Timeline Section */}
+            <section id="journey" className="py-16 md:py-20 bg-gray-50">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center mb-16">
+                        <p className="font-heading text-xs font-bold uppercase tracking-[0.24em] text-[#C0392B] mb-2">Our Story</p>
+                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 font-heading">Our Journey</h2>
+                        <div className="w-14 h-1 bg-[#C0392B] rounded-full mx-auto mt-4"></div>
+                    </div>
+
+                    <div className="relative mt-12">
+                        {/* Vertical line */}
+                        <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gray-200 -translate-x-1/2"></div>
+
+                        <div className="space-y-12">
+                            {/* 2020 */}
+                            <div className="relative flex flex-col md:flex-row items-start justify-between">
+                                <div className="absolute left-4 md:left-1/2 w-4 h-4 bg-[#C0392B] rounded-full -translate-x-1/2 z-10 journey-node journey-node-active top-[26px]"></div>
+                                <div className="w-full md:w-[calc(50%-2.5rem)] pl-10 md:pl-0 md:text-right">
+                                    <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow inline-block text-left w-full">
+                                        <span className="inline-block bg-[#C0392B]/10 text-[#C0392B] font-bold text-xs px-3 py-1 rounded-full mb-3">2020</span>
+                                        <h3 className="text-xl font-bold text-gray-900 mb-2 font-heading">Founded</h3>
+                                        <p className="text-gray-600 leading-relaxed">
+                                            Medicoline started with a vision to bring health awareness to patients during the COVID pandemic.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="hidden md:block w-[calc(50%-2.5rem)]"></div>
+                            </div>
+
+                            {/* 2021 */}
+                            <div className="relative flex flex-col md:flex-row-reverse items-start justify-between">
+                                <div className="absolute left-4 md:left-1/2 w-4 h-4 bg-[#C0392B] rounded-full -translate-x-1/2 z-10 journey-node journey-node-active top-[26px]"></div>
+                                <div className="w-full md:w-[calc(50%-2.5rem)] pl-10 md:pl-0">
+                                    <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow w-full">
+                                        <span className="inline-block bg-[#C0392B]/10 text-[#C0392B] font-bold text-xs px-3 py-1 rounded-full mb-3">2021</span>
+                                        <h3 className="text-xl font-bold text-gray-900 mb-2 font-heading">Social Media Healthcare Channel</h3>
+                                        <p className="text-gray-600 leading-relaxed">
+                                            Medicoline started taking patient queries through social media, especially Instagram, and began building awareness online.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="hidden md:block w-[calc(50%-2.5rem)]"></div>
+                            </div>
+
+                            {/* 2022–2025 */}
+                            <div className="relative flex flex-col md:flex-row items-start justify-between">
+                                <div className="absolute left-4 md:left-1/2 w-4 h-4 bg-[#C0392B] rounded-full -translate-x-1/2 z-10 journey-node journey-node-active top-[26px]"></div>
+                                <div className="w-full md:w-[calc(50%-2.5rem)] pl-10 md:pl-0 md:text-right">
+                                    <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow inline-block text-left w-full">
+                                        <span className="inline-block bg-[#C0392B]/10 text-[#C0392B] font-bold text-xs px-3 py-1 rounded-full mb-3">2022–2025</span>
+                                        <h3 className="text-xl font-bold text-gray-900 mb-2 font-heading">Market Research</h3>
+                                        <p className="text-gray-600 leading-relaxed">
+                                            Medicoline did deep research on what patients actually need in today’s healthcare world.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="hidden md:block w-[calc(50%-2.5rem)]"></div>
+                            </div>
+
+                            {/* 2026 */}
+                            <div className="relative flex flex-col md:flex-row-reverse items-start justify-between">
+                                <div className="absolute left-4 md:left-1/2 w-4 h-4 bg-[#C0392B] rounded-full -translate-x-1/2 z-10 journey-node journey-node-active top-[26px]"></div>
+                                <div className="w-full md:w-[calc(50%-2.5rem)] pl-10 md:pl-0">
+                                    <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow w-full">
+                                        <span className="inline-block bg-[#C0392B]/10 text-[#C0392B] font-bold text-xs px-3 py-1 rounded-full mb-3">2026</span>
+                                        <h3 className="text-xl font-bold text-gray-900 mb-2 font-heading">Controlled Entry to the Market</h3>
+                                        <p className="text-gray-600 leading-relaxed">
+                                            Medicoline initiated a controlled entry into the market, starting from Warangal, Hanamkonda, and Kazipet.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="hidden md:block w-[calc(50%-2.5rem)]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* Experience Section */}
-            <section id="experience" className="py-16 md:py-20 bg-gray-50">
+            <section id="experience" className="py-16 md:py-20 bg-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 className="text-3xl md:text-4xl font-bold mb-12 text-gray-900 font-heading text-center">Professional Experience</h2>
 
@@ -84,7 +162,7 @@ export default function FoundersPage() {
                                 description: "Built comprehensive healthcare operations including clinical protocols, staffing systems, quality assurance frameworks, and patient care management systems."
                             }
                         ].map((item, index) => (
-                            <div key={index} className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                            <div key={index} className="bg-gray-50 p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
                                 <h3 className="text-xl font-bold text-gray-900 mb-3 text-[#C0392B] font-heading">{item.title}</h3>
                                 <p className="text-gray-700 leading-relaxed">{item.description}</p>
                             </div>
@@ -94,7 +172,7 @@ export default function FoundersPage() {
             </section>
 
             {/* Achievements Section */}
-            <section id="achievements" className="py-16 md:py-20 bg-white">
+            <section id="achievements" className="py-16 md:py-20 bg-gray-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 className="text-3xl md:text-4xl font-bold mb-12 text-gray-900 font-heading text-center">Key Achievements</h2>
 
@@ -121,7 +199,7 @@ export default function FoundersPage() {
                                 description: "Founder of Medicoline Healthcare — a NABH-aligned, structured home healthcare organization setting new standards for quality and professionalism."
                             }
                         ].map((item, index) => (
-                            <div key={index} className="bg-[#F9FAFB] p-8 rounded-lg border border-[#C0392B]/20 hover:border-[#C0392B] transition-colors">
+                            <div key={index} className="bg-white p-8 rounded-lg border border-[#C0392B]/20 hover:border-[#C0392B] transition-colors">
                                 <div className="text-4xl mb-4">{item.icon}</div>
                                 <h3 className="text-xl font-bold text-gray-900 mb-3 font-heading">{item.title}</h3>
                                 <p className="text-gray-700 leading-relaxed">{item.description}</p>
