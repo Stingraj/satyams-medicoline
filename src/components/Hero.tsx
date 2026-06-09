@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { ArrowRight, MapPinned, Search } from 'lucide-react';
+import { ArrowRight, Search } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import firstTimeCity from '../assets/images/1st-time-in-city.png';
 import { useScrollReveal } from '../hooks/useScrollReveal';
@@ -174,10 +174,16 @@ export default function Hero() {
             <p>Hospital-grade care at ease of Home</p>
           </div>
 
-          <div className="mt-4 flex flex-col items-center justify-center gap-2 text-[#C0392B] sm:flex-row sm:gap-3">
-            <MapPinned size={38} strokeWidth={1.5} className="text-[#4B5563]" />
+          <div className="mt-4 flex flex-col items-center justify-center gap-2 sm:flex-row sm:gap-3">
+            <span aria-hidden="true" className="text-[1.6rem] leading-none sm:text-[1.8rem]">
+              📍
+            </span>
             <p className="font-heading text-[1.4rem] font-bold tracking-tight sm:text-[1.5rem]">
-              Warangal <span className="mx-1">|</span> Hanamkonda <span className="mx-1">|</span> Kazipet
+              <span className="font-bold text-[#CC2222]">Warangal</span>
+              <span className="mx-1 text-[#1F2937]">|</span>
+              <span className="font-bold text-[#CC2222]">Hanamkonda</span>
+              <span className="mx-1 text-[#1F2937]">|</span>
+              <span className="font-bold text-[#CC2222]">Kazipet</span>
             </p>
           </div>
 

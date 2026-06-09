@@ -1,4 +1,4 @@
-import { ArrowRight, HeartHandshake, ShieldCheck, Sparkles, Target, Users } from 'lucide-react';
+import { ArrowRight, HeartHandshake, ShieldCheck, Sparkles, Star, Target, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Hero from '../components/Hero';
 import Services from '../components/Services';
@@ -6,7 +6,7 @@ import EcgAtHome from '../components/EcgAtHome';
 import NursingPackages from '../components/NursingPackages';
 import FAQ from '../components/FAQ';
 import OurPartners from '../components/OurPartners';
-import DoctorProfileImage from '../components/DoctorProfileImage';
+import DoctorProfileCard from '../components/DoctorProfileCard';
 import doctors from '../data/doctors';
 
 const missionPoints = [
@@ -18,7 +18,7 @@ const missionPoints = [
 ] as const;
 
 const stats = [
-  { value: '500+', label: 'Patients Served' },
+  { value: '200+', label: 'Patients Served' },
   { value: '100+', label: 'Verified Professionals' },
   { value: '24/7', label: 'Emergency Backup' },
   { value: 'NABH', label: 'Aligned Protocols' },
@@ -35,18 +35,18 @@ const values = [
 const testimonials = [
   {
     quote: 'The Medicoline team supported our family with timely nursing care and clear communication.',
-    name: 'Patient Family',
-    rating: '5.0',
+    name: 'Kamala Devi',
+    rating: 4,
   },
   {
     quote: 'Home physiotherapy made recovery easier and more consistent after discharge.',
-    name: 'Warangal Resident',
-    rating: '5.0',
+    name: 'Narsaiah',
+    rating: 5,
   },
   {
     quote: 'The emergency backup and monitoring support gave us confidence during home care.',
-    name: 'Caregiver',
-    rating: '5.0',
+    name: 'Kamalamma',
+    rating: 3,
   },
 ] as const;
 
@@ -69,7 +69,7 @@ export default function HomePage() {
               </h2>
               <p className="mt-6 max-w-3xl text-base leading-8 text-[#6B7280]">
                 Medicoline Healthcare is a professionally managed home healthcare organization providing safe,
-                reliable, and compassionate medical services at patients homes in Warangal, Hanamkonda, and Kazipet.
+                reliable, and compassionate medical services at patients homes in Warangal | Hanamkonda | Kazipet.
               </p>
               <p className="mt-4 max-w-3xl text-base leading-8 text-[#6B7280]">
                 We bridge the gap between hospital-based treatment and home-based recovery, ensuring continuity of care
@@ -118,17 +118,9 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <div className="mx-auto mt-10 grid max-w-6xl auto-rows-fr grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
             {teamPreview.map((doctor) => (
-              <article key={doctor.id} className="overflow-hidden rounded-[1.75rem] border border-[#E5E7EB] bg-white shadow-sm">
-                <div className="h-60 bg-[#F3F4F6]">
-                  <DoctorProfileImage doctor={doctor} alt={doctor.name} />
-                </div>
-                <div className="p-6">
-                  <h3 className="font-heading text-xl font-bold text-[#1F2937]">{doctor.name}</h3>
-                  <p className="mt-2 text-sm leading-6 text-[#6B7280]">{doctor.specialty || doctor.qualification}</p>
-                </div>
-              </article>
+              <DoctorProfileCard key={doctor.id} doctor={doctor} />
             ))}
           </div>
 
@@ -191,7 +183,21 @@ export default function HomePage() {
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {testimonials.map((testimonial) => (
               <article key={testimonial.name} className="rounded-[1.75rem] border border-[#E5E7EB] bg-white p-7 shadow-sm">
-                <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#C0392B]">{testimonial.rating} Stars</p>
+                <div className="flex items-center gap-1" aria-label={`${testimonial.rating} out of 5 stars`}>
+                  {Array.from({ length: 5 }, (_, index) => {
+                    const filled = index < testimonial.rating;
+                    return (
+                      <Star
+                        key={`${testimonial.name}-star-${index}`}
+                        size={18}
+                        className={filled ? 'text-[#FBBF24]' : 'text-[#FCD34D]'}
+                        fill={filled ? '#FBBF24' : 'none'}
+                        strokeWidth={1.8}
+                        aria-hidden="true"
+                      />
+                    );
+                  })}
+                </div>
                 <p className="mt-4 text-sm leading-7 text-[#6B7280]">"{testimonial.quote}"</p>
                 <p className="mt-5 font-heading text-base font-bold text-[#1F2937]">{testimonial.name}</p>
               </article>

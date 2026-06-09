@@ -88,7 +88,7 @@ export default function FloatingChatbot() {
     }
 
     if (input.includes('location') || input.includes('where') || input.includes('area') || input.includes('warangal') || input.includes('hanamkonda') || input.includes('kazipet') || input.includes('telangana')) {
-      return 'We deliver quality home care services in Warangal, Hanamkonda, and Kazipet regions in Telangana, India. We plan to expand to Hyderabad outskirts soon!';
+      return 'We deliver quality home care services in Warangal | Hanamkonda | Kazipet regions in Telangana, India. We plan to expand to Hyderabad outskirts soon!';
     }
 
     if (input.includes('book') || input.includes('appointment') || input.includes('enquire') || input.includes('schedule') || input.includes('reserve')) {

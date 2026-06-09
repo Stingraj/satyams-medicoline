@@ -28,7 +28,7 @@ export default function InvestorsAndPartnersPage() {
 
                     <div className="bg-[#F9FAFB] p-8 rounded-lg border border-[#C0392B]/20 mb-8">
                         <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                            <strong>Medicoline Healthcare LLP</strong> is a structured, technology-enabled home healthcare ecosystem designed to organize, standardize, and legally safeguard independent healthcare professionals while delivering comprehensive, hospital-grade services at patients' homes.
+                            <strong>Medicoline Healthcare</strong> is a structured, technology-enabled home healthcare ecosystem designed to organize, standardize, and legally safeguard independent healthcare professionals while delivering comprehensive, hospital-grade services at patients' homes.
                         </p>
 
                         <p className="text-lg text-gray-700 leading-relaxed">

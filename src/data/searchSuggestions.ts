@@ -55,12 +55,6 @@ export const searchSuggestions: SearchSuggestion[] = [
     keywords: ['contact', 'location', 'phone', 'map'],
   },
   {
-    label: 'Email Directory',
-    description: 'Jump to the footer email directory',
-    path: '/#email-directory',
-    keywords: ['email', 'directory', 'support email', 'founder email'],
-  },
-  {
     label: 'Careers',
     description: 'See careers and application form',
     path: '/careers#apply',

@@ -32,35 +32,35 @@ const currentOpenings = [
   {
     id: 'staff-nurse',
     title: 'Staff Nurse',
-    location: 'Warangal | Hanamkonda |Kazipet',
+    location: 'Warangal | Hanamkonda | Kazipet',
     type: 'Freelancing',
     desc: 'Provide home nursing care, post-operative support, medication administration, and patient monitoring.',
   },
   {
     id: 'physiotherapist',
     title: 'Physiotherapist',
-    location: 'Warangal | Hanamkonda |Kazipet',
+    location: 'Warangal | Hanamkonda | Kazipet',
     type: 'Freelancing',
     desc: 'Conduct rehabilitation sessions, mobility support, pain management, and home physiotherapy services.',
   },
   {
     id: 'medical-lab-technician',
     title: 'Medical Lab Technician',
-    location: 'Warangal | Hanamkonda |Kazipet',
+    location: 'Warangal | Hanamkonda | Kazipet',
     type: 'Freelancing',
     desc: 'Handle home sample collection, diagnostics coordination, and patient interaction professionally.',
   },
   {
     id: 'care-coordinator',
     title: 'Care Coordinator',
-    location: 'Warangal | Hanamkonda |Kazipet',
+    location: 'Warangal | Hanamkonda | Kazipet',
     type: 'Freelancing',
     desc: 'Coordinate patient services, appointments, healthcare staff scheduling, and customer support.',
   },
   {
     id: 'dietitian',
     title: 'Dietitian',
-    location: 'Warangal | Hanamkonda |Kazipet',
+    location: 'Warangal | Hanamkonda | Kazipet',
     type: 'Freelancing',
     desc: 'Consult the patient and provide a personalised diet chart, visit home and evaluate the nutritional needs of the patient, and create nutritional awareness for the patient.',
   },
@@ -824,7 +824,7 @@ export default function CareersPage() {
               <h2 className="careers-main-heading">Current Openings</h2>
               <div className="careers-section-divider" />
               <p className="careers-subheading-text">
-                Explore our active freelancing opportunities across Warangal, Hanamkonda, and Kazipet.
+                Explore our active freelancing opportunities across Warangal | Hanamkonda | Kazipet.
               </p>
             </div>
 

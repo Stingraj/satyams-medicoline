@@ -110,7 +110,7 @@ export default function ServicesPage() {
               Comprehensive medical care at home.
             </h1>
             <p className="mt-5 text-lg leading-8 text-[#6B7280]">
-              We offer a complete range of nursing, diagnostics, physiotherapy, GDA, equipment rental, and emergency backup services across Warangal, Hanamkonda, and Kazipet.
+              We offer a complete range of nursing, diagnostics, physiotherapy, GDA, equipment rental, and emergency backup services across Warangal | Hanamkonda | Kazipet.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Link to="/contact" className="inline-flex items-center justify-center gap-2 rounded-full bg-[#C0392B] px-7 py-3 font-heading text-sm font-bold text-white">

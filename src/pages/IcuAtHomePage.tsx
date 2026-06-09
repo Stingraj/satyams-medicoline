@@ -10,7 +10,7 @@ import {
   Waypoints,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import icuHomeCareHero from '../assets/images/icu-home-care-hero.svg';
+import teamImage from '../assets/images/medicoline-team.jpg';
 
 const icuHighlights = [
   {
@@ -24,8 +24,8 @@ const icuHighlights = [
     icon: <UserRound size={24} strokeWidth={2.1} />,
   },
   {
-    title: 'Warangal | Hanamkonda |',
-    description: 'Kazipet',
+    title: 'Warangal | Hanamkonda | Kazipet',
+    description: 'Service Coverage',
     icon: <MapPin size={24} strokeWidth={2.1} />,
   },
   {
@@ -167,9 +167,9 @@ export default function IcuAtHomePage() {
               <div className="absolute -right-12 bottom-10 h-40 w-40 rounded-full bg-[#F3F4F6] blur-3xl" aria-hidden="true" />
               <div className="relative h-[320px] w-full overflow-hidden rounded-[26px] border border-[#E5E7EB] bg-[#F3F4F6] shadow-[0_20px_60px_rgba(17,17,17,0.12)] sm:h-[440px] lg:h-[610px] lg:rounded-[32px]">
                 <img
-                  src={icuHomeCareHero}
-                  alt="ICU at home setup with patient monitoring, critical care nurse, and family support"
-                  className="h-full w-full object-cover"
+                  src={teamImage}
+                  alt="Medicoline healthcare professionals supporting ICU at home care"
+                  className="h-full w-full object-cover object-center"
                   loading="eager"
                   fetchPriority="high"
                   decoding="async"

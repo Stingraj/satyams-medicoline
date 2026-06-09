@@ -1,7 +1,7 @@
 import { ArrowRight, HeartHandshake, ShieldCheck, Stethoscope, Target, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import teamImage from '../assets/images/medicoline-team.jpg';
-import DoctorProfileImage from '../components/DoctorProfileImage';
+import DoctorProfileCard from '../components/DoctorProfileCard';
 import doctors from '../data/doctors';
 
 const missionPoints = [
@@ -71,7 +71,7 @@ export default function AboutPage() {
               </h1>
               <p className="mt-6 max-w-3xl text-lg leading-8 text-[#6B7280]">
                 Medicoline Healthcare is a professionally managed home healthcare organization providing safe,
-                reliable, and compassionate medical services at patients homes in Warangal, Hanamkonda, and Kazipet.
+                reliable, and compassionate medical services at patients homes in Warangal | Hanamkonda | Kazipet.
               </p>
               <p className="mt-4 max-w-3xl text-base leading-7 text-[#6B7280]">
                 We bridge the gap between hospital-based treatment and home-based recovery, ensuring continuity of
@@ -137,18 +137,13 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <div className="mx-auto mt-10 grid max-w-6xl auto-rows-fr grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
             {featuredDoctors.map((doctor, index) => (
-              <article key={doctor.id} className="overflow-hidden rounded-[1.75rem] border border-[#E5E7EB] bg-white shadow-sm">
-                <div className="h-64 bg-[#F3F4F6]">
-                  <DoctorProfileImage doctor={doctor} alt={doctor.name} />
-                </div>
-                <div className="p-6">
-                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#C0392B]">{teamHighlights[index] || 'Healthcare Team'}</p>
-                  <h3 className="mt-2 font-heading text-xl font-bold text-[#1F2937]">{doctor.name}</h3>
-                  <p className="mt-2 text-sm leading-6 text-[#6B7280]">{doctor.specialty || doctor.qualification}</p>
-                </div>
-              </article>
+              <DoctorProfileCard
+                key={doctor.id}
+                doctor={doctor}
+                eyebrow={teamHighlights[index] || 'Healthcare Team'}
+              />
             ))}
           </div>
 
@@ -197,7 +192,7 @@ export default function AboutPage() {
                 <h2 className="mt-4 font-heading text-3xl font-black text-[#1F2937]">Join a structured and professionally rewarding healthcare ecosystem.</h2>
                 <p className="mt-5 text-base leading-8 text-[#6B7280]">
                   Medicoline Healthcare collaborates with a growing network of healthcare professionals and
-                  institutional partners across Warangal, Hanamkonda, and Kazipet.
+                  institutional partners across Warangal | Hanamkonda | Kazipet.
                 </p>
                 <p className="mt-4 text-base leading-8 text-[#6B7280]">
                   Partner with Medicoline Healthcare and become part of a structured, legally compliant, and
@@ -213,13 +208,15 @@ export default function AboutPage() {
                   <li><span className="font-bold text-[#1F2937]">Dedicated Relationship Support:</span> Our team coordinates patient services, updates, and communication.</li>
                 </ul>
 
-                <Link
-                  to="/investors-partners#why-partner"
+                <a
+                  href="https://forms.gle/FWmQ9X469TheMoQ97"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-[#C0392B] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[#8F2D22]"
                 >
                   Join as a Partner
                   <ArrowRight size={16} />
-                </Link>
+                </a>
               </div>
             </div>
           </div>

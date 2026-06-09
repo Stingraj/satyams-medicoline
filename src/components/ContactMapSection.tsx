@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Mail, MapPin, Phone, Instagram, Facebook, Youtube } from 'lucide-react';
+import { Mail, MapPin, Phone, Instagram, Facebook, Linkedin } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 const MAP_EMBED_SRC =
-  'https://maps.google.com/maps?q=MGM+Hospital+Warangal+Telangana+506007&hl=en&z=15&ie=UTF8&iwloc=&output=embed';
+  'https://maps.google.com/maps?q=Balasamudram+Hanamkonda+Telangana&hl=en&z=15&ie=UTF8&iwloc=&output=embed';
 const CONTACT_EMAIL = 'info@medicolinehealthcare.com';
 
 const inputClass =
@@ -114,7 +114,7 @@ export default function ContactMapSection() {
             <div className="w-14 h-1 bg-[#C0392B] rounded-full" />
           </div>
           <p className="text-gray-500 text-base max-w-xl mx-auto">
-            Send us a message or visit our headquarters in Warangal.
+            Send us a message or visit our headquarters in Balasamudram, Hanamkonda.
           </p>
         </div>
 
@@ -249,7 +249,7 @@ export default function ContactMapSection() {
 
           <div className="relative rounded-xl overflow-hidden border border-gray-200 shadow-sm min-h-[360px] lg:min-h-full bg-gray-100">
             <iframe
-              title="Medicoline location — Warangal"
+              title="Medicoline location — Balasamudram, Hanamkonda"
               src={MAP_EMBED_SRC}
               className="absolute inset-0 w-full h-full border-0"
               loading="lazy"
@@ -262,7 +262,7 @@ export default function ContactMapSection() {
               </span>
               <div className="space-y-2">
                 <p className="text-sm text-[#1F2937] font-semibold leading-snug">
-                  Medicoline HQ: Near MGM Hospital, Warangal, Telangana - 506007.
+                  Balasamudram, Hanamkonda, Telangana
                 </p>
                 <a
                   href="tel:+917654247569"
@@ -291,18 +291,22 @@ export default function ContactMapSection() {
                       <Instagram size={24} />
                     </a>
                     <a
-                      href="#"
+                      href="https://www.facebook.com/we.medicoline/"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="text-[#C0392B] hover:scale-110 transform transition-transform duration-200"
                       aria-label="Facebook"
                     >
                       <Facebook size={24} />
                     </a>
                     <a
-                      href="#"
+                      href="https://in.linkedin.com/company/medicolinehealthcare"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="text-[#C0392B] hover:scale-110 transform transition-transform duration-200"
-                      aria-label="YouTube"
+                      aria-label="LinkedIn"
                     >
-                      <Youtube size={24} />
+                      <Linkedin size={24} />
                     </a>
                   </div>
                 </div>

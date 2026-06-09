@@ -5,7 +5,7 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 const faqs = [
   {
     q: 'What areas do you serve?',
-    a: 'We currently serve Warangal, Hanamkonda, and Kazipet. We are expanding to more areas soon.',
+    a: 'We currently serve Warangal | Hanamkonda | Kazipet. We are expanding to more areas soon.',
   },
   {
     q: 'How quickly can a doctor visit my home?',

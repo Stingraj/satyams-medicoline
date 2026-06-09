@@ -127,7 +127,7 @@ export default function FoundersPage() {
                                         <span className="inline-block bg-[#C0392B]/10 text-[#C0392B] font-bold text-xs px-3 py-1 rounded-full mb-3">2026</span>
                                         <h3 className="text-xl font-bold text-gray-900 mb-2 font-heading">Controlled Entry to the Market</h3>
                                         <p className="text-gray-600 leading-relaxed">
-                                            Medicoline initiated a controlled entry into the market, starting from Warangal, Hanamkonda, and Kazipet.
+                                            Medicoline initiated a controlled entry into the market, starting from Warangal | Hanamkonda | Kazipet.
                                         </p>
                                     </div>
                                 </div>

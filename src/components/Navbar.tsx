@@ -3,6 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, MessageSquare, Phone, X } from 'lucide-react';
 import medicolineLogo from '../assets/images/medicoline-logo.png';
 
+const FEEDBACK_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSf_aVSCQif-5izo9gJFAnk9tBr2QjKKvpSQJfELdsR5h6veQA/viewform';
+
 const navItems = [
   { label: 'HOME', to: '/' },
   { label: 'ABOUT US', to: '/about' },
@@ -210,6 +212,14 @@ export default function Navbar() {
                         </div>
                         <a href="mailto:founder@medicolinehealthcare.com" className="block text-[14px] font-medium leading-relaxed text-[#1F2937] transition-colors hover:text-[#C0392B]">
                           founder@medicolinehealthcare.com
+                        </a>
+                        <a
+                          href={FEEDBACK_FORM_URL}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="mt-3 inline-flex items-center rounded-full border border-[#C0392B]/15 bg-[#FFF6F4] px-4 py-2 text-[13px] font-semibold text-[#C0392B] transition-colors hover:border-[#C0392B] hover:bg-[#FDEAE5]"
+                        >
+                          Open Feedback Form
                         </a>
                       </div>
                     </div>
