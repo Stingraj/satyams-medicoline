@@ -82,7 +82,6 @@ export default function Hero() {
             alt="Medicoline Healthcare first time in city home healthcare announcement"
             className="mb-7 w-[220px] max-w-full sm:w-[270px] lg:w-[300px]"
             loading="eager"
-            fetchPriority="high"
             decoding="async"
           />
 
@@ -174,11 +173,11 @@ export default function Hero() {
             <p>Hospital-grade care at ease of Home</p>
           </div>
 
-          <div className="mt-4 flex flex-col items-center justify-center gap-2 sm:flex-row sm:gap-3">
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-x-2 gap-y-1.5 sm:gap-3">
             <span aria-hidden="true" className="text-[1.6rem] leading-none sm:text-[1.8rem]">
               📍
             </span>
-            <p className="font-heading text-[1.4rem] font-bold tracking-tight sm:text-[1.5rem]">
+            <p className="font-heading text-[15px] font-bold tracking-tight xs:text-[16px] sm:text-[1.5rem]">
               <span className="font-bold text-[#CC2222]">Warangal</span>
               <span className="mx-1 text-[#1F2937]">|</span>
               <span className="font-bold text-[#CC2222]">Hanamkonda</span>

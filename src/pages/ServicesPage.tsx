@@ -101,8 +101,8 @@ export default function ServicesPage() {
   }, [query]);
 
   return (
-    <main className="bg-white pt-[76px]">
-      <section className="bg-[#F9FAFB] py-16 sm:py-20">
+    <main className="bg-white">
+      <section className="bg-[#F9FAFB] py-12 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <p className="font-heading text-xs font-bold uppercase tracking-[0.24em] text-[#C0392B]">Home Healthcare Services</p>
@@ -135,7 +135,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="py-12 sm:py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {filteredExpandedServices.length === 0 ? (
             <div className="text-center py-12 text-[#6B7280]">
@@ -166,7 +166,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="bg-[#F9FAFB] py-16">
+      <section className="bg-[#F9FAFB] py-12 sm:py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="font-heading text-3xl font-black text-[#1F2937]">Service quick view</h2>
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

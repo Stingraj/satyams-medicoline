@@ -10,7 +10,7 @@ export default function InvestorsAndPartnersPage() {
     }, []);
 
     return (
-        <div className="pt-[72px] lg:pt-[104px]">
+        <div>
             {/* Hero Section */}
             <section className="bg-[#C0392B] text-white py-16 md:py-20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

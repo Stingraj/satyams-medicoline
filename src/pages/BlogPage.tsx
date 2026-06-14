@@ -25,7 +25,7 @@ export default function BlogPage() {
 
   if (selectedPost) {
     return (
-      <div className="pt-20 lg:pt-24 bg-[#F9FAFB] min-h-screen pb-16">
+      <div className="bg-[#F9FAFB] min-h-screen pb-16">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Back Button */}
           <button
@@ -89,7 +89,7 @@ export default function BlogPage() {
   }
 
   return (
-    <div className="pt-20 lg:pt-24 bg-[#F9FAFB] min-h-screen pb-16">
+    <div className="bg-[#F9FAFB] min-h-screen pb-16">
       {/* Blog Hero Section */}
       <div className="bg-[#1F2937] text-white py-16 sm:py-20 text-center">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">

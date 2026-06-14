@@ -33,11 +33,13 @@
   }
 
   body {
+    margin: 0;
     font-family: var(--font-body);
     font-weight: 400;
     color: var(--color-gray-dark);
     background-color: var(--color-white);
     -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
   }
 
   h1,
@@ -384,25 +386,10 @@ img {
     grid-template-columns: 1fr !important;
   }
 
-  section,
   .careers-section-container,
-  .founder-container,
-  #app-root>div,
-  footer {
-    padding-left: 20px !important;
-    padding-right: 20px !important;
-  }
-
-  body,
-  p,
-  li,
-  .opening-desc,
-  .why-join-card-desc,
-  .testimonial-quote,
-  .founder-bio-p,
-  .careers-subheading-text,
-  .careers-hero-subheading {
-    font-size: 16px !important;
+  .founder-container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
   }
 }
 

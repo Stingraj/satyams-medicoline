@@ -60,7 +60,7 @@ export default function AboutPage() {
   const featuredDoctors = doctors.slice(0, 4);
 
   return (
-    <main id="about" className="bg-white pt-[76px]">
+    <main id="about" className="bg-white">
       <section className="bg-[#F9FAFB] py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
@@ -86,7 +86,6 @@ export default function AboutPage() {
                 alt="Medicoline Healthcare home healthcare team in Warangal"
                 className="h-full w-full object-cover"
                 loading="eager"
-                fetchPriority="high"
                 decoding="async"
               />
             </div>

@@ -30,7 +30,7 @@ const patientReviews = [
 
 export default function FaqsPage() {
   return (
-    <main className="bg-white pt-[76px]">
+    <main className="bg-white">
       <section className="bg-[#F9FAFB] py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <p className="font-heading text-xs font-bold uppercase tracking-[0.24em] text-[#C0392B]">Reviews and FAQs</p>

@@ -8,6 +8,7 @@ import {
   UserRound,
   Waypoints,
 } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const ICU_HOME_IMAGE_SRC = '/images/icu-at-home.jpg';
@@ -99,53 +100,73 @@ const whyChooseIcu = [
 ] as const;
 
 export default function IcuAtHomePage() {
+  const heroRef = useRef<HTMLElement | null>(null);
+  const [showStickyActions, setShowStickyActions] = useState(false);
+
+  useEffect(() => {
+    const hero = heroRef.current;
+    if (!hero) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setShowStickyActions(!entry.isIntersecting && entry.boundingClientRect.top < 0);
+      },
+      { threshold: 0, rootMargin: '-60px 0px 0px 0px' },
+    );
+
+    observer.observe(hero);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="bg-[#F9FAFB] pt-0 pb-20 md:pb-0">
       {/* HERO SECTION */}
-      <section className="relative overflow-hidden bg-white py-6 sm:py-12 lg:py-16">
+      <section ref={heroRef} className="relative overflow-hidden bg-white py-4 sm:py-10 lg:py-16">
         <div className="absolute inset-x-0 bottom-0 h-40 bg-[#F9FAFB] opacity-30" />
 
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid items-center gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-10">
+          <div className="grid items-center gap-4 sm:gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-10">
             <div className="relative z-10 flex flex-col items-start text-left">
               {/* Pill badge spacing: 16px (mb-4) */}
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#C0392B]/10 px-3.5 py-1 text-[10px] font-bold uppercase tracking-wider text-[#C0392B] sm:text-xs">
+              <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-[#C0392B]/10 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[#C0392B] sm:text-xs">
                 <HeartPulse size={12} className="animate-pulse shrink-0" />
                 ICU-Grade Care at Home
               </div>
 
               {/* Title size: 30px on small, 34px on xs, line height: tight. Max 2-3 lines */}
-              <h1 className="text-[30px] xs:text-[34px] font-black leading-tight tracking-tight text-[#1F2937] sm:text-[3.5rem] lg:text-[4.5rem] xl:text-[5rem]">
+              <h1 className="text-[28px] font-black leading-[1.08] tracking-tight text-[#1F2937] xs:text-[32px] sm:text-[3.5rem] lg:text-[4.5rem] xl:text-[5rem]">
                 Critical ICU Care <br />
                 <span className="text-[#C0392B]">In Your Own Home</span>
               </h1>
 
               {/* Body text size: 15px to 16px */}
-              <p className="mt-4 max-w-[39rem] text-[15px] xs:text-[16px] leading-relaxed text-[#6B7280] sm:text-lg lg:text-xl">
+              <p className="mt-3 max-w-[39rem] text-[14px] leading-6 text-[#6B7280] xs:text-[15px] sm:text-lg sm:leading-relaxed lg:text-xl">
                 Advanced critical care setup managed by hospital-trained ICU nurses and senior doctors. Emergency backup and regular monitoring.
               </p>
 
               {/* Feature Checklist - scanable, 16px top spacing */}
-              <div className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2 w-full max-w-md">
-                <div className="flex items-center gap-2 text-[13px] xs:text-[15px] font-semibold text-[#374151]">
+              <div className="mt-3 grid w-full max-w-md grid-cols-2 gap-x-3 gap-y-1.5">
+                <div className="flex items-start gap-1.5 text-[12px] font-semibold leading-5 text-[#374151] xs:text-[13px]">
                   <span className="text-[#C0392B] font-bold text-[15px]">✓</span> ICU-Trained Nurses
                 </div>
-                <div className="flex items-center gap-2 text-[13px] xs:text-[15px] font-semibold text-[#374151]">
+                <div className="flex items-start gap-1.5 text-[12px] font-semibold leading-5 text-[#374151] xs:text-[13px]">
                   <span className="text-[#C0392B] font-bold text-[15px]">✓</span> 24/7 Monitoring
                 </div>
-                <div className="flex items-center gap-2 text-[13px] xs:text-[15px] font-semibold text-[#374151]">
+                <div className="flex items-start gap-1.5 text-[12px] font-semibold leading-5 text-[#374151] xs:text-[13px]">
                   <span className="text-[#C0392B] font-bold text-[15px]">✓</span> Hospital-Level Care
                 </div>
-                <div className="flex items-center gap-2 text-[13px] xs:text-[15px] font-semibold text-[#374151]">
+                <div className="flex items-start gap-1.5 text-[12px] font-semibold leading-5 text-[#374151] xs:text-[13px]">
                   <span className="text-[#C0392B] font-bold text-[15px]">✓</span> Doctor Coordination
                 </div>
               </div>
 
               {/* Buttons: above the fold on mobile viewports */}
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row w-full sm:w-auto">
+              <div className="mt-4 grid w-full grid-cols-1 gap-2.5 xs:grid-cols-[1.35fr_0.65fr] sm:flex sm:w-auto sm:flex-row sm:gap-3">
                 <Link
                   to="/contact"
-                  className="inline-flex items-center justify-center gap-2.5 rounded-full bg-[#C0392B] px-6 py-3.5 text-sm font-bold text-white shadow-[0_10px_20px_rgba(192,57,43,0.15)] transition-all duration-200 hover:bg-[#8F2D22] w-full sm:w-auto text-center"
+                  className="inline-flex min-h-12 w-full touch-manipulation items-center justify-center gap-2 rounded-full bg-[#C0392B] px-4 py-3 text-xs font-bold text-white shadow-[0_10px_20px_rgba(192,57,43,0.15)] transition-colors duration-200 hover:bg-[#8F2D22] sm:w-auto sm:px-6 sm:text-sm"
                 >
                   <CalendarDays size={16} strokeWidth={2} />
                   Book ICU Consultation
@@ -153,7 +174,7 @@ export default function IcuAtHomePage() {
 
                 <a
                   href="tel:+917654247569"
-                  className="inline-flex items-center justify-center gap-2.5 rounded-full border border-[#C0392B] bg-white px-6 py-3.5 text-sm font-bold text-[#C0392B] transition-colors duration-200 hover:bg-[#C0392B] hover:text-white w-full sm:w-auto text-center"
+                  className="inline-flex min-h-12 w-full touch-manipulation items-center justify-center gap-2 rounded-full border border-[#C0392B] bg-white px-4 py-3 text-xs font-bold text-[#C0392B] transition-colors duration-200 hover:bg-[#C0392B] hover:text-white sm:w-auto sm:px-6 sm:text-sm"
                 >
                   <Phone size={16} strokeWidth={2} />
                   Call Now
@@ -162,20 +183,19 @@ export default function IcuAtHomePage() {
             </div>
 
             {/* Compact Image Card */}
-            <div className="relative z-10 w-full mt-4 lg:mt-0">
-              <div className="relative h-[180px] xs:h-[220px] sm:h-[350px] lg:h-[480px] w-full overflow-hidden rounded-xl sm:rounded-[32px] border border-[#E5E7EB] bg-[#F3F4F6] shadow-sm">
+            <div className="relative z-10 mt-1 w-full lg:mt-0">
+              <div className="relative h-[160px] w-full overflow-hidden rounded-xl border border-[#E5E7EB] bg-[#F3F4F6] shadow-sm xs:h-[190px] sm:h-[350px] sm:rounded-[32px] lg:h-[480px]">
                 <img
                   src={ICU_HOME_IMAGE_SRC}
                   alt="Medicoline ICU setup at home"
                   className="h-full w-full object-cover object-center"
                   loading="eager"
-                  fetchPriority="high"
                   decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[rgba(17,17,17,0.7)] to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-4 text-left text-white sm:p-8">
                   <p className="text-[10px] sm:text-sm font-bold uppercase tracking-wider text-white/80">ICU@Home</p>
-                  <h2 className="mt-1 text-sm xs:text-base sm:text-2xl font-bold leading-tight">
+                  <h2 className="mt-1 text-sm font-bold leading-tight text-white xs:text-base sm:text-2xl">
                     Intensive clinical monitoring at home
                   </h2>
                 </div>
@@ -421,23 +441,32 @@ export default function IcuAtHomePage() {
         </div>
       </section>
 
-      {/* STICKY MOBILE CTA ACTION BAR */}
-      <div className="fixed bottom-0 left-0 right-0 z-[999] md:hidden bg-white/95 backdrop-blur-md border-t border-gray-100 p-3 shadow-[0_-8px_30px_rgba(0,0,0,0.06)] flex gap-3">
-        <a
-          href="https://wa.me/917654247569?text=Hi,%20I%20am%20interested%20in%20Medicoline%20ICU@Home%20service.%20Please%20guide%20me."
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex-1 flex items-center justify-center gap-2 bg-[#25D366] text-white py-3 rounded-xl text-sm font-bold shadow-[0_4px_12px_rgba(37,211,102,0.2)] hover:bg-[#20ba59] active:scale-[0.98] transition-all"
+      {/* MOBILE ACTIONS: appear only after the hero CTAs have scrolled away. */}
+      {showStickyActions && (
+        <div
+          data-mobile-sticky-actions
+          className="fixed inset-x-0 bottom-0 z-[999] flex gap-2.5 border-t border-gray-100 bg-white/95 px-3 pt-2.5 pb-[max(0.75rem,env(safe-area-inset-bottom))] shadow-[0_-8px_30px_rgba(0,0,0,0.06)] backdrop-blur-md md:hidden"
         >
-          💬 WhatsApp
-        </a>
-        <a
-          href="tel:+917654247569"
-          className="flex-1 flex items-center justify-center gap-2 bg-[#C0392B] text-white py-3 rounded-xl text-sm font-bold shadow-[0_4px_12px_rgba(192,57,43,0.2)] hover:bg-[#8F2D22] active:scale-[0.98] transition-all"
-        >
-          📞 Call Now
-        </a>
-      </div>
+          <a
+            href="https://wa.me/917654247569?text=Hi,%20I%20am%20interested%20in%20Medicoline%20ICU@Home%20service.%20Please%20guide%20me."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex min-h-12 flex-1 touch-manipulation items-center justify-center gap-2 rounded-xl bg-[#25D366] px-3 text-sm font-bold text-white shadow-[0_4px_12px_rgba(37,211,102,0.2)] active:scale-[0.98]"
+          >
+            <svg className="h-5 w-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884" />
+            </svg>
+            WhatsApp
+          </a>
+          <a
+            href="tel:+917654247569"
+            className="flex min-h-12 flex-1 touch-manipulation items-center justify-center gap-2 rounded-xl bg-[#C0392B] px-3 text-sm font-bold text-white shadow-[0_4px_12px_rgba(192,57,43,0.2)] active:scale-[0.98]"
+          >
+            <Phone size={18} fill="currentColor" />
+            Call Now
+          </a>
+        </div>
+      )}
     </div>
   );
 }

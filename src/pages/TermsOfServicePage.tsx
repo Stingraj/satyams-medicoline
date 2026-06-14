@@ -4,7 +4,7 @@ export default function TermsOfServicePage() {
   const { ref, visible } = useScrollReveal();
 
   return (
-    <div className="pt-[76px] lg:pt-[86px]">
+    <div>
       <section className="bg-white py-12 md:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
