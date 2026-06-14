@@ -3,7 +3,9 @@ import { useLocation } from 'react-router-dom';
 
 const SITE_NAME = 'Medicoline Healthcare';
 const SITE_URL = 'https://www.medicolinehealthcare.com';
-const DEFAULT_IMAGE = `${SITE_URL}/assets/images/1st-time-in-city.png`;
+const DEFAULT_IMAGE = `${SITE_URL}/images/medicoline-logo-full.png`;
+const KEYWORDS =
+  'Medicoline Healthcare, Home Care Services, ICU at Home, Doctor Consultation at Home, Nursing Care at Home, Warangal, Hanamkonda, Kazipet';
 
 type SeoConfig = {
   title: string;
@@ -142,6 +144,7 @@ export default function RouteSeo() {
     document.title = seo.title;
 
     upsertMeta('meta[name="description"]', { name: 'description' }, seo.description);
+    upsertMeta('meta[name="keywords"]', { name: 'keywords' }, KEYWORDS);
     upsertMeta('meta[name="robots"]', { name: 'robots' }, 'index, follow, max-image-preview:large');
     upsertMeta('meta[property="og:type"]', { property: 'og:type' }, 'website');
     upsertMeta('meta[property="og:site_name"]', { property: 'og:site_name' }, SITE_NAME);
@@ -149,7 +152,7 @@ export default function RouteSeo() {
     upsertMeta('meta[property="og:description"]', { property: 'og:description' }, seo.description);
     upsertMeta('meta[property="og:url"]', { property: 'og:url' }, canonicalUrl);
     upsertMeta('meta[property="og:image"]', { property: 'og:image' }, DEFAULT_IMAGE);
-    upsertMeta('meta[property="og:image:alt"]', { property: 'og:image:alt' }, 'Medicoline Healthcare home healthcare services');
+    upsertMeta('meta[property="og:image:alt"]', { property: 'og:image:alt' }, 'Medicoline Healthcare logo');
     upsertMeta('meta[name="twitter:card"]', { name: 'twitter:card' }, 'summary_large_image');
     upsertMeta('meta[name="twitter:title"]', { name: 'twitter:title' }, seo.title);
     upsertMeta('meta[name="twitter:description"]', { name: 'twitter:description' }, seo.description);

@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Clock3, Mail, Phone, MapPin, Instagram, Facebook, Linkedin, ShieldCheck } from 'lucide-react';
-import medicolineLogo from '../assets/images/medicoline-logo.png';
 
-const LOGO_SRC = medicolineLogo;
+const LOGO_SRC = '/images/medicoline-logo-full.png';
 const CONTACT_EMAIL = 'info@medicolinehealthcare.com';
 
 export default function Footer() {
@@ -16,7 +15,7 @@ export default function Footer() {
               <img
                 src={LOGO_SRC}
                 alt="Medicoline Healthcare logo"
-                className="h-auto w-auto max-h-14 shrink-0"
+                className="h-auto w-full max-w-[260px] shrink-0 object-contain sm:max-w-[300px]"
                 loading="lazy"
                 decoding="async"
               />

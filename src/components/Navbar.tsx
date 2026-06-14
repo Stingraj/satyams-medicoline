@@ -110,10 +110,10 @@ export default function Navbar() {
             : 'border-b border-[#E5E7EB]'
         }`}
       >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex h-[76px] items-center justify-between gap-3 lg:h-[86px]">
+        <div className="mx-auto max-w-7xl px-3 xs:px-4 sm:px-6 lg:px-8">
+          <div className="flex h-[56px] xs:h-[64px] items-center justify-between gap-1.5 xs:gap-3 lg:h-[86px]">
             <Link to="/" className="group flex shrink-0 items-center">
-              <div className="flex h-10 items-center lg:h-11">
+              <div className="flex h-6 xs:h-8 sm:h-10 lg:h-11 items-center">
                 <img
                   src={medicolineLogo}
                   alt="Medicoline Healthcare logo"
@@ -228,38 +228,38 @@ export default function Navbar() {
               </div>
             </div>
 
-            <div className="flex items-center gap-3 lg:hidden">
+            <div className="flex items-center gap-1.5 xs:gap-3 lg:hidden">
               <a
                 href="tel:+917654247569"
-                className="flex shrink-0 items-center justify-center rounded-full border border-gray-100 p-2.5 text-[#374151] transition-colors hover:bg-gray-50 hover:text-[#C0392B]"
+                className="flex shrink-0 items-center justify-center rounded-full bg-[#C0392B] text-white p-2 xs:p-2.5 shadow-sm hover:bg-[#8F2D22] transition-colors"
                 aria-label="Call Us"
               >
-                <Phone size={18} />
+                <Phone size={16} className="xs:w-[18px] xs:h-[18px]" fill="currentColor" />
               </a>
               <button
-                className="flex items-center justify-center rounded-full border border-gray-100 p-2.5 text-[#374151] transition-colors hover:bg-gray-50 hover:text-[#C0392B] focus:outline-none"
+                className="flex items-center justify-center rounded-full border border-gray-100 p-2 xs:p-2.5 text-[#374151] transition-colors hover:bg-gray-50 hover:text-[#C0392B] focus:outline-none"
                 onClick={() => setMenuOpen(!menuOpen)}
                 aria-label="Toggle menu"
               >
-                {menuOpen ? <X size={20} /> : <Menu size={20} />}
+                {menuOpen ? <X size={18} className="xs:w-5 xs:h-5" /> : <Menu size={18} className="xs:w-5 xs:h-5" />}
               </button>
             </div>
           </div>
         </div>
 
         <div
-          className={`fixed inset-x-0 top-[77px] z-[999] border-t border-gray-100 bg-white transition-all duration-300 ease-in-out lg:hidden ${
+          className={`fixed inset-x-0 bottom-0 top-[56px] xs:top-[64px] z-[999] border-t border-gray-100 bg-white transition-all duration-300 ease-in-out lg:hidden overflow-y-auto ${
             menuOpen ? 'translate-y-0 opacity-100' : 'pointer-events-none -translate-y-4 opacity-0'
           }`}
         >
-          <div className="flex min-h-[calc(100vh-77px)] flex-col gap-5 bg-white px-6 py-8">
-            <div className="flex flex-col gap-4">
+          <div className="flex flex-col min-h-full bg-white px-5 py-6 gap-6 justify-between">
+            <div className="flex flex-col gap-2.5">
               {navItems.map((item) => (
                 <Link
                   key={item.label}
                   to={item.to}
                   onClick={() => setMenuOpen(false)}
-                  className={`rounded-xl border border-transparent px-4 py-2.5 font-heading text-lg font-bold transition-all ${
+                  className={`rounded-xl border border-transparent px-4 py-2 font-heading text-[15px] sm:text-lg font-bold transition-all ${
                     isActive(item.to)
                       ? 'border-[#C0392B]/10 bg-[#fff5f5] pl-6 text-[#C0392B]'
                       : 'text-[#374151] hover:bg-[#F9FAFB] hover:text-[#C0392B]'
@@ -270,26 +270,26 @@ export default function Navbar() {
               ))}
             </div>
 
-            <div className="mt-auto flex flex-col gap-4 border-t border-gray-100 pt-6">
+            <div className="flex flex-col gap-3 border-t border-gray-100 pt-6 mt-4 pb-8">
               <a
                 href="tel:+917654247569"
-                className="flex items-center justify-center gap-3 rounded-full border border-gray-100 bg-gray-50 py-4 text-sm font-bold text-[#374151]"
+                className="flex items-center justify-center gap-2.5 rounded-full border border-gray-100 bg-gray-50 py-3.5 text-xs sm:text-sm font-bold text-[#374151]"
               >
-                <Phone size={16} className="text-[#C0392B]" />
+                <Phone size={14} className="text-[#C0392B]" />
                 Call +91 76542 47569
               </a>
               <a
                 href="mailto:support@medicolinehealthcare.com"
-                className="flex items-center justify-center gap-3 rounded-full border border-[#E5E7EB] px-5 py-4 text-sm font-bold text-[#374151]"
+                className="flex items-center justify-center gap-2.5 rounded-full border border-[#E5E7EB] px-5 py-3.5 text-xs sm:text-sm font-bold text-[#374151]"
               >
-                <MessageSquare size={16} className="text-[#C0392B]" />
+                <MessageSquare size={14} className="text-[#C0392B]" />
                 Need Help? Email Support
               </a>
             </div>
           </div>
         </div>
       </nav>
-      <div className="h-[76px] bg-transparent" />
+      <div className="h-[56px] xs:h-[64px] lg:h-[86px] bg-transparent" />
     </>
   );
 }
