@@ -2,36 +2,37 @@ import {
   Activity,
   CalendarDays,
   HeartPulse,
-  MapPin,
   Phone,
   ShieldCheck,
   Stethoscope,
   UserRound,
   Waypoints,
 } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import teamImage from '../assets/images/medicoline-team.jpg';
 
-const icuHighlights = [
+const ICU_HOME_IMAGE_SRC = '/images/icu-at-home.jpg';
+
+const icuTrustIndicators = [
   {
-    title: '24/7',
-    description: 'Emergency Support',
-    icon: <span className="text-[15px] font-extrabold tracking-tight">24/7</span>,
+    title: '5+ Years Experience',
+    description: 'Trusted clinical care',
+    icon: <span className="text-[11px] font-black tracking-tighter">5+ Yrs</span>,
   },
   {
-    title: 'Experienced',
-    description: 'ICU Team',
-    icon: <UserRound size={24} strokeWidth={2.1} />,
+    title: '60 Min Response',
+    description: 'Rapid emergency backup',
+    icon: <Activity className="w-5 h-5" strokeWidth={2.5} />,
   },
   {
-    title: 'Warangal | Hanamkonda | Kazipet',
-    description: 'Service Coverage',
-    icon: <MapPin size={24} strokeWidth={2.1} />,
+    title: 'Qualified ICU Staff',
+    description: '100% Certified Nurses',
+    icon: <UserRound className="w-5 h-5" strokeWidth={2.5} />,
   },
   {
-    title: 'Since',
-    description: '2020',
-    icon: <ShieldCheck size={24} strokeWidth={2.1} />,
+    title: 'Home Critical Care',
+    description: 'Hospital Setup at Home',
+    icon: <ShieldCheck className="w-5 h-5" strokeWidth={2.5} />,
   },
 ] as const;
 
@@ -39,22 +40,22 @@ const icuServices = [
   {
     title: 'Ventilator Support',
     description: 'Advanced ventilator care managed by trained ICU professionals at home.',
-    icon: <Waypoints size={34} strokeWidth={1.9} />,
+    icon: <Waypoints className="w-5 h-5" strokeWidth={1.9} />,
   },
   {
     title: 'Nursing Care',
     description: 'Trained ICU nurses for medication, hygiene, and continuous patient care.',
-    icon: <HeartPulse size={34} strokeWidth={1.9} />,
+    icon: <HeartPulse className="w-5 h-5" strokeWidth={1.9} />,
   },
   {
     title: 'Patient Monitoring',
     description: 'Continuous monitoring of vital parameters with advanced equipment.',
-    icon: <Activity size={34} strokeWidth={1.9} />,
+    icon: <Activity className="w-5 h-5" strokeWidth={1.9} />,
   },
   {
     title: 'Doctor Visits',
     description: 'Regular doctor visits and 24/7 tele-consultation for critical care.',
-    icon: <Stethoscope size={34} strokeWidth={1.9} />,
+    icon: <Stethoscope className="w-5 h-5" strokeWidth={1.9} />,
   },
 ] as const;
 
@@ -99,135 +100,200 @@ const whyChooseIcu = [
 ] as const;
 
 export default function IcuAtHomePage() {
-  return (
-    <div className="bg-[#F9FAFB] pt-[72px] lg:pt-[104px]">
-      <section className="relative overflow-hidden bg-white">
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-[#F3F4F6]" />
+  const heroRef = useRef<HTMLElement | null>(null);
+  const [showStickyActions, setShowStickyActions] = useState(false);
 
-        <div className="mx-auto max-w-7xl px-4 pb-10 pt-8 sm:px-6 sm:pb-14 sm:pt-12 lg:px-8 lg:pb-16 lg:pt-10">
-          <div className="grid items-center gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-10">
-            <div className="relative z-10">
-              <div className="mb-5 inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.26em] text-[#374151] sm:text-xs">
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#C0392B] text-white shadow-[0_10px_24px_rgba(192,57,43,0.22)]">
-                  <HeartPulse size={18} strokeWidth={2.4} />
-                </span>
-                Complete Critical Care At Home
+  useEffect(() => {
+    const hero = heroRef.current;
+    if (!hero) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setShowStickyActions(!entry.isIntersecting && entry.boundingClientRect.top < 0);
+      },
+      { threshold: 0, rootMargin: '-60px 0px 0px 0px' },
+    );
+
+    observer.observe(hero);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div className="bg-[#F9FAFB] pt-0 pb-20 md:pb-0">
+      {/* HERO SECTION */}
+      <section ref={heroRef} className="relative overflow-hidden bg-white py-4 sm:py-10 lg:py-16">
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-[#F9FAFB] opacity-30" />
+
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-4 sm:gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-10">
+            <div className="relative z-10 flex flex-col items-start text-left">
+              {/* Pill badge spacing: 16px (mb-4) */}
+              <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-[#C0392B]/10 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[#C0392B] sm:text-xs">
+                <HeartPulse size={12} className="animate-pulse shrink-0" />
+                ICU-Grade Care at Home
               </div>
 
-              <h1 className="text-[3.2rem] font-black leading-[0.95] tracking-[-0.05em] text-[#1F2937] sm:text-[4.8rem] lg:text-[6rem] xl:text-[6.7rem]">
-                ICU@
-                <span className="text-[#C0392B]">Home</span>
+              {/* Title size: 30px on small, 34px on xs, line height: tight. Max 2-3 lines */}
+              <h1 className="text-[28px] font-black leading-[1.08] tracking-tight text-[#1F2937] xs:text-[32px] sm:text-[3.5rem] lg:text-[4.5rem] xl:text-[5rem]">
+                Critical ICU Care <br />
+                <span className="text-[#C0392B]">In Your Own Home</span>
               </h1>
 
-              <p className="mt-6 max-w-[39rem] text-[18px] leading-[1.7] text-[#6B7280] sm:text-[20px] lg:text-[21px]">
-                Advanced critical care at home with ICU setup, trained nurses, monitoring, oxygen support,
-                ventilator care, and 24/7 doctor supervision.
+              {/* Body text size: 15px to 16px */}
+              <p className="mt-3 max-w-[39rem] text-[14px] leading-6 text-[#6B7280] xs:text-[15px] sm:text-lg sm:leading-relaxed lg:text-xl">
+                Advanced critical care setup managed by hospital-trained ICU nurses and senior doctors. Emergency backup and regular monitoring.
               </p>
 
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+              {/* Feature Checklist - scanable, 16px top spacing */}
+              <div className="mt-3 grid w-full max-w-md grid-cols-2 gap-x-3 gap-y-1.5">
+                <div className="flex items-start gap-1.5 text-[12px] font-semibold leading-5 text-[#374151] xs:text-[13px]">
+                  <span className="text-[#C0392B] font-bold text-[15px]">✓</span> ICU-Trained Nurses
+                </div>
+                <div className="flex items-start gap-1.5 text-[12px] font-semibold leading-5 text-[#374151] xs:text-[13px]">
+                  <span className="text-[#C0392B] font-bold text-[15px]">✓</span> 24/7 Monitoring
+                </div>
+                <div className="flex items-start gap-1.5 text-[12px] font-semibold leading-5 text-[#374151] xs:text-[13px]">
+                  <span className="text-[#C0392B] font-bold text-[15px]">✓</span> Hospital-Level Care
+                </div>
+                <div className="flex items-start gap-1.5 text-[12px] font-semibold leading-5 text-[#374151] xs:text-[13px]">
+                  <span className="text-[#C0392B] font-bold text-[15px]">✓</span> Doctor Coordination
+                </div>
+              </div>
+
+              {/* Buttons: above the fold on mobile viewports */}
+              <div className="mt-4 grid w-full grid-cols-1 gap-2.5 xs:grid-cols-[1.35fr_0.65fr] sm:flex sm:w-auto sm:flex-row sm:gap-3">
                 <Link
                   to="/contact"
-                  className="inline-flex items-center justify-center gap-3 rounded-full bg-[#C0392B] px-8 py-4 text-base font-semibold text-white shadow-[0_14px_30px_rgba(192,57,43,0.18)] transition-all duration-200 hover:bg-[#8F2D22]"
+                  className="inline-flex min-h-12 w-full touch-manipulation items-center justify-center gap-2 rounded-full bg-[#C0392B] px-4 py-3 text-xs font-bold text-white shadow-[0_10px_20px_rgba(192,57,43,0.15)] transition-colors duration-200 hover:bg-[#8F2D22] sm:w-auto sm:px-6 sm:text-sm"
                 >
-                  <CalendarDays size={19} strokeWidth={2.1} />
+                  <CalendarDays size={16} strokeWidth={2} />
                   Book ICU Consultation
                 </Link>
 
                 <a
                   href="tel:+917654247569"
-                  className="inline-flex items-center justify-center gap-3 rounded-full border border-[#C0392B] bg-white px-8 py-4 text-base font-semibold text-[#C0392B] transition-colors duration-200 hover:bg-[#8F2D22] hover:text-white"
+                  className="inline-flex min-h-12 w-full touch-manipulation items-center justify-center gap-2 rounded-full border border-[#C0392B] bg-white px-4 py-3 text-xs font-bold text-[#C0392B] transition-colors duration-200 hover:bg-[#C0392B] hover:text-white sm:w-auto sm:px-6 sm:text-sm"
                 >
-                  <Phone size={19} strokeWidth={2.1} />
+                  <Phone size={16} strokeWidth={2} />
                   Call Now
                 </a>
               </div>
-
-              <div className="mt-10 grid gap-4 border-t border-[#E5E7EB] pt-7 sm:grid-cols-2 xl:grid-cols-4 xl:gap-0 xl:pt-8">
-                {icuHighlights.map((item, index) => (
-                  <div
-                    key={`${item.title}-${item.description}`}
-                    className={`flex items-start gap-4 xl:px-5 ${index < icuHighlights.length - 1 ? 'xl:border-r xl:border-[#E5E7EB]' : ''} ${
-                      index === 0 ? 'xl:pl-0' : ''
-                    }`}
-                  >
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-[#C0392B] text-[#C0392B]">
-                      {item.icon}
-                    </div>
-                    <div>
-                      <p className="text-[13px] font-extrabold leading-5 text-[#1F2937] sm:text-[15px]">{item.title}</p>
-                      <p className="mt-1 text-sm leading-6 text-[#6B7280]">{item.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
             </div>
 
-            <div className="relative z-10">
-              <div className="absolute -left-10 top-12 h-36 w-36 rounded-full bg-[#F3F4F6] blur-3xl" aria-hidden="true" />
-              <div className="absolute -right-12 bottom-10 h-40 w-40 rounded-full bg-[#F3F4F6] blur-3xl" aria-hidden="true" />
-              <div className="relative h-[320px] w-full overflow-hidden rounded-[26px] border border-[#E5E7EB] bg-[#F3F4F6] shadow-[0_20px_60px_rgba(17,17,17,0.12)] sm:h-[440px] lg:h-[610px] lg:rounded-[32px]">
+            {/* Compact Image Card */}
+            <div className="relative z-10 mt-1 w-full lg:mt-0">
+              <div className="relative h-[160px] w-full overflow-hidden rounded-xl border border-[#E5E7EB] bg-[#F3F4F6] shadow-sm xs:h-[190px] sm:h-[350px] sm:rounded-[32px] lg:h-[480px]">
                 <img
-                  src={teamImage}
-                  alt="Medicoline healthcare professionals supporting ICU at home care"
+                  src={ICU_HOME_IMAGE_SRC}
+                  alt="Medicoline ICU setup at home"
                   className="h-full w-full object-cover object-center"
                   loading="eager"
-                  fetchPriority="high"
                   decoding="async"
                 />
-                <div className="absolute inset-0 bg-[rgba(17,17,17,0.28)]" />
-                <div className="absolute inset-x-0 bottom-0 p-8 text-left text-white sm:p-10">
-                  <p className="text-sm font-bold uppercase tracking-[0.22em] text-white/80">ICU@Home</p>
-                  <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
-                    Intensive monitoring and clinical support at home
+                <div className="absolute inset-0 bg-gradient-to-t from-[rgba(17,17,17,0.7)] to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-4 text-left text-white sm:p-8">
+                  <p className="text-[10px] sm:text-sm font-bold uppercase tracking-wider text-white/80">ICU@Home</p>
+                  <h2 className="mt-1 text-sm font-bold leading-tight text-white xs:text-base sm:text-2xl">
+                    Intensive clinical monitoring at home
                   </h2>
-                  <p className="mt-4 max-w-md text-base leading-7 text-white/85">
-                    Managed home critical care with equipment, trained nurses, doctor coordination, and emergency backup.
-                  </p>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className="relative z-20 mt-10 grid gap-5 md:grid-cols-2 xl:mt-[-18px] xl:grid-cols-4">
+      {/* TRUST SECTION: Immediately below Hero Section. Grid spacing: 16px (gap-4) */}
+      <section className="bg-[#F9FAFB] py-6 border-b border-gray-100">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+            {icuTrustIndicators.map((indicator) => (
+              <div
+                key={indicator.title}
+                className="flex flex-col items-start rounded-xl border border-gray-100 bg-white p-4 shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:shadow-md transition-shadow"
+              >
+                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#C0392B]/10 text-[#C0392B] mb-3 shrink-0">
+                  {indicator.icon}
+                </div>
+                <h3 className="text-[14px] sm:text-[16px] font-bold text-[#1F2937] leading-tight">
+                  {indicator.title}
+                </h3>
+                <p className="mt-1 text-[11px] sm:text-[13px] leading-normal text-[#6B7280]">
+                  {indicator.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* WHY CHOOSE ICU@HOME (Services layout) - spacing: 48px (py-12), card titles: 18px */}
+      <section className="bg-white py-12">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <p className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#C0392B]">Specialized Home Care</p>
+            {/* Title size: 24px */}
+            <h2 className="mt-2 text-[24px] font-extrabold leading-tight text-[#1F2937] sm:text-3xl lg:text-4xl">
+              Our ICU@Home Services
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-2 lg:grid-cols-4">
             {icuServices.map((service) => (
               <article
                 key={service.title}
-                className="group relative overflow-hidden rounded-[22px] border border-[#E5E7EB] bg-white p-7 shadow-[0_10px_28px_rgba(17,17,17,0.07)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_34px_rgba(17,17,17,0.1)]"
+                className="group relative flex flex-col justify-between h-full rounded-xl border border-gray-100 bg-white p-4 shadow-[0_8px_30px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
               >
-                <div className="mb-5 flex h-[86px] w-[86px] items-center justify-center rounded-full bg-[#F3F4F6] text-[#C0392B]">
-                  {service.icon}
+                <div>
+                  <div className="mb-4 flex h-9 w-9 items-center justify-center rounded-full bg-[#C0392B]/5 text-[#C0392B] shrink-0">
+                    {service.icon}
+                  </div>
+                  {/* Card Title size: 18px */}
+                  <h3 className="text-[15px] sm:text-[18px] font-bold leading-snug text-[#1F2937]">
+                    {service.title}
+                  </h3>
+                  {/* Body Text size: 15px */}
+                  <p className="mt-2 text-[12px] sm:text-[15px] leading-relaxed text-[#6B7280]">
+                    {service.description}
+                  </p>
                 </div>
-                <h2 className="pr-8 text-[1.55rem] font-extrabold leading-tight tracking-[-0.03em] text-[#1F2937]">
-                  {service.title}
-                </h2>
-                <p className="mt-4 max-w-[16rem] text-[15px] leading-8 text-[#6B7280]">{service.description}</p>
-                <span className="absolute bottom-7 right-7 text-[31px] font-light leading-none text-[#C0392B] transition-transform duration-300 group-hover:translate-x-1">
-                  ›
-                </span>
+                <div className="mt-4 flex items-center justify-end">
+                  <span className="text-lg font-light leading-none text-[#C0392B] transition-transform duration-300 group-hover:translate-x-1">
+                    ›
+                  </span>
+                </div>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-[#F9FAFB] py-16">
+      {/* DEFINITION SECTION - spacing: 48px (py-12) */}
+      <section className="bg-white py-12 border-t border-gray-100">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-8 lg:grid-cols-[1fr_1fr]">
-            <article className="rounded-[2rem] border border-[#E5E7EB] bg-white p-8 shadow-sm">
-              <p className="font-heading text-xs font-bold uppercase tracking-[0.24em] text-[#C0392B]">What is ICU@Home?</p>
-              <h2 className="mt-4 font-heading text-3xl font-black text-[#1F2937]">Advanced home-based critical care for medically stable patients.</h2>
-              <p className="mt-5 text-base leading-8 text-[#6B7280]">
-                ICU@Home is Medicoline Healthcare advanced home-based critical care program designed for patients who
+          <div className="grid gap-6 lg:grid-cols-[1fr_1fr]">
+            <article className="rounded-xl border border-gray-100 bg-[#F9FAFB] p-5 sm:p-8 shadow-sm">
+              <p className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#C0392B]">Clinical Definition</p>
+              {/* Title size: 24px */}
+              <h2 className="mt-2 text-[20px] sm:text-[24px] font-bold text-[#1F2937]">What is ICU@Home?</h2>
+              <p className="mt-4 text-[13px] sm:text-[15px] leading-relaxed text-[#6B7280]">
+                ICU@Home is Medicoline Healthcare&apos;s advanced home-based critical care program designed for patients who
                 require intensive monitoring and clinical support but are medically stable enough to be managed at home.
               </p>
             </article>
 
-            <article className="rounded-[2rem] border border-[#E5E7EB] bg-white p-8 shadow-sm">
-              <p className="font-heading text-xs font-bold uppercase tracking-[0.24em] text-[#C0392B]">Ideal For</p>
-              <ul className="mt-5 space-y-3">
+            <article className="rounded-xl border border-gray-100 bg-[#F9FAFB] p-5 sm:p-8 shadow-sm">
+              <p className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#C0392B]">Patient Suitability</p>
+              {/* Title size: 24px */}
+              <h2 className="mt-2 text-[20px] sm:text-[24px] font-bold text-[#1F2937]">Ideal For</h2>
+              <ul className="mt-4 space-y-2.5">
                 {icuIdealFor.map((item) => (
-                  <li key={item} className="flex gap-3 text-base leading-7 text-[#6B7280]">
-                    <span className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-[#C0392B]" />
+                  <li key={item} className="flex items-start gap-2.5 text-[13px] sm:text-[15px] leading-relaxed text-[#6B7280]">
+                    <span className="flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded-full bg-[#C0392B]/10 text-[#C0392B] mt-0.5">
+                      <ShieldCheck size={12} strokeWidth={2.5} />
+                    </span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -237,68 +303,170 @@ export default function IcuAtHomePage() {
         </div>
       </section>
 
-      <section className="bg-white py-16">
+      {/* SAFETY & GOVERNANCE - spacing: 48px (py-12) */}
+      <section className="bg-white py-12 border-t border-gray-100">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <p className="font-heading text-xs font-bold uppercase tracking-[0.24em] text-[#C0392B]">Safety and Clinical Governance</p>
-            <h2 className="mt-4 font-heading text-3xl font-black text-[#1F2937] sm:text-4xl">Protocol-driven care with daily oversight and escalation pathways.</h2>
+          <div className="text-center mb-8">
+            <p className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#C0392B]">Safety First</p>
+            {/* Title size: 24px */}
+            <h2 className="mt-2 text-[24px] font-extrabold leading-tight text-[#1F2937]">Clinical Governance Standards</h2>
           </div>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {clinicalGovernance.map((item) => (
-              <article key={item} className="rounded-[1.75rem] border border-[#E5E7EB] bg-[#F9FAFB] p-7 shadow-sm">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-[#C0392B] shadow-sm">
-                  <ShieldCheck size={22} />
+              <article key={item} className="flex gap-4 rounded-xl border border-gray-100 bg-[#F9FAFB] p-4 shadow-sm items-center">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-[#C0392B] shadow-sm">
+                  <ShieldCheck size={18} strokeWidth={2.2} />
                 </div>
-                <p className="mt-5 text-sm leading-7 text-[#6B7280]">{item}</p>
+                <p className="text-[13px] sm:text-[15px] leading-relaxed text-[#6B7280]">{item}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-[#F9FAFB] py-16">
+      {/* WHY CHOOSE MEDICOLINE & PRICING - spacing: 48px (py-12) */}
+      <section className="bg-[#F9FAFB] py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
             <div>
-              <p className="font-heading text-xs font-bold uppercase tracking-[0.24em] text-[#C0392B]">Why Choose Medicoline ICU@Home?</p>
-              <h2 className="mt-4 font-heading text-3xl font-black text-[#1F2937] sm:text-4xl">Hospital-level support without the burden of a prolonged stay.</h2>
-              <div className="mt-8 grid gap-5 md:grid-cols-2">
+              <p className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#C0392B]">Why Choose Medicoline ICU@Home?</p>
+              {/* Title size: 24px */}
+              <h2 className="mt-2 text-[24px] font-extrabold leading-tight text-[#1F2937] sm:text-3xl">Hospital-level support without the burden of a prolonged stay.</h2>
+              <div className="mt-6 grid gap-4 grid-cols-1 sm:grid-cols-2">
                 {whyChooseIcu.map((item) => (
-                  <article key={item.title} className="rounded-[1.75rem] border border-[#E5E7EB] bg-white p-6 shadow-sm">
-                    <h3 className="font-heading text-xl font-bold text-[#1F2937]">{item.title}</h3>
-                    <p className="mt-3 text-sm leading-7 text-[#6B7280]">{item.description}</p>
+                  <article key={item.title} className="flex flex-col justify-between h-full rounded-xl border border-gray-100 bg-white p-4 shadow-[0_8px_30px_rgba(0,0,0,0.03)]">
+                    <div>
+                      {/* Card Title size: 18px */}
+                      <h3 className="text-[15px] sm:text-[18px] font-bold text-[#1F2937]">{item.title}</h3>
+                      <p className="mt-2 text-[12px] sm:text-[15px] leading-relaxed text-[#6B7280]">{item.description}</p>
+                    </div>
                   </article>
                 ))}
               </div>
             </div>
 
-            <div className="rounded-[2rem] border border-[#E5E7EB] bg-white p-8 shadow-sm">
-              <p className="font-heading text-xs font-bold uppercase tracking-[0.24em] text-[#C0392B]">Assessment and Pricing</p>
-              <h3 className="mt-4 font-heading text-2xl font-black text-[#1F2937]">Custom package pricing based on case assessment.</h3>
-              <p className="mt-5 text-base leading-8 text-[#6B7280]">
-                Every ICU@Home case is planned around patient condition, equipment needs, nursing intensity, and
-                escalation support. Contact us for a detailed care plan and cost estimate.
-              </p>
-              <div className="mt-8 space-y-4 rounded-[1.5rem] bg-[#F9FAFB] p-6">
-                <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#C0392B]">ICU Contact</p>
-                <a href="tel:+917654247569" className="block text-lg font-bold text-[#1F2937] hover:text-[#C0392B]">
-                  +91 7654247569
-                </a>
-                <a href="mailto:support@medicolinehealthcare.com" className="block text-base font-semibold text-[#6B7280] hover:text-[#C0392B]">
-                  support@medicolinehealthcare.com
-                </a>
+            {/* ASSESSMENT & PRICING SECTION: Redesigned premium card with checkmarks */}
+            <div className="rounded-xl border border-[#E5E7EB] bg-white p-6 shadow-[0_8px_30px_rgba(0,0,0,0.03)] flex flex-col justify-between h-full">
+              <div>
+                <p className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#C0392B]">Assessment & Pricing</p>
+                <h3 className="mt-2 text-[20px] sm:text-[24px] font-black text-[#1F2937]">Custom Home ICU Planning</h3>
+                <p className="mt-3 text-[13px] sm:text-[15px] leading-relaxed text-[#6B7280]">
+                  Every critical care setup is planned individually based on patient status, equipment needs, and medical team requirements.
+                </p>
+                <ul className="mt-4 space-y-2.5 border-t border-gray-100 pt-4">
+                  <li className="flex items-center gap-2 text-[13px] xs:text-[15px] font-semibold text-[#374151]">
+                    <span className="text-[#C0392B] font-bold text-[15px]">✓</span> Personalized Assessment
+                  </li>
+                  <li className="flex items-center gap-2 text-[13px] xs:text-[15px] font-semibold text-[#374151]">
+                    <span className="text-[#C0392B] font-bold text-[15px]">✓</span> Equipment Planning
+                  </li>
+                  <li className="flex items-center gap-2 text-[13px] xs:text-[15px] font-semibold text-[#374151]">
+                    <span className="text-[#C0392B] font-bold text-[15px]">✓</span> ICU Staffing
+                  </li>
+                  <li className="flex items-center gap-2 text-[13px] xs:text-[15px] font-semibold text-[#374151]">
+                    <span className="text-[#C0392B] font-bold text-[15px]">✓</span> Monthly Care Plan
+                  </li>
+                  <li className="flex items-center gap-2 text-[13px] xs:text-[15px] font-semibold text-[#374151]">
+                    <span className="text-[#C0392B] font-bold text-[15px]">✓</span> Transparent Pricing
+                  </li>
+                </ul>
               </div>
               <Link
                 to="/contact#book-appointment"
-                className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-[#C0392B] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[#8F2D22]"
+                className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-[#C0392B] px-6 py-3.5 text-xs sm:text-sm font-bold text-white transition-colors hover:bg-[#8F2D22] w-full text-center"
               >
-                Request ICU@Home Assessment
+                Request Assessment
               </Link>
             </div>
           </div>
         </div>
       </section>
+
+      {/* CONTACT SECTION: Conversion-focused, one-click calls, WhatsApp, email */}
+      <section className="bg-white py-12 border-t border-gray-100">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#C0392B]">Urgent Care Coordination</p>
+          {/* Title size: 24px */}
+          <h2 className="mt-2 text-[24px] font-extrabold text-[#1F2937]">Need Emergency Home ICU Support?</h2>
+          <p className="mt-3 max-w-xl mx-auto text-[13px] sm:text-[15px] text-[#6B7280]">
+            Speak directly with our clinical manager to set up equipment and schedule ICU nurses.
+          </p>
+
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3 max-w-2xl mx-auto">
+            <a
+              href="tel:+917654247569"
+              className="flex items-center justify-center gap-3 rounded-xl border border-gray-200 bg-white p-4 shadow-sm hover:border-[#C0392B]/30 transition-colors"
+            >
+              <Phone className="w-5 h-5 text-[#C0392B] shrink-0" />
+              <div className="text-left">
+                <p className="text-[9px] font-bold text-gray-400 uppercase">One-Click Call</p>
+                <p className="text-[14px] font-bold text-[#1F2937]">+91 76542 47569</p>
+              </div>
+            </a>
+
+            <a
+              href="https://wa.me/917654247569?text=EMERGENCY%20ICU:%20I%20need%20critical%20care%20setup."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-3 rounded-xl border border-gray-200 bg-[#FFF] p-4 shadow-sm hover:border-green-300 transition-colors"
+            >
+              <svg className="w-5 h-5 fill-current text-[#25D366] shrink-0" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.458 5.705 1.459h.008c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+              </svg>
+              <div className="text-left">
+                <p className="text-[9px] font-bold text-gray-400 uppercase">One-Click WhatsApp</p>
+                <p className="text-[14px] font-bold text-[#1F2937]">Chat with Doctor</p>
+              </div>
+            </a>
+
+            <a
+              href="mailto:support@medicolinehealthcare.com?subject=Home%20ICU%20Service%20Enquiry"
+              className="flex items-center justify-center gap-3 rounded-xl border border-gray-200 bg-white p-4 shadow-sm hover:border-[#C0392B]/30 transition-colors"
+            >
+              <svg className="w-5 h-5 text-[#C0392B] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <div className="text-left">
+                <p className="text-[9px] font-bold text-gray-400 uppercase">One-Click Email</p>
+                <p className="text-[14px] font-bold text-[#1F2937]">Send Request</p>
+              </div>
+            </a>
+          </div>
+
+          <div className="mt-6 text-[12px] font-bold text-[#C0392B] uppercase tracking-wider flex items-center justify-center gap-2 animate-pulse">
+            <span className="w-2.5 h-2.5 bg-[#C0392B] rounded-full inline-block"></span>
+            Emergency Support Coordination Available 24/7
+          </div>
+        </div>
+      </section>
+
+      {/* MOBILE ACTIONS: appear only after the hero CTAs have scrolled away. */}
+      {showStickyActions && (
+        <div
+          data-mobile-sticky-actions
+          className="fixed inset-x-0 bottom-0 z-[999] flex gap-2.5 border-t border-gray-100 bg-white/95 px-3 pt-2.5 pb-[max(0.75rem,env(safe-area-inset-bottom))] shadow-[0_-8px_30px_rgba(0,0,0,0.06)] backdrop-blur-md md:hidden"
+        >
+          <a
+            href="https://wa.me/917654247569?text=Hi,%20I%20am%20interested%20in%20Medicoline%20ICU@Home%20service.%20Please%20guide%20me."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex min-h-12 flex-1 touch-manipulation items-center justify-center gap-2 rounded-xl bg-[#25D366] px-3 text-sm font-bold text-white shadow-[0_4px_12px_rgba(37,211,102,0.2)] active:scale-[0.98]"
+          >
+            <svg className="h-5 w-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884" />
+            </svg>
+            WhatsApp
+          </a>
+          <a
+            href="tel:+917654247569"
+            className="flex min-h-12 flex-1 touch-manipulation items-center justify-center gap-2 rounded-xl bg-[#C0392B] px-3 text-sm font-bold text-white shadow-[0_4px_12px_rgba(192,57,43,0.2)] active:scale-[0.98]"
+          >
+            <Phone size={18} fill="currentColor" />
+            Call Now
+          </a>
+        </div>
+      )}
     </div>
   );
 }

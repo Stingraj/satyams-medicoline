@@ -41,6 +41,27 @@ export default function Navbar() {
   }, [location]);
 
   useEffect(() => {
+    if (!menuOpen) {
+      return;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setMenuOpen(false);
+      }
+    };
+
+    document.body.style.overflow = 'hidden';
+    document.addEventListener('keydown', handleEscape);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [menuOpen]);
+
+  useEffect(() => {
     if (!helpOpen) {
       return;
     }
@@ -104,22 +125,21 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed left-0 right-0 top-0 z-[1000] bg-white transition-all duration-300 ${
+        className={`fixed left-0 right-0 top-0 z-[1000] bg-white transition-shadow duration-200 ${
           scrolled
             ? 'border-b border-[#E5E7EB] bg-white/95 shadow-[0_10px_30px_rgba(17,17,17,0.05)] backdrop-blur-md'
             : 'border-b border-[#E5E7EB]'
         }`}
       >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex h-[76px] items-center justify-between gap-3 lg:h-[86px]">
-            <Link to="/" className="group flex shrink-0 items-center">
-              <div className="flex h-10 items-center lg:h-11">
+        <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
+          <div className="flex h-[60px] items-center justify-between gap-2 lg:h-[86px]">
+            <Link to="/" className="group flex min-w-0 shrink items-center" aria-label="Medicoline Healthcare home">
+              <div className="flex h-9 items-center xs:h-10 lg:h-11">
                 <img
                   src={medicolineLogo}
                   alt="Medicoline Healthcare logo"
-                  className="h-full object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+                  className="h-full w-auto max-w-[118px] object-contain transition-transform duration-200 group-hover:scale-[1.02] xs:max-w-[132px] lg:max-w-none"
                   loading="eager"
-                  fetchPriority="high"
                   decoding="async"
                 />
               </div>
@@ -228,18 +248,21 @@ export default function Navbar() {
               </div>
             </div>
 
-            <div className="flex items-center gap-3 lg:hidden">
+            <div className="flex shrink-0 items-center gap-2 lg:hidden">
               <a
                 href="tel:+917654247569"
-                className="flex shrink-0 items-center justify-center rounded-full border border-gray-100 p-2.5 text-[#374151] transition-colors hover:bg-gray-50 hover:text-[#C0392B]"
+                className="flex h-11 w-11 shrink-0 touch-manipulation items-center justify-center rounded-full bg-[#C0392B] text-white shadow-sm transition-colors hover:bg-[#8F2D22] active:bg-[#8F2D22]"
                 aria-label="Call Us"
               >
-                <Phone size={18} />
+                <Phone size={18} fill="currentColor" />
               </a>
               <button
-                className="flex items-center justify-center rounded-full border border-gray-100 p-2.5 text-[#374151] transition-colors hover:bg-gray-50 hover:text-[#C0392B] focus:outline-none"
-                onClick={() => setMenuOpen(!menuOpen)}
+                type="button"
+                className="flex h-11 w-11 touch-manipulation items-center justify-center rounded-full border border-[#E5E7EB] bg-white text-[#374151] transition-colors hover:bg-gray-50 hover:text-[#C0392B] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C0392B] focus-visible:ring-offset-2"
+                onClick={() => setMenuOpen((open) => !open)}
                 aria-label="Toggle menu"
+                aria-expanded={menuOpen}
+                aria-controls="mobile-navigation"
               >
                 {menuOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
@@ -247,49 +270,50 @@ export default function Navbar() {
           </div>
         </div>
 
-        <div
-          className={`fixed inset-x-0 top-[77px] z-[999] border-t border-gray-100 bg-white transition-all duration-300 ease-in-out lg:hidden ${
-            menuOpen ? 'translate-y-0 opacity-100' : 'pointer-events-none -translate-y-4 opacity-0'
-          }`}
-        >
-          <div className="flex min-h-[calc(100vh-77px)] flex-col gap-5 bg-white px-6 py-8">
-            <div className="flex flex-col gap-4">
-              {navItems.map((item) => (
-                <Link
-                  key={item.label}
-                  to={item.to}
-                  onClick={() => setMenuOpen(false)}
-                  className={`rounded-xl border border-transparent px-4 py-2.5 font-heading text-lg font-bold transition-all ${
-                    isActive(item.to)
-                      ? 'border-[#C0392B]/10 bg-[#fff5f5] pl-6 text-[#C0392B]'
-                      : 'text-[#374151] hover:bg-[#F9FAFB] hover:text-[#C0392B]'
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
+        {menuOpen && (
+          <div
+            id="mobile-navigation"
+            className="fixed inset-x-0 bottom-0 top-[60px] z-[1001] overflow-y-auto overscroll-contain border-t border-gray-100 bg-white [-webkit-overflow-scrolling:touch] lg:hidden"
+          >
+            <div className="flex min-h-full flex-col justify-between gap-6 bg-white px-4 py-4">
+              <div className="flex flex-col gap-1.5">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.label}
+                    to={item.to}
+                    onClick={() => setMenuOpen(false)}
+                    className={`flex min-h-11 touch-manipulation items-center rounded-xl border border-transparent px-4 py-2 font-heading text-[15px] font-bold ${
+                      isActive(item.to)
+                        ? 'border-[#C0392B]/10 bg-[#fff5f5] text-[#C0392B]'
+                        : 'text-[#374151] hover:bg-[#F9FAFB] hover:text-[#C0392B]'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
 
-            <div className="mt-auto flex flex-col gap-4 border-t border-gray-100 pt-6">
-              <a
-                href="tel:+917654247569"
-                className="flex items-center justify-center gap-3 rounded-full border border-gray-100 bg-gray-50 py-4 text-sm font-bold text-[#374151]"
-              >
-                <Phone size={16} className="text-[#C0392B]" />
-                Call +91 76542 47569
-              </a>
-              <a
-                href="mailto:support@medicolinehealthcare.com"
-                className="flex items-center justify-center gap-3 rounded-full border border-[#E5E7EB] px-5 py-4 text-sm font-bold text-[#374151]"
-              >
-                <MessageSquare size={16} className="text-[#C0392B]" />
-                Need Help? Email Support
-              </a>
+              <div className="mt-2 flex flex-col gap-3 border-t border-gray-100 pb-[max(1rem,env(safe-area-inset-bottom))] pt-4">
+                <a
+                  href="tel:+917654247569"
+                  className="flex min-h-12 touch-manipulation items-center justify-center gap-2.5 rounded-full border border-gray-100 bg-gray-50 px-4 text-xs font-bold text-[#374151] sm:text-sm"
+                >
+                  <Phone size={15} className="text-[#C0392B]" />
+                  Call +91 76542 47569
+                </a>
+                <a
+                  href="mailto:support@medicolinehealthcare.com"
+                  className="flex min-h-12 touch-manipulation items-center justify-center gap-2.5 rounded-full border border-[#E5E7EB] px-4 text-xs font-bold text-[#374151] sm:text-sm"
+                >
+                  <MessageSquare size={15} className="text-[#C0392B]" />
+                  Need Help? Email Support
+                </a>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </nav>
-      <div className="h-[76px] bg-transparent" />
+      <div className="h-[60px] bg-transparent lg:h-[86px]" />
     </>
   );
 }

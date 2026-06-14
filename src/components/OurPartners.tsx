@@ -17,13 +17,12 @@ type Partner = {
 const partners: Partner[] = [
   { name: 'Apollo Labs', src: partnerLogo01 },
   { name: 'Manipal Labs', src: partnerLogo02 },
-  { name: 'Medplus Pharmacy' },
+  { name: 'MedPlus', src: '/images/partners/medplus-logo.png' },
   { name: 'Hari Hospital', src: partnerLogo07 },
   { name: "Dr. Divya's Poly", src: partnerLogo04 },
   { name: 'Sri Chakra Hospital', src: partnerLogo03 },
   { name: 'Medisure', src: partnerLogo05 },
   { name: 'Dr. Om Prakash', src: partnerLogo06 },
-  { name: 'Az S4S' },
 ];
 
 export default function OurPartners() {

@@ -21,7 +21,7 @@ const SERVICE_OPTIONS = [
 ] as const;
 
 const inputClass =
-  'w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#1F2937] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow';
+  'w-full min-h-[48px] bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#1F2937] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow box-border max-w-full';
 const CONTACT_EMAIL = 'support@medicolinehealthcare.com';
 
 export default function AppointmentBooking() {
@@ -30,6 +30,8 @@ export default function AppointmentBooking() {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const [prescriptionFile, setPrescriptionFile] = useState<File | null>(null);
+  const [fileError, setFileError] = useState('');
   const [form, setForm] = useState({
     fullName: '',
     phone: '',
@@ -63,6 +65,7 @@ export default function AppointmentBooking() {
         'Service selected': SERVICE_OPTIONS.find((s) => s.id === selectedService)?.label ?? selectedService,
         'Preferred Date': form.date,
         'Preferred Time': form.time,
+        'Prescription File Name': prescriptionFile ? prescriptionFile.name : 'No file uploaded',
         'Additional Notes': form.notes || 'None',
       },
     };
@@ -142,7 +145,7 @@ export default function AppointmentBooking() {
 
         <div
           ref={ref}
-          className={`max-w-5xl mx-auto bg-white rounded-xl border border-gray-100 shadow-sm p-6 sm:p-8 md:p-10 ${
+          className={`max-w-5xl mx-auto bg-white rounded-xl border border-gray-100 shadow-sm p-4 sm:p-8 md:p-10 ${
             visible ? 'section-visible' : 'section-hidden'
           }`}
         >
@@ -244,7 +247,7 @@ export default function AppointmentBooking() {
 
               <div>
                 <p className="text-sm font-semibold text-[#1F2937] mb-3">Select Service</p>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-4">
                   {SERVICE_OPTIONS.map(({ id, label, icon: Icon }) => {
                     const selected = selectedService === id;
                     return (
@@ -252,21 +255,21 @@ export default function AppointmentBooking() {
                         key={id}
                         type="button"
                         onClick={() => setSelectedService(id)}
-                        className={`flex flex-col items-center gap-2 rounded-xl border p-4 text-center transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 ${
+                        className={`flex flex-col items-center gap-1.5 sm:gap-2 rounded-xl border p-2.5 sm:p-4 text-center transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 ${
                           selected
                             ? 'border-[#C0392B] bg-[#F3F4F6] shadow-sm ring-2 ring-[#C0392B]/20'
                             : 'border-gray-200 bg-white hover:border-[#C0392B]/40'
                         }`}
                       >
                         <span
-                          className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${
+                          className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center transition-colors shrink-0 ${
                             selected ? 'bg-[#C0392B] text-white' : 'bg-[#F3F4F6] text-[#C0392B]'
                           }`}
                         >
-                          <Icon size={20} strokeWidth={2} />
+                          <Icon className="w-4.5 h-4.5 sm:w-5 sm:h-5" strokeWidth={2} />
                         </span>
                         <span
-                          className={`text-xs sm:text-sm font-semibold leading-snug ${
+                          className={`text-[10px] xs:text-xs sm:text-sm font-semibold leading-snug ${
                             selected ? 'text-[#C0392B]' : 'text-[#1F2937]'
                           }`}
                         >
@@ -306,6 +309,46 @@ export default function AppointmentBooking() {
                     onChange={handleChange}
                     className={inputClass}
                   />
+                </div>
+                <div className="lg:col-span-2">
+                  <label className="block text-sm font-semibold text-[#1F2937] mb-1.5">
+                    Upload Prescription / Discharge Summary (Optional)
+                  </label>
+                  <div className="relative flex items-center justify-center w-full min-h-[48px]">
+                    <label
+                      htmlFor="prescription"
+                      className="flex items-center justify-between w-full min-h-[48px] px-4 py-3 bg-white border border-dashed border-gray-200 hover:border-[#C0392B]/50 rounded-xl cursor-pointer text-sm text-gray-500 hover:bg-[#FFF6F4] transition-colors box-border"
+                    >
+                      <span className="truncate max-w-[70%]">
+                        {prescriptionFile ? prescriptionFile.name : 'Choose PDF, Image or Document...'}
+                      </span>
+                      <span className="shrink-0 bg-[#C0392B]/10 text-[#C0392B] px-3 py-1 rounded-full text-xs font-bold">
+                        Browse File
+                      </span>
+                    </label>
+                    <input
+                      id="prescription"
+                      name="prescription"
+                      type="file"
+                      accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) {
+                          if (file.size > 5 * 1024 * 1024) {
+                            setFileError('File size must be under 5MB.');
+                            setPrescriptionFile(null);
+                          } else {
+                            setFileError('');
+                            setPrescriptionFile(file);
+                          }
+                        }
+                      }}
+                      className="hidden"
+                    />
+                  </div>
+                  {fileError ? (
+                    <p className="mt-1 text-xs text-[#C0392B] font-medium">{fileError}</p>
+                  ) : null}
                 </div>
               </div>
 

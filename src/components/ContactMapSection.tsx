@@ -7,7 +7,7 @@ const MAP_EMBED_SRC =
 const CONTACT_EMAIL = 'info@medicolinehealthcare.com';
 
 const inputClass =
-  'w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#1F2937] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow';
+  'w-full min-h-[48px] bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#1F2937] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0392B]/30 focus:border-[#C0392B] transition-shadow box-border max-w-full';
 
 export default function ContactMapSection() {
   const { ref, visible } = useScrollReveal();
@@ -124,7 +124,7 @@ export default function ContactMapSection() {
             visible ? 'section-visible' : 'section-hidden'
           }`}
         >
-          <div className="bg-[#F9FAFB] rounded-xl border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col justify-center min-h-[380px]">
+          <div className="bg-[#F9FAFB] rounded-xl border border-gray-100 shadow-sm p-4 sm:p-8 flex flex-col justify-center min-h-[380px]">
             {submitted ? (
               <div className="text-center py-6">
                 <div className="w-14 h-14 bg-[#F3F4F6] text-[#C0392B] rounded-full flex items-center justify-center mx-auto mb-4">

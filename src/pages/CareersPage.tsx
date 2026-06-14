@@ -237,12 +237,12 @@ export default function CareersPage() {
           background-color: #ffffff;
           font-family: 'Montserrat', sans-serif;
           color: #1F2937;
-          padding-top: 72px;
+          padding-top: 0;
         }
 
         @media (min-width: 1024px) {
           .careers-page {
-            padding-top: 104px;
+            padding-top: 0;
           }
         }
 
@@ -655,6 +655,7 @@ export default function CareersPage() {
           display: grid;
           grid-template-columns: 1fr;
           gap: 20px;
+          min-width: 0;
         }
 
         @media (min-width: 768px) {
@@ -671,6 +672,8 @@ export default function CareersPage() {
           display: flex;
           flex-direction: column;
           gap: 8px;
+          width: 100%;
+          min-width: 0;
         }
 
         .form-label {
@@ -680,6 +683,10 @@ export default function CareersPage() {
         }
 
         .form-input {
+          width: 100%;
+          min-width: 0;
+          min-height: 48px;
+          box-sizing: border-box;
           border: 1px solid #E5E7EB;
           background-color: #ffffff;
           border-radius: 10px;
@@ -689,6 +696,35 @@ export default function CareersPage() {
           outline: none;
           transition: border-color 0.25s ease;
           font-family: inherit;
+        }
+
+        @media (max-width: 767px) {
+          .careers-section-container {
+            padding-top: 48px;
+            padding-bottom: 48px;
+          }
+
+          .careers-title-wrapper {
+            margin-bottom: 36px;
+          }
+
+          .careers-hero {
+            padding: 48px 16px;
+          }
+
+          .careers-hero-heading {
+            font-size: 32px;
+            margin-bottom: 16px;
+          }
+
+          .careers-hero-subheading {
+            margin-bottom: 28px;
+          }
+
+          .apply-card {
+            width: 100%;
+            padding: 24px 16px;
+          }
         }
 
         .form-input:focus {
